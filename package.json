@@ -1,6 +1,6 @@
 {
     "name": "react-firebase-auth",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Components to use firebase on react",
     "author": "BrandonMA",
     "license": "MIT",
@@ -24,8 +24,7 @@
         "firebase": "^7.14.4"
     },
     "dependencies": {
-        "@reduxjs/toolkit": "^1.3.6",
-        "immutable": "^4.0.0-rc.12"
+        "@reduxjs/toolkit": "^1.3.6"
     },
     "devDependencies": {
         "@types/jest": "^25.1.4",
@@ -48,7 +47,13 @@
         "microbundle-crl": "^0.13.10",
         "prettier": "^2.0.4",
         "react-scripts": "^3.4.1",
-        "typescript": "^3.9.2"
+        "typescript": "^3.9.2",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "react-redux": "^7.2.0",
+        "redux": "^4.0.5",
+        "redux-thunk": "^2.3.0",
+        "firebase": "^7.14.4"
     },
     "files": [
         "dist"

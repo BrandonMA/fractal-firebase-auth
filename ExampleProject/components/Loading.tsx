@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text } from 'react-native';
 
-export default function Loading(): JSX.Element {
+function Loading(): JSX.Element {
     return <Text>Loading</Text>;
 }
+
+export default React.memo(Loading);
