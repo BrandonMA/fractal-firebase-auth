@@ -1,4 +1,4 @@
-import React from 'react';
+/// <reference types="react" />
 interface Config {
     [key: string]: string;
 }
@@ -7,5 +7,5 @@ interface Props {
     firebaseConfig: Config;
     loadingComponent: JSX.Element;
 }
-export declare function Firebase(props: Props): React.ReactNode;
+export declare function Firebase(props: Props): JSX.Element;
 export {};

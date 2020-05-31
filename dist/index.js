@@ -122,8 +122,6 @@ function createAuthenticationSlice(_extraReducers) {
 var authSlice = createAuthenticationSlice();
 authSlice.actions.setLoadingFirebaseData(false);
 function Firebase(props) {
-  console.log(props);
-
   var _useState = react.useState(false),
       firebaseReady = _useState[0],
       setFirebaseReady = _useState[1];
