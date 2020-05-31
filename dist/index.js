@@ -1,5 +1,5 @@
 var firebase = require('firebase/app');
-var React = require('react');
+var react = require('react');
 var toolkit = require('@reduxjs/toolkit');
 require('firebase/auth');
 
@@ -121,18 +121,20 @@ function createAuthenticationSlice(_extraReducers) {
 
 var authSlice = createAuthenticationSlice();
 authSlice.actions.setLoadingFirebaseData(false);
-var Firebase = function Firebase(props) {
-  var _React$useState = React.useState(false),
-      firebaseReady = _React$useState[0],
-      setFirebaseReady = _React$useState[1];
+function Firebase(props) {
+  console.log(props);
+
+  var _useState = react.useState(false),
+      firebaseReady = _useState[0],
+      setFirebaseReady = _useState[1];
 
   var firebaseConfig = props.firebaseConfig;
-  React.useEffect(function () {
+  react.useEffect(function () {
     firebase.initializeApp(firebaseConfig);
     setFirebaseReady(true);
   }, [firebaseConfig]);
   return firebaseReady ? props.children : props.loadingComponent;
-};
+}
 
 exports.Firebase = Firebase;
 //# sourceMappingURL=index.js.map

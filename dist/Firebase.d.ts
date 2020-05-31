@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 interface Config {
     [key: string]: string;
 }
@@ -7,5 +7,5 @@ interface Props {
     firebaseConfig: Config;
     loadingComponent: JSX.Element;
 }
-export declare const Firebase: React.FunctionComponent<Props>;
+export declare function Firebase(props: Props): React.ReactNode;
 export {};

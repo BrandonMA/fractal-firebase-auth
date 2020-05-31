@@ -121,10 +121,12 @@ function createAuthenticationSlice(_extraReducers) {
 
 var authSlice = createAuthenticationSlice();
 authSlice.actions.setLoadingFirebaseData(false);
-var Firebase = function Firebase(props) {
-  var _React$useState = useState(false),
-      firebaseReady = _React$useState[0],
-      setFirebaseReady = _React$useState[1];
+function Firebase(props) {
+  console.log(props);
+
+  var _useState = useState(false),
+      firebaseReady = _useState[0],
+      setFirebaseReady = _useState[1];
 
   var firebaseConfig = props.firebaseConfig;
   useEffect(function () {
@@ -132,7 +134,7 @@ var Firebase = function Firebase(props) {
     setFirebaseReady(true);
   }, [firebaseConfig]);
   return firebaseReady ? props.children : props.loadingComponent;
-};
+}
 
 export { Firebase };
 //# sourceMappingURL=index.modern.js.map
