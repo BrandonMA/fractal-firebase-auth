@@ -9,6 +9,7 @@
     },
     "dependencies": {
         "expo": "~37.0.3",
+        "firebase": "^7.14.6",
         "react": "~16.9.0",
         "react-dom": "~16.9.0",
         "react-firebase-auth": "https://github.com/BrandonMA/react-firebase-auth.git",

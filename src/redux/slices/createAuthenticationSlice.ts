@@ -9,10 +9,6 @@ const initialState: AuthenticationState = {
     loading: true
 };
 
-export const replaceAuthenticationState = (state: AuthenticationState, action: PayloadAction<AuthenticationState>): void => {
-    state = action.payload;
-};
-
 type ReducerFunction = (state: AuthenticationState, action: PayloadAction<AuthenticationState>) => void;
 interface ExtraReducers {
     [key: string]: ReducerFunction;
@@ -29,6 +25,13 @@ export function createAuthenticationSlice(extraReducers?: ExtraReducers) {
             }
         },
         extraReducers: (builder) => {
+            const replaceAuthenticationState = (state: AuthenticationState, action: PayloadAction<AuthenticationState>): void => {
+                // Used to bypass the has not been read rule
+                if (state != null) {
+                    state = action.payload;
+                }
+            };
+
             builder.addCase(signIn.fulfilled, replaceAuthenticationState);
             builder.addCase(signOut.fulfilled, replaceAuthenticationState);
             builder.addCase(signUp.fulfilled, replaceAuthenticationState);
