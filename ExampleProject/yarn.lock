@@ -4669,8 +4669,8 @@ react-dom@~16.9.0:
     scheduler "^0.15.0"
 
 "react-firebase-auth@https://github.com/BrandonMA/react-firebase-auth.git":
-  version "1.0.1"
-  resolved "https://github.com/BrandonMA/react-firebase-auth.git#fc85abc584776b03b978b7a8d23cf5299cff4303"
+  version "1.0.2"
+  resolved "https://github.com/BrandonMA/react-firebase-auth.git#35632357801f7f8d6f9f36578b46a8d2eddd6f3d"
 
 react-is@^16.12.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.13.1"

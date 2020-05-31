@@ -1,5 +1,5 @@
 import * as firebase from 'firebase/app';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { createAuthenticationSlice } from './redux/slices/createAuthenticationSlice';
 
 const authSlice = createAuthenticationSlice();
@@ -15,8 +15,7 @@ interface Props {
     loadingComponent: JSX.Element;
 }
 
-export function Firebase(props: Props): React.ReactNode {
-    console.log(props);
+export function Firebase(props: Props): JSX.Element {
     const [firebaseReady, setFirebaseReady] = useState(false);
     const { firebaseConfig } = props;
 
