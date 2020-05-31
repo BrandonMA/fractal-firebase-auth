@@ -1,16 +1,14 @@
 import React from 'react';
 import { Text } from 'react-native';
+import { Collection, Database } from 'firebase-db-manager';
 
-function Database(): JSX.Element {
-    // const userSubCollections = {
-    //     pets: new SubCollection<Pet, null>('Pets', null)
-    // };
-    // const usersCollection = new Collection<User, typeof userSubCollections>('Users', userSubCollections);
-    // const collections = {
-    //     users: usersCollection
-    // };
-    // const database = new Database(collections);
+function DatabaseProvider(): JSX.Element {
+    const usersCollection = new Collection<User, null>('Users', null);
+    const collections = {
+        users: usersCollection
+    };
+    const database = new Database(collections);
     return <Text>Loading</Text>;
 }
 
-export default React.memo(Database);
+export default React.memo(DatabaseProvider);

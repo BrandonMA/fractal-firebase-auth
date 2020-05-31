@@ -10,6 +10,7 @@
     "dependencies": {
         "expo": "~37.0.3",
         "firebase": "^7.14.6",
+        "firebase-db-manager": "https://github.com/BrandonMA/firebase-db-manager",
         "react": "~16.9.0",
         "react-dom": "~16.9.0",
         "react-firebase-auth": "https://github.com/BrandonMA/react-firebase-auth.git",

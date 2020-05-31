@@ -1,5 +1,5 @@
-import useAuthenticationState from './redux/hooks/useAuthenticationState';
-import useCurrentUser from './redux/hooks/useCurrentUser';
+import { useAuthenticationState } from './redux/hooks/useAuthenticationState';
+import { useCurrentUser } from './redux/hooks/useCurrentUser';
 
 interface Props {
     loadingComponent: JSX.Element;

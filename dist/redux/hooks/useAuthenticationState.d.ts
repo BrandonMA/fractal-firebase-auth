@@ -1,3 +1,2 @@
 import { AuthenticationState } from '../types/AuthenticationState';
-declare const useAuthenticationState: () => Readonly<AuthenticationState>;
-export default useAuthenticationState;
+export declare const useAuthenticationState: () => Readonly<AuthenticationState>;

@@ -10,8 +10,6 @@ const getState = (state: unknown): Readonly<AuthenticationState> => {
     }
 };
 
-const useAuthenticationState = (): Readonly<AuthenticationState> => {
+export const useAuthenticationState = (): Readonly<AuthenticationState> => {
     return useSelector(getState);
 };
-
-export default useAuthenticationState;

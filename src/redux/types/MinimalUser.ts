@@ -1,4 +1,4 @@
-export default interface MinimalUser {
+export interface MinimalUser {
     email: string;
     id: string;
 }

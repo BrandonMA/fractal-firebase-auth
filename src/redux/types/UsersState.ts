@@ -1,6 +1,6 @@
-import MinimalUser from './MinimalUser';
+import { MinimalUser } from './MinimalUser';
 
-export default interface UsersState<T extends MinimalUser> {
+export interface UsersState<T extends MinimalUser> {
     users: Map<string, T>;
 }
 

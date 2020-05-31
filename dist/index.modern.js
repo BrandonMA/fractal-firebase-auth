@@ -2,6 +2,25 @@ import { auth, initializeApp } from 'firebase/app';
 import { useState, useEffect } from 'react';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import 'firebase/auth';
+import { useSelector } from 'react-redux';
+
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
 
 function _unsupportedIterableToArray(o, minLen) {
   if (!o) return;
@@ -84,19 +103,22 @@ var signUp = createAsyncThunk('authentication/signUp', function (user) {
   }
 });
 
-var initialState = {
+var initialState = Object.freeze({
   firebaseUser: undefined,
   loading: true
-};
-function createAuthenticationSlice(_extraReducers) {
+});
+function createAuthenticationSlice(reducers, _extraReducers) {
   return createSlice({
     name: 'authentication',
     initialState: initialState,
-    reducers: {
+    reducers: _extends({
+      setFirebaseUser: function setFirebaseUser(state, action) {
+        state.firebaseUser = action.payload;
+      },
       setLoadingFirebaseData: function setLoadingFirebaseData(state, action) {
         state.loading = action.payload;
       }
-    },
+    }, reducers),
     extraReducers: function extraReducers(builder) {
       var replaceAuthenticationState = function replaceAuthenticationState(state, action) {
       };
@@ -111,7 +133,8 @@ function createAuthenticationSlice(_extraReducers) {
         if (keys.length > 0) {
           for (var _iterator = _createForOfIteratorHelperLoose(keys), _step; !(_step = _iterator()).done;) {
             var reducerKey = _step.value;
-            builder.addCase(reducerKey, _extraReducers[reducerKey]);
+            var data = _extraReducers[reducerKey];
+            builder.addCase(data.fullfilled, data.callback);
           }
         }
       }
@@ -134,5 +157,95 @@ function Firebase(props) {
   return firebaseReady ? props.children : props.loadingComponent;
 }
 
-export { Firebase };
+function isAuthenticationState(value) {
+  var castedValue = value;
+  return castedValue.loading != null;
+}
+
+function isMinimalExpectedReduxState(value) {
+  var castedValue = value;
+  return castedValue.authentication != null && isAuthenticationState(castedValue.authentication);
+}
+
+var getState = function getState(state) {
+  if (isMinimalExpectedReduxState(state)) {
+    return state.authentication;
+  } else {
+    throw Error('State does not have the expected shape');
+  }
+};
+
+var useAuthenticationState = function useAuthenticationState() {
+  return useSelector(getState);
+};
+
+function isUsersState(value) {
+  var casted = value;
+  return casted.users != null;
+}
+
+function getUsers(state) {
+  if (isUsersState(state)) {
+    return state.users;
+  } else {
+    throw Error('State does not have the expected shape');
+  }
+}
+
+function useCurrentUser() {
+  var authState = useAuthenticationState();
+
+  if (authState.firebaseUser != null) {
+    return useSelector(getUsers).get(authState.firebaseUser.uid);
+  } else {
+    return undefined;
+  }
+}
+
+function Authenticate(props) {
+  var authenticationState = useAuthenticationState();
+  var currentUser = useCurrentUser();
+
+  if (authenticationState.firebaseUser === undefined && authenticationState.loading) {
+    return props.loadingComponent;
+  } else if (authenticationState.firebaseUser === null && authenticationState.loading === false) {
+    return props.authenticationComponent;
+  } else {
+    if (currentUser === undefined) {
+      return props.userNotAvailableComponent;
+    } else {
+      return props.children;
+    }
+  }
+}
+
+var initialState$1 = Object.freeze({
+  users: new Map()
+});
+function createUsersSlice(reducers, _extraReducers) {
+  return createSlice({
+    name: 'users',
+    initialState: initialState$1,
+    reducers: _extends({
+      setUser: function setUser(state, action) {
+        state.users.set(action.payload.id, action.payload);
+      }
+    }, reducers),
+    extraReducers: function extraReducers(builder) {
+      if (_extraReducers != null) {
+        var keys = Object.keys(_extraReducers);
+
+        if (keys.length > 0) {
+          for (var _iterator = _createForOfIteratorHelperLoose(keys), _step; !(_step = _iterator()).done;) {
+            var reducerKey = _step.value;
+            var data = _extraReducers[reducerKey];
+            builder.addCase(data.fullfilled, data.callback);
+          }
+        }
+      }
+    }
+  });
+}
+
+export { Authenticate, Firebase, createAuthenticationSlice, createUsersSlice, isAuthenticationState, isMinimalExpectedReduxState, isUsersState, signIn, signOut, signUp, useAuthenticationState, useCurrentUser };
 //# sourceMappingURL=index.modern.js.map

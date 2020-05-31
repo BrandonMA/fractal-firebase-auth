@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, ActionCreatorWithPreparedPayload } from '@reduxjs/toolkit';
-import UsersState from '../types/UsersState';
-import MinimalUser from '../types/MinimalUser';
+import { UsersState } from '../types/UsersState';
+import { MinimalUser } from '../types/MinimalUser';
 
 type UsersMinimalState = UsersState<MinimalUser>;
 

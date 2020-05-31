@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
-import MinimalUser from '../types/MinimalUser';
+import { MinimalUser } from '../types/MinimalUser';
 import { isUsersState } from '../types/UsersState';
-import useAuthenticationState from './useAuthenticationState';
+import { useAuthenticationState } from './useAuthenticationState';
 
 function getUsers<T extends MinimalUser>(state: unknown): Readonly<Map<string, T>> {
     if (isUsersState<T>(state)) {
@@ -11,7 +11,7 @@ function getUsers<T extends MinimalUser>(state: unknown): Readonly<Map<string, T
     }
 }
 
-function useCurrentUser<T extends MinimalUser>(): Readonly<T> | undefined {
+export function useCurrentUser<T extends MinimalUser>(): Readonly<T> | undefined {
     const authState = useAuthenticationState();
     if (authState.firebaseUser != null) {
         return useSelector(getUsers).get(authState.firebaseUser.uid) as Readonly<T>;
@@ -19,5 +19,3 @@ function useCurrentUser<T extends MinimalUser>(): Readonly<T> | undefined {
         return undefined;
     }
 }
-
-export default useCurrentUser;
