@@ -17,7 +17,7 @@ export default function App(): JSX.Element {
     return (
         <View style={styles.container}>
             <Firebase firebaseConfig={firebaseConfig} loadingComponent={<Loading />}>
-                <Text>Open up App.tsx to start working on your app!</Text>
+                <Text>Firebase is ready!</Text>
             </Firebase>
         </View>
     );
