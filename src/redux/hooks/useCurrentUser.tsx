@@ -2,10 +2,11 @@ import { useSelector } from 'react-redux';
 import { MinimalUser } from '../types/MinimalUser';
 import { isUsersState } from '../types/UsersState';
 import { useAuthenticationState } from './useAuthenticationState';
+import { isMinimalExpectedReduxState } from '../types';
 
 function getUsers<T extends MinimalUser>(state: unknown): Readonly<Map<string, T>> {
-    if (isUsersState<T>(state)) {
-        return state.users;
+    if (isMinimalExpectedReduxState(state) && isUsersState<T>(state.users)) {
+        return state.users.users;
     } else {
         throw Error('State does not have the expected shape');
     }
