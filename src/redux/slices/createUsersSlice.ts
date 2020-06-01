@@ -4,7 +4,9 @@ import { MinimalUser } from '../types/MinimalUser';
 
 type UsersMinimalState = UsersState<MinimalUser>;
 
-const initialState: Readonly<UsersMinimalState> = Object.freeze({});
+const initialState: Readonly<UsersMinimalState> = Object.freeze({
+    values: new Map()
+});
 
 type ReducerFunction = (state: UsersMinimalState, action: PayloadAction<UsersMinimalState>) => void;
 interface ExtraReducers<ThunkArg = void> {
@@ -21,7 +23,7 @@ export function createUsersSlice<ThunkArg = void>(reducers?: ExtraReducers<Thunk
         initialState,
         reducers: {
             setUser: (state, action: PayloadAction<MinimalUser>): void => {
-                state[action.payload.id] = action.payload;
+                state.values.set(action.payload.id, action.payload);
             },
             ...reducers
         },

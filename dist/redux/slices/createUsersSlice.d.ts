@@ -11,17 +11,17 @@ interface ExtraReducers<ThunkArg = void> {
 }
 export declare function createUsersSlice<ThunkArg = void>(reducers?: ExtraReducers<ThunkArg>, extraReducers?: ExtraReducers<ThunkArg>): import("@reduxjs/toolkit").Slice<Readonly<UsersMinimalState>, {
     setUser: (state: {
-        [x: string]: {
+        values: Map<string, {
             email: string;
             id: string;
-        };
+        }>;
     }, action: PayloadAction<MinimalUser>) => void;
 } | {
     setUser: (state: {
-        [x: string]: {
+        values: Map<string, {
             email: string;
             id: string;
-        };
+        }>;
     }, action: PayloadAction<MinimalUser>) => void;
 }, "users">;
 export {};

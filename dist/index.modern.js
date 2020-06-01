@@ -192,7 +192,7 @@ function useCurrentUser() {
   var users = useSelector(getUsers);
 
   if (authState.firebaseUser != null) {
-    return users[authState.firebaseUser.uid];
+    return users.values.get(authState.firebaseUser.uid);
   } else {
     return null;
   }
@@ -215,14 +215,16 @@ function Authenticate(props) {
   }
 }
 
-var initialState$1 = Object.freeze({});
+var initialState$1 = Object.freeze({
+  values: new Map()
+});
 function createUsersSlice(reducers, _extraReducers) {
   return createSlice({
     name: 'users',
     initialState: initialState$1,
     reducers: _extends({
       setUser: function setUser(state, action) {
-        state[action.payload.id] = action.payload;
+        state.values.set(action.payload.id, action.payload);
       }
     }, reducers),
     extraReducers: function extraReducers(builder) {

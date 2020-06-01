@@ -15,7 +15,7 @@ export function useCurrentUser<T extends MinimalUser>(): Readonly<T> | null {
     const authState = useAuthenticationState();
     const users = useSelector(getUsers);
     if (authState.firebaseUser != null) {
-        return users[authState.firebaseUser.uid] as Readonly<T>;
+        return users.values.get(authState.firebaseUser.uid) as Readonly<T>;
     } else {
         return null;
     }
