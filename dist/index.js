@@ -179,13 +179,8 @@ var useAuthenticationState = function useAuthenticationState() {
   return reactRedux.useSelector(getState);
 };
 
-function isUsersState(value) {
-  var casted = value;
-  return casted.users != null;
-}
-
 function getUsers(state) {
-  if (isUsersState(state)) {
+  if (isMinimalExpectedReduxState(state)) {
     return state.users;
   } else {
     throw Error('State does not have the expected shape');
@@ -197,9 +192,9 @@ function useCurrentUser() {
   var users = reactRedux.useSelector(getUsers);
 
   if (authState.firebaseUser != null) {
-    return users.get(authState.firebaseUser.uid);
+    return users[authState.firebaseUser.uid];
   } else {
-    return undefined;
+    return null;
   }
 }
 
@@ -212,7 +207,7 @@ function Authenticate(props) {
   } else if (authenticationState.firebaseUser === null && authenticationState.loading === false) {
     return props.authenticationComponent;
   } else {
-    if (currentUser === undefined) {
+    if (currentUser == null) {
       return props.userNotAvailableComponent;
     } else {
       return props.children;
@@ -220,16 +215,14 @@ function Authenticate(props) {
   }
 }
 
-var initialState$1 = Object.freeze({
-  users: new Map()
-});
+var initialState$1 = Object.freeze({});
 function createUsersSlice(reducers, _extraReducers) {
   return toolkit.createSlice({
     name: 'users',
     initialState: initialState$1,
     reducers: _extends({
       setUser: function setUser(state, action) {
-        state.users.set(action.payload.id, action.payload);
+        state[action.payload.id] = action.payload;
       }
     }, reducers),
     extraReducers: function extraReducers(builder) {
@@ -254,7 +247,6 @@ exports.createAuthenticationSlice = createAuthenticationSlice;
 exports.createUsersSlice = createUsersSlice;
 exports.isAuthenticationState = isAuthenticationState;
 exports.isMinimalExpectedReduxState = isMinimalExpectedReduxState;
-exports.isUsersState = isUsersState;
 exports.signIn = signIn;
 exports.signOut = signOut;
 exports.signUp = signUp;
