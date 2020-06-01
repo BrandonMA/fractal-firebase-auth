@@ -16,7 +16,7 @@ export function Authenticate(props: Props): JSX.Element {
     } else if (authenticationState.firebaseUser === null && authenticationState.loading === false) {
         return props.authenticationComponent;
     } else {
-        if (currentUser === undefined) {
+        if (currentUser == null) {
             return props.userNotAvailableComponent;
         } else {
             return props.children;
