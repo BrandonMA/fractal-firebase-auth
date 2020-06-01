@@ -1,8 +1,12 @@
 import React from 'react';
 import { Text } from 'react-native';
 
-function Loading(): JSX.Element {
-    return <Text>Loading</Text>;
+interface Props {
+    text: string;
+}
+
+function Loading(props: Props): JSX.Element {
+    return <Text>Loading {props.text}</Text>;
 }
 
 export default React.memo(Loading);

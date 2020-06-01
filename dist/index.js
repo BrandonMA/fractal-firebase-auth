@@ -164,7 +164,7 @@ function isAuthenticationState(value) {
 
 function isMinimalExpectedReduxState(value) {
   var castedValue = value;
-  return castedValue.authentication != null && isAuthenticationState(castedValue.authentication);
+  return castedValue.authentication != null && isAuthenticationState(castedValue.authentication) && castedValue.users != null;
 }
 
 var getState = function getState(state) {
@@ -194,9 +194,10 @@ function getUsers(state) {
 
 function useCurrentUser() {
   var authState = useAuthenticationState();
+  var users = reactRedux.useSelector(getUsers);
 
   if (authState.firebaseUser != null) {
-    return reactRedux.useSelector(getUsers).get(authState.firebaseUser.uid);
+    return users.get(authState.firebaseUser.uid);
   } else {
     return undefined;
   }

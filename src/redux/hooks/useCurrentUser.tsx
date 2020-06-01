@@ -13,8 +13,9 @@ function getUsers<T extends MinimalUser>(state: unknown): Readonly<Map<string, T
 
 export function useCurrentUser<T extends MinimalUser>(): Readonly<T> | undefined {
     const authState = useAuthenticationState();
+    const users = useSelector(getUsers);
     if (authState.firebaseUser != null) {
-        return useSelector(getUsers).get(authState.firebaseUser.uid) as Readonly<T>;
+        return users.get(authState.firebaseUser.uid) as Readonly<T>;
     } else {
         return undefined;
     }
