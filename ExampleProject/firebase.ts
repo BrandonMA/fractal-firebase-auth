@@ -5,5 +5,5 @@ export default {
     projectId: 'fir-db-manager',
     storageBucket: 'fir-db-manager.appspot.com',
     messagingSenderId: '215089057587',
-    appId: '1:215089057587:web:fd31cd1201101253aab846'
+    appId: '1:215089057587:web:166a4e5ab680ba6caab846'
 };
