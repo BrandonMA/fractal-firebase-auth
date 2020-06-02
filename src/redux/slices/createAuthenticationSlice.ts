@@ -18,6 +18,11 @@ interface ExtraReducers<ThunkArg = void> {
     };
 }
 
+const replaceAuthenticationState = (state: AuthenticationState, action: PayloadAction<AuthenticationState>): void => {
+    state.loading = action.payload.loading;
+    state.firebaseUser = action.payload.firebaseUser;
+};
+
 // eslint-disable-next-line
 export function createAuthenticationSlice<ThunkArg = void>(reducers?: ExtraReducers<ThunkArg>, extraReducers?: ExtraReducers<ThunkArg>) {
     return createSlice({
@@ -30,22 +35,10 @@ export function createAuthenticationSlice<ThunkArg = void>(reducers?: ExtraReduc
             setLoadingFirebaseData: (state, action: PayloadAction<boolean>): void => {
                 state.loading = action.payload;
             },
-            setAuthenticationState: (state, action: PayloadAction<AuthenticationState>): void => {
-                // Used to bypass the has not been read rule
-                if (state != null) {
-                    state = action.payload;
-                }
-            },
+            setAuthenticationState: replaceAuthenticationState,
             ...reducers
         },
         extraReducers: (builder) => {
-            const replaceAuthenticationState = (state: AuthenticationState, action: PayloadAction<AuthenticationState>): void => {
-                // Used to bypass the has not been read rule
-                if (state != null) {
-                    state = action.payload;
-                }
-            };
-
             builder.addCase(signIn.fulfilled, replaceAuthenticationState);
             builder.addCase(signOut.fulfilled, replaceAuthenticationState);
             builder.addCase(signUp.fulfilled, replaceAuthenticationState);

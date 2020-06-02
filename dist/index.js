@@ -203,6 +203,12 @@ var initialState = Object.freeze({
   firebaseUser: undefined,
   loading: true
 });
+
+var replaceAuthenticationState = function replaceAuthenticationState(state, action) {
+  state.loading = action.payload.loading;
+  state.firebaseUser = action.payload.firebaseUser;
+};
+
 function createAuthenticationSlice(reducers, _extraReducers) {
   return toolkit.createSlice({
     name: 'authentication',
@@ -214,13 +220,9 @@ function createAuthenticationSlice(reducers, _extraReducers) {
       setLoadingFirebaseData: function setLoadingFirebaseData(state, action) {
         state.loading = action.payload;
       },
-      setAuthenticationState: function setAuthenticationState(state, action) {
-      }
+      setAuthenticationState: replaceAuthenticationState
     }, reducers),
     extraReducers: function extraReducers(builder) {
-      var replaceAuthenticationState = function replaceAuthenticationState(state, action) {
-      };
-
       builder.addCase(signIn.fulfilled, replaceAuthenticationState);
       builder.addCase(signOut.fulfilled, replaceAuthenticationState);
       builder.addCase(signUp.fulfilled, replaceAuthenticationState);
