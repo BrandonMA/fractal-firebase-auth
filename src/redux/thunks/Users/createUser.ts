@@ -5,11 +5,9 @@ import { MinimalExpectedDatabase } from '../../types/MinimalExpectedDatabase';
 import { MinimalUserData } from '../../types';
 import { UsersSlice } from '../../slices';
 
-function createUser<T extends MinimalUserData, S>(database: MinimalExpectedDatabase<T, S>, data: T, usersSlice: UsersSlice) {
+export function createUser<T extends MinimalUserData, S>(database: MinimalExpectedDatabase<T, S>, data: T, usersSlice: UsersSlice) {
     return async (dispatch: ThunkDispatch<Promise<void>, MinimalExpectedReduxState, Action>): Promise<void> => {
         const userDocument = await database.collections.users.createDocument(data);
         dispatch(usersSlice.actions.setUser(userDocument));
     };
 }
-
-export default createUser;

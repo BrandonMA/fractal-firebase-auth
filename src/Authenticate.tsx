@@ -3,7 +3,7 @@ import { useCurrentUser } from './redux/hooks/useCurrentUser';
 import { ThunkDispatch } from 'redux-thunk';
 import { MinimalExpectedReduxState, AuthenticationSlice } from './redux';
 import { Action } from 'redux';
-import subscribeForAuthenticatedUserThunk from './redux/thunks/Authentication/subscribeForAuthenticatedUser';
+import { subscribeForAuthenticatedUser } from './redux/thunks/Authentication/subscribeForAuthenticatedUser';
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -21,7 +21,7 @@ interface OwnProps {
 
 interface Props extends OwnProps, ReduxFunctions {}
 
-export function Authenticate(props: Props): JSX.Element {
+function Authenticate(props: Props): JSX.Element {
     const authenticationState = useAuthenticationState();
     const currentUser = useCurrentUser();
 
@@ -49,7 +49,7 @@ export function Authenticate(props: Props): JSX.Element {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<void, MinimalExpectedReduxState, Action>, ownProps: OwnProps): ReduxFunctions => ({
     subscribeForAuthenticatedUser(): firebase.Unsubscribe {
-        return dispatch(subscribeForAuthenticatedUserThunk(ownProps.authenticationSlice));
+        return dispatch(subscribeForAuthenticatedUser(ownProps.authenticationSlice));
     }
 });
 

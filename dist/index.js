@@ -1,11 +1,104 @@
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
+var reactRedux = require('react-redux');
 var firebase = require('firebase/app');
 var firebase__default = _interopDefault(firebase);
+require('firebase/auth');
 var react = require('react');
 var toolkit = require('@reduxjs/toolkit');
-require('firebase/auth');
-var reactRedux = require('react-redux');
+
+function isAuthenticationState(value) {
+  var castedValue = value;
+  return castedValue.loading != null;
+}
+
+function isMinimalExpectedReduxState(value) {
+  var castedValue = value;
+  return castedValue.authentication != null && isAuthenticationState(castedValue.authentication) && castedValue.users != null;
+}
+
+var getState = function getState(state) {
+  if (isMinimalExpectedReduxState(state)) {
+    return state.authentication;
+  } else {
+    throw Error('State does not have the expected shape');
+  }
+};
+
+var useAuthenticationState = function useAuthenticationState() {
+  return reactRedux.useSelector(getState);
+};
+
+function isUsersState(value) {
+  var casted = value;
+  return casted.values != null;
+}
+
+function getUsers(state) {
+  if (isMinimalExpectedReduxState(state) && isUsersState(state.users)) {
+    return state.users;
+  } else {
+    throw Error('State does not have the expected shape');
+  }
+}
+
+function useCurrentUser() {
+  var authState = useAuthenticationState();
+  var users = reactRedux.useSelector(getUsers);
+
+  if (authState.firebaseUser != null) {
+    return users.values.get(authState.firebaseUser.uid);
+  } else {
+    return null;
+  }
+}
+
+var subscribeForAuthenticatedUser = function subscribeForAuthenticatedUser(slice) {
+  return function (dispatch) {
+    return firebase__default.auth().onAuthStateChanged(function (user) {
+      dispatch(slice.actions.setAuthenticationState({
+        firebaseUser: user,
+        loading: false
+      }));
+    }, function (error) {
+      alert(error.message);
+    });
+  };
+};
+
+function Authenticate(props) {
+  var authenticationState = useAuthenticationState();
+  var currentUser = useCurrentUser();
+  var subscribeForAuthenticatedUser = props.subscribeForAuthenticatedUser;
+  react.useEffect(function () {
+    var unsubscribe = subscribeForAuthenticatedUser();
+    return function () {
+      unsubscribe();
+    };
+  }, [subscribeForAuthenticatedUser]);
+
+  if (authenticationState.firebaseUser === undefined && authenticationState.loading) {
+    return props.loadingComponent;
+  } else if (authenticationState.firebaseUser === null && authenticationState.loading === false) {
+    return props.authenticationComponent;
+  } else {
+    if (currentUser == null) {
+      return props.userNotAvailableComponent;
+    } else {
+      return props.children;
+    }
+  }
+}
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    subscribeForAuthenticatedUser: function subscribeForAuthenticatedUser$1() {
+      return dispatch(subscribeForAuthenticatedUser(ownProps.authenticationSlice));
+    }
+  };
+};
+
+var Authenticate$1 = reactRedux.connect(null, mapDispatchToProps)(Authenticate);
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -162,99 +255,6 @@ function Firebase(props) {
   return firebaseReady ? props.children : props.loadingComponent;
 }
 
-function isAuthenticationState(value) {
-  var castedValue = value;
-  return castedValue.loading != null;
-}
-
-function isMinimalExpectedReduxState(value) {
-  var castedValue = value;
-  return castedValue.authentication != null && isAuthenticationState(castedValue.authentication) && castedValue.users != null;
-}
-
-var getState = function getState(state) {
-  if (isMinimalExpectedReduxState(state)) {
-    return state.authentication;
-  } else {
-    throw Error('State does not have the expected shape');
-  }
-};
-
-var useAuthenticationState = function useAuthenticationState() {
-  return reactRedux.useSelector(getState);
-};
-
-function isUsersState(value) {
-  var casted = value;
-  return casted.values != null;
-}
-
-function getUsers(state) {
-  if (isMinimalExpectedReduxState(state) && isUsersState(state.users)) {
-    return state.users;
-  } else {
-    throw Error('State does not have the expected shape');
-  }
-}
-
-function useCurrentUser() {
-  var authState = useAuthenticationState();
-  var users = reactRedux.useSelector(getUsers);
-
-  if (authState.firebaseUser != null) {
-    return users.values.get(authState.firebaseUser.uid);
-  } else {
-    return null;
-  }
-}
-
-var subscribeForAuthenticatedUser = function subscribeForAuthenticatedUser(slice) {
-  return function (dispatch) {
-    return firebase__default.auth().onAuthStateChanged(function (user) {
-      dispatch(slice.actions.setAuthenticationState({
-        firebaseUser: user,
-        loading: false
-      }));
-    }, function (error) {
-      alert(error.message);
-    });
-  };
-};
-
-function Authenticate(props) {
-  var authenticationState = useAuthenticationState();
-  var currentUser = useCurrentUser();
-  var subscribeForAuthenticatedUser = props.subscribeForAuthenticatedUser;
-  react.useEffect(function () {
-    var unsubscribe = subscribeForAuthenticatedUser();
-    return function () {
-      unsubscribe();
-    };
-  }, [subscribeForAuthenticatedUser]);
-
-  if (authenticationState.firebaseUser === undefined && authenticationState.loading) {
-    return props.loadingComponent;
-  } else if (authenticationState.firebaseUser === null && authenticationState.loading === false) {
-    return props.authenticationComponent;
-  } else {
-    if (currentUser == null) {
-      return props.userNotAvailableComponent;
-    } else {
-      return props.children;
-    }
-  }
-}
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-  return {
-    subscribeForAuthenticatedUser: function subscribeForAuthenticatedUser$1() {
-      return dispatch(subscribeForAuthenticatedUser(ownProps.authenticationSlice));
-    }
-  };
-};
-
-reactRedux.connect(null, mapDispatchToProps)(Authenticate);
-
 var initialState$1 = Object.freeze({
   values: new Map()
 });
@@ -283,9 +283,22 @@ function createUsersSlice(reducers, _extraReducers) {
   });
 }
 
-exports.Authenticate = Authenticate;
+function createUser(database, data, usersSlice) {
+  return function (dispatch) {
+    try {
+      return Promise.resolve(database.collections.users.createDocument(data)).then(function (userDocument) {
+        dispatch(usersSlice.actions.setUser(userDocument));
+      });
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
+}
+
+exports.Authenticate = Authenticate$1;
 exports.Firebase = Firebase;
 exports.createAuthenticationSlice = createAuthenticationSlice;
+exports.createUser = createUser;
 exports.createUsersSlice = createUsersSlice;
 exports.isAuthenticationState = isAuthenticationState;
 exports.isMinimalExpectedReduxState = isMinimalExpectedReduxState;
@@ -293,6 +306,7 @@ exports.isUsersState = isUsersState;
 exports.signIn = signIn;
 exports.signOut = signOut;
 exports.signUp = signUp;
+exports.subscribeForAuthenticatedUser = subscribeForAuthenticatedUser;
 exports.useAuthenticationState = useAuthenticationState;
 exports.useCurrentUser = useCurrentUser;
 //# sourceMappingURL=index.js.map

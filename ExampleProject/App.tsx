@@ -4,8 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import firebaseConfig from './firebase';
 import Loading from './components/Loading';
 import DatabaseProvider from './components/DatabaseProvider';
-import Authentication from './components/Authentication';
-import UserNotAvailable from './components/UserNotAvailable';
+
 import { Provider } from 'react-redux';
 import store from './redux';
 

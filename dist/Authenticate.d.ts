@@ -12,6 +12,6 @@ interface OwnProps {
 }
 interface Props extends OwnProps, ReduxFunctions {
 }
-export declare function Authenticate(props: Props): JSX.Element;
+declare function Authenticate(props: Props): JSX.Element;
 declare const _default: import("react-redux").ConnectedComponent<typeof Authenticate, Pick<Props, "authenticationSlice" | "loadingComponent" | "authenticationComponent" | "userNotAvailableComponent" | "children"> & OwnProps>;
 export default _default;

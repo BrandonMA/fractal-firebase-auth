@@ -4,7 +4,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
 import { AuthenticationSlice, MinimalExpectedReduxState } from '../..';
 
-const subscribeForAuthenticatedUser = (slice: AuthenticationSlice) => (
+export const subscribeForAuthenticatedUser = (slice: AuthenticationSlice) => (
     dispatch: ThunkDispatch<firebase.Unsubscribe, MinimalExpectedReduxState, Action>
 ): firebase.Unsubscribe => {
     return firebase.auth().onAuthStateChanged(
@@ -21,5 +21,3 @@ const subscribeForAuthenticatedUser = (slice: AuthenticationSlice) => (
         }
     );
 };
-
-export default subscribeForAuthenticatedUser;
