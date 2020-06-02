@@ -2928,8 +2928,8 @@ find-up@^4.1.0:
     path-exists "^4.0.0"
 
 "firebase-db-manager@https://github.com/BrandonMA/firebase-db-manager":
-  version "1.0.3"
-  resolved "https://github.com/BrandonMA/firebase-db-manager#5f9be8c0a5e99bf14d1d8678602d93f5bcfb8a5a"
+  version "1.0.5"
+  resolved "https://github.com/BrandonMA/firebase-db-manager#fc074f15f91c368d62d2783fc0ea6e1fea6ae88e"
   dependencies:
     uuid "^8.0.0"
 
@@ -4697,8 +4697,8 @@ react-dom@~16.9.0:
     scheduler "^0.15.0"
 
 "react-firebase-auth@https://github.com/BrandonMA/react-firebase-auth.git":
-  version "1.0.18"
-  resolved "https://github.com/BrandonMA/react-firebase-auth.git#2ab4187acdd50a6c1df901c11cf52d05945580f1"
+  version "1.0.19"
+  resolved "https://github.com/BrandonMA/react-firebase-auth.git#249ce12d8c0981909a94a135fbb3e117674c5288"
   dependencies:
     "@reduxjs/toolkit" "^1.3.6"
 

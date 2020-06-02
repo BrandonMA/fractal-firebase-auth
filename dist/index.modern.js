@@ -73,6 +73,10 @@ function subscribeForUser(database, id, usersSlice, onFetchDone) {
       }
     }, function (error) {
       alert(error.message);
+    }, function () {
+      if (onFetchDone) {
+        onFetchDone();
+      }
     });
   };
 }

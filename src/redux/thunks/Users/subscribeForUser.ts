@@ -23,6 +23,11 @@ export function subscribeForUser<T extends MinimalUserData, S>(
             },
             (error) => {
                 alert(error.message);
+            },
+            () => {
+                if (onFetchDone) {
+                    onFetchDone();
+                }
             }
         );
     };

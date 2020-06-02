@@ -5180,8 +5180,8 @@ find-up@^3.0.0:
     locate-path "^3.0.0"
 
 "firebase-db-manager@https://github.com/BrandonMA/firebase-db-manager":
-  version "1.0.3"
-  resolved "https://github.com/BrandonMA/firebase-db-manager#5f9be8c0a5e99bf14d1d8678602d93f5bcfb8a5a"
+  version "1.0.5"
+  resolved "https://github.com/BrandonMA/firebase-db-manager#fc074f15f91c368d62d2783fc0ea6e1fea6ae88e"
   dependencies:
     uuid "^8.0.0"
 
@@ -6153,9 +6153,9 @@ is-buffer@^1.0.2, is-buffer@^1.1.5:
   integrity sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==
 
 is-callable@^1.1.4, is-callable@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/is-callable/-/is-callable-1.1.5.tgz#f7e46b596890456db74e7f6e976cb3273d06faab"
-  integrity sha512-ESKv5sMCJB2jnHTWZ3O5itG+O128Hsus4K4Qh1h2/cgn2vbgnLSVqfV46AeJA9D5EeeLa9w81KUXMtn34zhX+Q==
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/is-callable/-/is-callable-1.2.0.tgz#83336560b54a38e35e3a2df7afd0454d691468bb"
+  integrity sha512-pyVD9AaGLxtg6srb2Ng6ynWJqkHU9bEM087AKck0w8QwDarTfNcpIYoU8x8Hv2Icm8u6kFJM18Dag8lyqGkviw==
 
 is-ci@^2.0.0:
   version "2.0.0"
