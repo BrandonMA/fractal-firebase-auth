@@ -8,7 +8,6 @@ import Authentication from './components/Authentication';
 import UserNotAvailable from './components/UserNotAvailable';
 import { Provider } from 'react-redux';
 import store from './redux';
-import Authenticator from './components/Authenticator';
 
 const styles = StyleSheet.create({
     container: {
@@ -25,15 +24,13 @@ export default function App(): JSX.Element {
             <Provider store={store}>
                 <Firebase firebaseConfig={firebaseConfig} loadingComponent={<Loading text='firebase' />}>
                     <DatabaseProvider>
-                        <Authenticator>
-                            <Authenticate
-                                userNotAvailableComponent={<UserNotAvailable />}
-                                authenticationComponent={<Authentication />}
-                                loadingComponent={<Loading text='authentication' />}
-                            >
-                                <Text>Firebase is ready!</Text>
-                            </Authenticate>
-                        </Authenticator>
+                        <Authenticate
+                            userNotAvailableComponent={<UserNotAvailable />}
+                            authenticationComponent={<Authentication />}
+                            loadingComponent={<Loading text='authentication' />}
+                        >
+                            <Text>Firebase is ready!</Text>
+                        </Authenticate>
                     </DatabaseProvider>
                 </Firebase>
             </Provider>

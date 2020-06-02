@@ -4697,8 +4697,8 @@ react-dom@~16.9.0:
     scheduler "^0.15.0"
 
 "react-firebase-auth@https://github.com/BrandonMA/react-firebase-auth.git":
-  version "1.0.12"
-  resolved "https://github.com/BrandonMA/react-firebase-auth.git#018d97fefa457bf4a16ec9c30e09e437cfd6b96c"
+  version "1.0.13"
+  resolved "https://github.com/BrandonMA/react-firebase-auth.git#8bb5f69d983e00dbd6c61a3e020cd5a4dae1e58b"
   dependencies:
     "@reduxjs/toolkit" "^1.3.6"
 

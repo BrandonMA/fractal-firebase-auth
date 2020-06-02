@@ -179,8 +179,13 @@ var useAuthenticationState = function useAuthenticationState() {
   return useSelector(getState);
 };
 
+function isUsersState(value) {
+  var casted = value;
+  return casted.values != null;
+}
+
 function getUsers(state) {
-  if (isMinimalExpectedReduxState(state)) {
+  if (isMinimalExpectedReduxState(state) && isUsersState(state.users)) {
     return state.users;
   } else {
     throw Error('State does not have the expected shape');
@@ -243,5 +248,5 @@ function createUsersSlice(reducers, _extraReducers) {
   });
 }
 
-export { Authenticate, Firebase, createAuthenticationSlice, createUsersSlice, isAuthenticationState, isMinimalExpectedReduxState, signIn, signOut, signUp, useAuthenticationState, useCurrentUser };
+export { Authenticate, Firebase, createAuthenticationSlice, createUsersSlice, isAuthenticationState, isMinimalExpectedReduxState, isUsersState, signIn, signOut, signUp, useAuthenticationState, useCurrentUser };
 //# sourceMappingURL=index.modern.js.map

@@ -179,8 +179,13 @@ var useAuthenticationState = function useAuthenticationState() {
   return reactRedux.useSelector(getState);
 };
 
+function isUsersState(value) {
+  var casted = value;
+  return casted.values != null;
+}
+
 function getUsers(state) {
-  if (isMinimalExpectedReduxState(state)) {
+  if (isMinimalExpectedReduxState(state) && isUsersState(state.users)) {
     return state.users;
   } else {
     throw Error('State does not have the expected shape');
@@ -249,6 +254,7 @@ exports.createAuthenticationSlice = createAuthenticationSlice;
 exports.createUsersSlice = createUsersSlice;
 exports.isAuthenticationState = isAuthenticationState;
 exports.isMinimalExpectedReduxState = isMinimalExpectedReduxState;
+exports.isUsersState = isUsersState;
 exports.signIn = signIn;
 exports.signOut = signOut;
 exports.signUp = signUp;

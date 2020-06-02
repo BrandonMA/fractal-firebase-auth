@@ -30,6 +30,9 @@ export function createAuthenticationSlice<ThunkArg = void>(reducers?: ExtraReduc
             setLoadingFirebaseData: (state, action: PayloadAction<boolean>): void => {
                 state.loading = action.payload;
             },
+            setAuthenticationState: (state, action: PayloadAction<AuthenticationState>): void => {
+                state = action.payload;
+            },
             ...reducers
         },
         extraReducers: (builder) => {
@@ -57,3 +60,5 @@ export function createAuthenticationSlice<ThunkArg = void>(reducers?: ExtraReduc
         }
     });
 }
+
+export type AuthenticationSlice = ReturnType<typeof createAuthenticationSlice>;

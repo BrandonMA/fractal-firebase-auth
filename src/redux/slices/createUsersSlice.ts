@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction, ActionCreatorWithPreparedPayload } from '@reduxjs/toolkit';
 import { UsersState } from '../types/UsersState';
-import { MinimalUser } from '../types/MinimalUser';
+import { MinimalUserData, MinimalUser } from '../types/MinimalUser';
 
-type UsersMinimalState = UsersState<MinimalUser>;
+type UsersMinimalState = UsersState<MinimalUserData, unknown>;
 
 const initialState: Readonly<UsersMinimalState> = Object.freeze({
     values: new Map()
@@ -17,13 +17,16 @@ interface ExtraReducers<ThunkArg = void> {
 }
 
 // eslint-disable-next-line
-export function createUsersSlice<ThunkArg = void>(reducers?: ExtraReducers<ThunkArg>, extraReducers?: ExtraReducers<ThunkArg>) {
+export function createUsersSlice<T extends MinimalUserData, S, ThunkArg = void>(
+    reducers?: ExtraReducers<ThunkArg>,
+    extraReducers?: ExtraReducers<ThunkArg>
+) {
     return createSlice({
         name: 'users',
         initialState,
         reducers: {
-            setUser: (state, action: PayloadAction<MinimalUser>): void => {
-                state.values.set(action.payload.id, action.payload);
+            setUser: (state, action: PayloadAction<MinimalUser<T, S>>): void => {
+                state.values.set(action.payload.id(), action.payload);
             },
             ...reducers
         },
@@ -41,3 +44,5 @@ export function createUsersSlice<ThunkArg = void>(reducers?: ExtraReducers<Thunk
         }
     });
 }
+
+export type UsersSlice = ReturnType<typeof createUsersSlice>;

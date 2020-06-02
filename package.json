@@ -1,6 +1,6 @@
 {
     "name": "react-firebase-auth",
-    "version": "1.0.13",
+    "version": "1.0.14",
     "description": "Components to use firebase on react",
     "author": "BrandonMA",
     "license": "MIT",
@@ -16,12 +16,13 @@
         "start": "microbundle-crl watch --no-compress --format modern,cjs"
     },
     "peerDependencies": {
+        "firebase": "^7.14.4",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-redux": "^7.2.0",
         "redux": "^4.0.5",
         "redux-thunk": "^2.3.0",
-        "firebase": "^7.14.4"
+        "firebase-db-manager": "https://github.com/BrandonMA/firebase-db-manager"
     },
     "dependencies": {
         "@reduxjs/toolkit": "^1.3.6"
@@ -44,16 +45,17 @@
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-react": "^7.17.0",
         "eslint-plugin-standard": "^4.0.1",
+        "firebase": "^7.14.4",
         "microbundle-crl": "^0.13.10",
         "prettier": "^2.0.4",
-        "react-scripts": "^3.4.1",
-        "typescript": "^3.9.2",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-redux": "^7.2.0",
+        "react-scripts": "^3.4.1",
         "redux": "^4.0.5",
         "redux-thunk": "^2.3.0",
-        "firebase": "^7.14.4"
+        "typescript": "^3.9.2",
+        "firebase-db-manager": "https://github.com/BrandonMA/firebase-db-manager"
     },
     "files": [
         "dist"
