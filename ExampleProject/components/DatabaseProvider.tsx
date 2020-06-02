@@ -1,10 +1,10 @@
-import React, { createContext } from 'react';
+import React, { createContext, useMemo } from 'react';
 import { Collection, Database } from 'firebase-db-manager';
-import { MinimalUser } from 'react-firebase-auth';
+import { MinimalUserData } from 'react-firebase-auth';
 
 // eslint-disable-next-line
-function createDatabase() {
-    const usersCollection = new Collection<MinimalUser, null>('Users', null);
+export function createDatabase() {
+    const usersCollection = new Collection<MinimalUserData, null>('Users', null);
     const collections = {
         users: usersCollection
     };
@@ -18,7 +18,8 @@ interface Props {
 }
 
 function DatabaseProvider(props: Props): JSX.Element {
-    return <DatabaseContext.Provider value={createDatabase()}>{props.children}</DatabaseContext.Provider>;
+    const database = useMemo(() => createDatabase(), []);
+    return <DatabaseContext.Provider value={database}>{props.children}</DatabaseContext.Provider>;
 }
 
 export default React.memo(DatabaseProvider);

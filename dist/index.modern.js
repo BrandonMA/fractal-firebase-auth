@@ -1,7 +1,7 @@
 import { useSelector, connect } from 'react-redux';
 import firebase__default, { auth, initializeApp } from 'firebase/app';
 import 'firebase/auth';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 function isAuthenticationState(value) {
@@ -63,27 +63,67 @@ var subscribeForAuthenticatedUser = function subscribeForAuthenticatedUser(slice
   };
 };
 
+function subscribeForUser(database, id, usersSlice, onFetchDone) {
+  return function (dispatch) {
+    return database.collections.users.subscribeToDocument(id, function (newDocument) {
+      dispatch(usersSlice.actions.setUser(newDocument));
+
+      if (onFetchDone) {
+        onFetchDone();
+      }
+    }, function (error) {
+      alert(error.message);
+    });
+  };
+}
+
 function Authenticate(props) {
   var authenticationState = useAuthenticationState();
   var currentUser = useCurrentUser();
-  var subscribeForAuthenticatedUser = props.subscribeForAuthenticatedUser;
+
+  var _useState = useState(false),
+      listeningForUser = _useState[0],
+      setListeningForUser = _useState[1];
+
+  var subscribeForAuthenticatedUser = props.subscribeForAuthenticatedUser,
+      database = props.database,
+      subscribeForUser = props.subscribeForUser;
   useEffect(function () {
     var unsubscribe = subscribeForAuthenticatedUser();
     return function () {
       unsubscribe();
     };
   }, [subscribeForAuthenticatedUser]);
+  useEffect(function () {
+    var unsubscribe;
+
+    if (authenticationState.firebaseUser != null) {
+      unsubscribe = subscribeForUser(database, authenticationState.firebaseUser.uid, function () {
+        setListeningForUser(true);
+      });
+    }
+
+    return function () {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
+  }, [subscribeForUser, authenticationState]);
 
   if (authenticationState.firebaseUser === undefined && authenticationState.loading) {
     return props.loadingComponent;
   } else if (authenticationState.firebaseUser === null && authenticationState.loading === false) {
     return props.authenticationComponent;
   } else {
-    if (currentUser == null) {
-      return props.userNotAvailableComponent;
-    } else {
-      return props.children;
+    if (listeningForUser) {
+      if (currentUser == null) {
+        return props.userNotAvailableComponent;
+      } else {
+        return props.children;
+      }
     }
+
+    return props.loadingComponent;
   }
 }
 
@@ -91,6 +131,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   return {
     subscribeForAuthenticatedUser: function subscribeForAuthenticatedUser$1() {
       return dispatch(subscribeForAuthenticatedUser(ownProps.authenticationSlice));
+    },
+    subscribeForUser: function subscribeForUser$1(database, id, onFetchDone) {
+      return dispatch(subscribeForUser(database, id, ownProps.usersSlice, onFetchDone));
     }
   };
 };

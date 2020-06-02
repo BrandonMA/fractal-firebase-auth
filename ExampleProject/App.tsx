@@ -1,12 +1,13 @@
 import React from 'react';
-import { Firebase, Authenticate } from 'react-firebase-auth';
-import { StyleSheet, Text, View } from 'react-native';
+import { Firebase } from 'react-firebase-auth';
+import { StyleSheet, View } from 'react-native';
 import firebaseConfig from './firebase';
 import Loading from './components/Loading';
 import DatabaseProvider from './components/DatabaseProvider';
 
 import { Provider } from 'react-redux';
 import store from './redux';
+import Root from './components/Root';
 
 const styles = StyleSheet.create({
     container: {
@@ -23,13 +24,7 @@ export default function App(): JSX.Element {
             <Provider store={store}>
                 <Firebase firebaseConfig={firebaseConfig} loadingComponent={<Loading text='firebase' />}>
                     <DatabaseProvider>
-                        <Authenticate
-                            userNotAvailableComponent={<UserNotAvailable />}
-                            authenticationComponent={<Authentication />}
-                            loadingComponent={<Loading text='authentication' />}
-                        >
-                            <Text>Firebase is ready!</Text>
-                        </Authenticate>
+                        <Root />
                     </DatabaseProvider>
                 </Firebase>
             </Provider>
