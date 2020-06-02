@@ -1,8 +1,8 @@
-import { auth, initializeApp } from 'firebase/app';
+import firebase__default, { auth, initializeApp } from 'firebase/app';
 import { useState, useEffect } from 'react';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import 'firebase/auth';
-import { useSelector } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -117,6 +117,8 @@ function createAuthenticationSlice(reducers, _extraReducers) {
       },
       setLoadingFirebaseData: function setLoadingFirebaseData(state, action) {
         state.loading = action.payload;
+      },
+      setAuthenticationState: function setAuthenticationState(state, action) {
       }
     }, reducers),
     extraReducers: function extraReducers(builder) {
@@ -203,9 +205,29 @@ function useCurrentUser() {
   }
 }
 
+var subscribeForAuthenticatedUser = function subscribeForAuthenticatedUser(slice) {
+  return function (dispatch) {
+    return firebase__default.auth().onAuthStateChanged(function (user) {
+      dispatch(slice.actions.setAuthenticationState({
+        firebaseUser: user,
+        loading: false
+      }));
+    }, function (error) {
+      alert(error.message);
+    });
+  };
+};
+
 function Authenticate(props) {
   var authenticationState = useAuthenticationState();
   var currentUser = useCurrentUser();
+  var subscribeForAuthenticatedUser = props.subscribeForAuthenticatedUser;
+  useEffect(function () {
+    var unsubscribe = subscribeForAuthenticatedUser();
+    return function () {
+      unsubscribe();
+    };
+  }, [subscribeForAuthenticatedUser]);
 
   if (authenticationState.firebaseUser === undefined && authenticationState.loading) {
     return props.loadingComponent;
@@ -220,6 +242,16 @@ function Authenticate(props) {
   }
 }
 
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    subscribeForAuthenticatedUser: function subscribeForAuthenticatedUser$1() {
+      return dispatch(subscribeForAuthenticatedUser(ownProps.authenticationSlice));
+    }
+  };
+};
+
+connect(null, mapDispatchToProps)(Authenticate);
+
 var initialState$1 = Object.freeze({
   values: new Map()
 });
@@ -229,7 +261,7 @@ function createUsersSlice(reducers, _extraReducers) {
     initialState: initialState$1,
     reducers: _extends({
       setUser: function setUser(state, action) {
-        state.values.set(action.payload.id, action.payload);
+        state.values.set(action.payload.id(), action.payload);
       }
     }, reducers),
     extraReducers: function extraReducers(builder) {

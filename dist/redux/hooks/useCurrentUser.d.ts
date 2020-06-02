@@ -1,2 +1,2 @@
-import { MinimalUser } from '../types/MinimalUser';
-export declare function useCurrentUser<T extends MinimalUser>(): Readonly<T> | null;
+import { MinimalUser, MinimalUserData } from '../types/MinimalUser';
+export declare function useCurrentUser<T extends MinimalUserData, S>(): MinimalUser<T, S> | null | undefined;

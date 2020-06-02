@@ -31,7 +31,10 @@ export function createAuthenticationSlice<ThunkArg = void>(reducers?: ExtraReduc
                 state.loading = action.payload;
             },
             setAuthenticationState: (state, action: PayloadAction<AuthenticationState>): void => {
-                state = action.payload;
+                // Used to bypass the has not been read rule
+                if (state != null) {
+                    state = action.payload;
+                }
             },
             ...reducers
         },

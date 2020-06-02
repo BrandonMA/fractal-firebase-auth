@@ -2473,9 +2473,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.3.413:
-  version "1.3.455"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.455.tgz#fd65a3f5db6ffa83eb7c84f16ea9b1b7396f537d"
-  integrity sha512-4lwnxp+ArqOX9hiLwLpwhfqvwzUHFuDgLz4NTiU3lhygUzWtocIJ/5Vix+mWVNE2HQ9aI1k2ncGe5H/0OktMvA==
+  version "1.3.456"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.456.tgz#5125bce136b04a8e39473696509e83038f679cbd"
+  integrity sha512-jaVZ9+8HG2qvEN7c9r5EVguvhtevITJou4L10XuqoiZUoXIMF5qLG1pB9raP3WFcME4exDZRq1b6qyCA+u5Vew==
 
 encodeurl@~1.0.2:
   version "1.0.2"
@@ -2928,8 +2928,8 @@ find-up@^4.1.0:
     path-exists "^4.0.0"
 
 "firebase-db-manager@https://github.com/BrandonMA/firebase-db-manager":
-  version "1.0.2"
-  resolved "https://github.com/BrandonMA/firebase-db-manager#f21849bf8a3092b7249b98db9ad2c1765a8c63b1"
+  version "1.0.3"
+  resolved "https://github.com/BrandonMA/firebase-db-manager#5f9be8c0a5e99bf14d1d8678602d93f5bcfb8a5a"
   dependencies:
     uuid "^8.0.0"
 
@@ -4697,8 +4697,8 @@ react-dom@~16.9.0:
     scheduler "^0.15.0"
 
 "react-firebase-auth@https://github.com/BrandonMA/react-firebase-auth.git":
-  version "1.0.13"
-  resolved "https://github.com/BrandonMA/react-firebase-auth.git#8bb5f69d983e00dbd6c61a3e020cd5a4dae1e58b"
+  version "1.0.14"
+  resolved "https://github.com/BrandonMA/react-firebase-auth.git#8b32ca9f1cf442e0ad7a5943793b7dd576bb7e5f"
   dependencies:
     "@reduxjs/toolkit" "^1.3.6"
 
@@ -5751,9 +5751,9 @@ websocket-driver@>=0.5.1:
     websocket-extensions ">=0.1.1"
 
 websocket-extensions@>=0.1.1:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.3.tgz#5d2ff22977003ec687a4b87073dfbbac146ccf29"
-  integrity sha512-nqHUnMXmBzT0w570r2JpJxfiSD1IzoI+HGVdd3aZ0yNi3ngvQ4jv1dtHt5VGxfI2yj5yqImPhOK4vmIh2xMbGg==
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.4.tgz#7f8473bc839dfd87608adb95d7eb075211578a42"
+  integrity sha512-OqedPIGOfsDlo31UNwYbCFMSaO9m9G/0faIHj5/dZFDMFqPTcx6UwqyOy3COEaEOg/9VsGIpdqn62W5KhoKSpg==
 
 whatwg-fetch@2.0.4:
   version "2.0.4"

@@ -1,9 +1,17 @@
 /// <reference types="react" />
-interface Props {
+import { AuthenticationSlice } from './redux';
+interface ReduxFunctions {
+    subscribeForAuthenticatedUser: () => firebase.Unsubscribe;
+}
+interface OwnProps {
+    authenticationSlice: AuthenticationSlice;
     loadingComponent: JSX.Element;
     authenticationComponent: JSX.Element;
     userNotAvailableComponent: JSX.Element;
     children: JSX.Element;
 }
+interface Props extends OwnProps, ReduxFunctions {
+}
 export declare function Authenticate(props: Props): JSX.Element;
-export {};
+declare const _default: import("react-redux").ConnectedComponent<typeof Authenticate, Pick<Props, "authenticationSlice" | "loadingComponent" | "authenticationComponent" | "userNotAvailableComponent" | "children"> & OwnProps>;
+export default _default;

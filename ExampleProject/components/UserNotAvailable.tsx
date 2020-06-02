@@ -1,7 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { Text } from 'react-native';
 import { DatabaseContext } from './DatabaseProvider';
-import { useAuthenticationState } from 'react-firebase-auth';
+import { useAuthenticationState, MinimalUserData } from 'react-firebase-auth';
+
+interface ReduxFunctions {
+    createUser: (user: MinimalUserData) => Promise<void>;
+}
 
 function UserNotAvailable(): JSX.Element {
     const database = useContext(DatabaseContext);

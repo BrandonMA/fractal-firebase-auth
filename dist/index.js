@@ -1,4 +1,7 @@
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
 var firebase = require('firebase/app');
+var firebase__default = _interopDefault(firebase);
 var react = require('react');
 var toolkit = require('@reduxjs/toolkit');
 require('firebase/auth');
@@ -117,6 +120,8 @@ function createAuthenticationSlice(reducers, _extraReducers) {
       },
       setLoadingFirebaseData: function setLoadingFirebaseData(state, action) {
         state.loading = action.payload;
+      },
+      setAuthenticationState: function setAuthenticationState(state, action) {
       }
     }, reducers),
     extraReducers: function extraReducers(builder) {
@@ -203,9 +208,29 @@ function useCurrentUser() {
   }
 }
 
+var subscribeForAuthenticatedUser = function subscribeForAuthenticatedUser(slice) {
+  return function (dispatch) {
+    return firebase__default.auth().onAuthStateChanged(function (user) {
+      dispatch(slice.actions.setAuthenticationState({
+        firebaseUser: user,
+        loading: false
+      }));
+    }, function (error) {
+      alert(error.message);
+    });
+  };
+};
+
 function Authenticate(props) {
   var authenticationState = useAuthenticationState();
   var currentUser = useCurrentUser();
+  var subscribeForAuthenticatedUser = props.subscribeForAuthenticatedUser;
+  react.useEffect(function () {
+    var unsubscribe = subscribeForAuthenticatedUser();
+    return function () {
+      unsubscribe();
+    };
+  }, [subscribeForAuthenticatedUser]);
 
   if (authenticationState.firebaseUser === undefined && authenticationState.loading) {
     return props.loadingComponent;
@@ -220,6 +245,16 @@ function Authenticate(props) {
   }
 }
 
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    subscribeForAuthenticatedUser: function subscribeForAuthenticatedUser$1() {
+      return dispatch(subscribeForAuthenticatedUser(ownProps.authenticationSlice));
+    }
+  };
+};
+
+reactRedux.connect(null, mapDispatchToProps)(Authenticate);
+
 var initialState$1 = Object.freeze({
   values: new Map()
 });
@@ -229,7 +264,7 @@ function createUsersSlice(reducers, _extraReducers) {
     initialState: initialState$1,
     reducers: _extends({
       setUser: function setUser(state, action) {
-        state.values.set(action.payload.id, action.payload);
+        state.values.set(action.payload.id(), action.payload);
       }
     }, reducers),
     extraReducers: function extraReducers(builder) {
