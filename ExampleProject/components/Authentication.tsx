@@ -4,24 +4,24 @@ import { AppState } from '../redux';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
-import { signUp, signIn } from 'react-firebase-auth';
+import { signUp, useSignIn } from 'react-firebase-auth';
 
 interface ReduxFunctions {
     signUp: (email: string, password: string) => Promise<void>;
-    signIn: (email: string, password: string) => Promise<void>;
 }
 
 type AuthenticationState = 'signIn' | 'signUp';
 
 function Authentication(props: ReduxFunctions): JSX.Element {
-    const { signUp, signIn } = props;
+    const { signUp } = props;
     const [currentState, setCurrentState] = useState<AuthenticationState>('signIn');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const signIn = useSignIn(email, password);
 
     const handleAuthButton = useCallback(() => {
         if (currentState === 'signIn') {
-            signIn(email, password);
+            signIn();
         } else {
             signUp(email, password);
         }
@@ -45,14 +45,6 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<void, AppState, Action>): Re
     async signUp(email: string, password: string): Promise<void> {
         await dispatch(
             signUp({
-                email,
-                password
-            })
-        );
-    },
-    async signIn(email: string, password: string): Promise<void> {
-        await dispatch(
-            signIn({
                 email,
                 password
             })

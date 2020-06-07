@@ -316,10 +316,14 @@ function createUser(database, data, usersSlice) {
 var useSignIn = function useSignIn(email, password) {
   var dispatch = useDispatch();
   return useCallback(function () {
-    dispatch(signIn({
-      email: email,
-      password: password
-    }));
+    try {
+      return Promise.resolve(dispatch(signIn({
+        email: email,
+        password: password
+      }))).then(function () {});
+    } catch (e) {
+      return Promise.reject(e);
+    }
   }, [email, password, dispatch]);
 };
 
