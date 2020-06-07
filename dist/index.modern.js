@@ -1,7 +1,7 @@
-import { useSelector, connect } from 'react-redux';
+import { useSelector, connect, useDispatch } from 'react-redux';
 import firebase__default, { auth, initializeApp } from 'firebase/app';
 import 'firebase/auth';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 function isAuthenticationState(value) {
@@ -301,6 +301,28 @@ function Firebase(props) {
   return firebaseReady ? props.children : props.loadingComponent;
 }
 
+function createUser(database, data, usersSlice) {
+  return function (dispatch) {
+    try {
+      return Promise.resolve(database.collections.users.createDocument(data)).then(function (userDocument) {
+        dispatch(usersSlice.actions.setUser(userDocument));
+      });
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
+}
+
+var useSignIn = function useSignIn(email, password) {
+  var dispatch = useDispatch();
+  return useCallback(function () {
+    dispatch(signIn({
+      email: email,
+      password: password
+    }));
+  }, [email, password, dispatch]);
+};
+
 var initialState$1 = Object.freeze({
   values: new Map()
 });
@@ -329,17 +351,5 @@ function createUsersSlice(reducers, _extraReducers) {
   });
 }
 
-function createUser(database, data, usersSlice) {
-  return function (dispatch) {
-    try {
-      return Promise.resolve(database.collections.users.createDocument(data)).then(function (userDocument) {
-        dispatch(usersSlice.actions.setUser(userDocument));
-      });
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  };
-}
-
-export { Authenticate$1 as Authenticate, Firebase, createAuthenticationSlice, createUser, createUsersSlice, isAuthenticationState, isMinimalExpectedReduxState, isUsersState, signIn, signOut, signUp, subscribeForAuthenticatedUser, useAuthenticationState, useCurrentUser };
+export { Authenticate$1 as Authenticate, Firebase, createAuthenticationSlice, createUser, createUsersSlice, isAuthenticationState, isMinimalExpectedReduxState, isUsersState, signIn, signOut, signUp, subscribeForAuthenticatedUser, useAuthenticationState, useCurrentUser, useSignIn };
 //# sourceMappingURL=index.modern.js.map

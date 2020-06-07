@@ -1,6 +1,6 @@
 {
     "name": "react-firebase-auth",
-    "version": "1.0.20",
+    "version": "1.0.21",
     "description": "Components to use firebase on react",
     "author": "BrandonMA",
     "license": "MIT",

@@ -304,6 +304,28 @@ function Firebase(props) {
   return firebaseReady ? props.children : props.loadingComponent;
 }
 
+function createUser(database, data, usersSlice) {
+  return function (dispatch) {
+    try {
+      return Promise.resolve(database.collections.users.createDocument(data)).then(function (userDocument) {
+        dispatch(usersSlice.actions.setUser(userDocument));
+      });
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
+}
+
+var useSignIn = function useSignIn(email, password) {
+  var dispatch = reactRedux.useDispatch();
+  return react.useCallback(function () {
+    dispatch(signIn({
+      email: email,
+      password: password
+    }));
+  }, [email, password, dispatch]);
+};
+
 var initialState$1 = Object.freeze({
   values: new Map()
 });
@@ -332,18 +354,6 @@ function createUsersSlice(reducers, _extraReducers) {
   });
 }
 
-function createUser(database, data, usersSlice) {
-  return function (dispatch) {
-    try {
-      return Promise.resolve(database.collections.users.createDocument(data)).then(function (userDocument) {
-        dispatch(usersSlice.actions.setUser(userDocument));
-      });
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  };
-}
-
 exports.Authenticate = Authenticate$1;
 exports.Firebase = Firebase;
 exports.createAuthenticationSlice = createAuthenticationSlice;
@@ -358,4 +368,5 @@ exports.signUp = signUp;
 exports.subscribeForAuthenticatedUser = subscribeForAuthenticatedUser;
 exports.useAuthenticationState = useAuthenticationState;
 exports.useCurrentUser = useCurrentUser;
+exports.useSignIn = useSignIn;
 //# sourceMappingURL=index.js.map
