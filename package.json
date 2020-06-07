@@ -17,7 +17,7 @@
     },
     "peerDependencies": {
         "@reduxjs/toolkit": "^1.3.6",
-        "firebase": "^7.14.4",
+        "firebase": "^7.15.0",
         "firebase-db-manager": "https://github.com/BrandonMA/firebase-db-manager",
         "react": "^16.11.0",
         "react-dom": "^16.11.0",
@@ -44,7 +44,7 @@
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-react": "^7.17.0",
         "eslint-plugin-standard": "^4.0.1",
-        "firebase": "^7.14.4",
+        "firebase": "^7.15.0",
         "firebase-db-manager": "https://github.com/BrandonMA/firebase-db-manager",
         "immer": "^6.0.5",
         "microbundle-crl": "^0.13.10",
