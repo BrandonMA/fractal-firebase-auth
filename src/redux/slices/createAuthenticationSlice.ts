@@ -18,10 +18,10 @@ interface ExtraReducers<ThunkArg = void> {
     };
 }
 
-const replaceAuthenticationState = (state: AuthenticationState, action: PayloadAction<AuthenticationState>): void => {
+function replaceAuthenticationState(state: AuthenticationState, action: PayloadAction<AuthenticationState>): void {
     state.loading = action.payload.loading;
     state.firebaseUser = action.payload.firebaseUser;
-};
+}
 
 // eslint-disable-next-line
 export function createAuthenticationSlice<ThunkArg = void>(reducers?: ExtraReducers<ThunkArg>, extraReducers?: ExtraReducers<ThunkArg>) {

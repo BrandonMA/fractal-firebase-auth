@@ -1,24 +1,10 @@
 import { useAuthenticationState } from './redux/hooks/useAuthenticationState';
 import { useCurrentUser } from './redux/hooks/useCurrentUser';
-import { ThunkDispatch } from 'redux-thunk';
-import { MinimalExpectedReduxState, AuthenticationSlice, MinimalUserData, UsersSlice } from './redux';
-import { Action } from 'redux';
-import { subscribeForAuthenticatedUser } from './redux/thunks/Authentication/subscribeForAuthenticatedUser';
-import { connect } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { subscribeForUser } from './redux/thunks/Users/subscribeForUser';
+import { AuthenticationSlice, MinimalUserData, UsersSlice, useSubscribeForAuthenticatedUser, useSubscribeForUser } from './redux';
+import { useEffect, useState, useCallback } from 'react';
 import { MinimalExpectedDatabase } from './redux/types/MinimalExpectedDatabase';
 
-interface ReduxFunctions {
-    subscribeForAuthenticatedUser: () => firebase.Unsubscribe;
-    subscribeForUser: (
-        database: MinimalExpectedDatabase<MinimalUserData, null>,
-        id: string,
-        onFetchDone: () => void
-    ) => firebase.Unsubscribe;
-}
-
-interface OwnProps {
+interface Props {
     database: MinimalExpectedDatabase<MinimalUserData, null>;
     authenticationSlice: AuthenticationSlice;
     usersSlice: UsersSlice;
@@ -28,14 +14,16 @@ interface OwnProps {
     children: JSX.Element;
 }
 
-interface Props extends OwnProps, ReduxFunctions {}
-
-function Authenticate(props: Props): JSX.Element {
+export default function Authenticate(props: Props): JSX.Element {
     const authenticationState = useAuthenticationState();
     const currentUser = useCurrentUser();
     const [listeningForUser, setListeningForUser] = useState(false);
-
-    const { subscribeForAuthenticatedUser, database, subscribeForUser } = props;
+    const { database, authenticationSlice, usersSlice } = props;
+    const subscribeForAuthenticatedUser = useSubscribeForAuthenticatedUser(authenticationSlice);
+    const onFetch = useCallback(() => {
+        setListeningForUser(true);
+    }, []);
+    const subscribeForUser = useSubscribeForUser(database, authenticationState.firebaseUser?.uid ?? '', usersSlice, onFetch);
 
     useEffect(() => {
         const unsubscribe = subscribeForAuthenticatedUser();
@@ -47,9 +35,7 @@ function Authenticate(props: Props): JSX.Element {
     useEffect(() => {
         let unsubscribe: firebase.Unsubscribe | undefined;
         if (authenticationState.firebaseUser != null) {
-            unsubscribe = subscribeForUser(database, authenticationState.firebaseUser.uid, () => {
-                setListeningForUser(true);
-            });
+            unsubscribe = subscribeForUser();
         }
         return (): void => {
             if (unsubscribe) {
@@ -73,14 +59,3 @@ function Authenticate(props: Props): JSX.Element {
         return props.loadingComponent;
     }
 }
-
-const mapDispatchToProps = (dispatch: ThunkDispatch<void, MinimalExpectedReduxState, Action>, ownProps: OwnProps): ReduxFunctions => ({
-    subscribeForAuthenticatedUser(): firebase.Unsubscribe {
-        return dispatch(subscribeForAuthenticatedUser(ownProps.authenticationSlice));
-    },
-    subscribeForUser(database: MinimalExpectedDatabase<MinimalUserData, null>, id: string, onFetchDone: () => void): firebase.Unsubscribe {
-        return dispatch(subscribeForUser(database, id, ownProps.usersSlice, onFetchDone));
-    }
-});
-
-export default connect(null, mapDispatchToProps)(Authenticate);

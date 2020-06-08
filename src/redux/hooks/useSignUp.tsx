@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux';
-import { signIn } from '../thunks';
+import { signUp } from '../thunks';
 import { useCallback } from 'react';
 
-export function useSignIn(email: string, password: string): () => Promise<void> {
+export function useSignUp(email: string, password: string): () => Promise<void> {
     const dispatch = useDispatch();
     return useCallback(async () => {
         await dispatch(
-            signIn({
+            signUp({
                 email,
                 password
             })
