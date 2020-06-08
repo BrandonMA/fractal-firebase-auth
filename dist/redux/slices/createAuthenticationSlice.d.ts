@@ -8,6 +8,7 @@ interface ExtraReducers<ThunkArg = void> {
         fullfilled: ActionCreatorWithPreparedPayload<[AuthenticationState, string, ThunkArg], AuthenticationState, string, never>;
     };
 }
+declare function replaceAuthenticationState(state: AuthenticationState, action: PayloadAction<AuthenticationState>): void;
 export declare function createAuthenticationSlice<ThunkArg = void>(reducers?: ExtraReducers<ThunkArg>, extraReducers?: ExtraReducers<ThunkArg>): import("@reduxjs/toolkit").Slice<Readonly<AuthenticationState>, {
     setFirebaseUser: (state: {
         firebaseUser: {
@@ -135,10 +136,7 @@ export declare function createAuthenticationSlice<ThunkArg = void>(reducers?: Ex
         } | null | undefined;
         loading: boolean;
     }, action: PayloadAction<boolean>) => void;
-    setAuthenticationState: (state: AuthenticationState, action: {
-        payload: AuthenticationState;
-        type: string;
-    }) => void;
+    setAuthenticationState: typeof replaceAuthenticationState;
 } | {
     setFirebaseUser: (state: {
         firebaseUser: {
@@ -266,10 +264,7 @@ export declare function createAuthenticationSlice<ThunkArg = void>(reducers?: Ex
         } | null | undefined;
         loading: boolean;
     }, action: PayloadAction<boolean>) => void;
-    setAuthenticationState: (state: AuthenticationState, action: {
-        payload: AuthenticationState;
-        type: string;
-    }) => void;
+    setAuthenticationState: typeof replaceAuthenticationState;
 }, "authentication">;
 export declare type AuthenticationSlice = ReturnType<typeof createAuthenticationSlice>;
 export {};
