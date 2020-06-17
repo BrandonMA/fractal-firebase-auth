@@ -1,12 +1,12 @@
 import { useAuthenticationState } from './redux/hooks/useAuthenticationState';
 import { useCurrentUser } from './redux/hooks/useCurrentUser';
-import { AuthenticationSlice, MinimalUserData, UsersSlice, useSubscribeForAuthenticatedUser, useSubscribeForUser } from './redux';
+import { MinimalUserData, UsersSlice, useSubscribeForAuthenticatedUser, useSubscribeForUser, authenticationSlice } from './redux';
 import { useEffect, useState, useCallback } from 'react';
 import { MinimalExpectedDatabase } from './redux/types/MinimalExpectedDatabase';
 
 interface Props {
     database: MinimalExpectedDatabase<MinimalUserData, null>;
-    authenticationSlice: AuthenticationSlice;
+    authenticationSlice: typeof authenticationSlice;
     usersSlice: UsersSlice;
     loadingComponent: JSX.Element;
     authenticationComponent: JSX.Element;

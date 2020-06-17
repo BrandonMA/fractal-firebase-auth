@@ -1,9 +1,9 @@
 /// <reference types="react" />
-import { AuthenticationSlice, MinimalUserData, UsersSlice } from './redux';
+import { MinimalUserData, UsersSlice, authenticationSlice } from './redux';
 import { MinimalExpectedDatabase } from './redux/types/MinimalExpectedDatabase';
 interface Props {
     database: MinimalExpectedDatabase<MinimalUserData, null>;
-    authenticationSlice: AuthenticationSlice;
+    authenticationSlice: typeof authenticationSlice;
     usersSlice: UsersSlice;
     loadingComponent: JSX.Element;
     authenticationComponent: JSX.Element;
