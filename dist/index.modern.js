@@ -204,6 +204,13 @@ function useUpdateUser(database, data, usersSlice) {
   }, [dispatch, database, data, usersSlice]);
 }
 
+function useCreateUser(database, data, usersSlice) {
+  var dispatch = useDispatch();
+  return useCallback(function () {
+    return dispatch(createUser(database, data, usersSlice));
+  }, [dispatch, database, data, usersSlice]);
+}
+
 var initialState = Object.freeze({
   firebaseUser: undefined,
   loading: true
@@ -316,5 +323,5 @@ function Firebase(props) {
   return firebaseReady ? props.children : props.loadingComponent;
 }
 
-export { Authenticate, Firebase, authenticationSlice, createUser, createUsersSlice, isAuthenticationState, isMinimalExpectedReduxState, isUsersState, signIn, signOut, signUp, subscribeForAuthenticatedUser, useAuthenticationState, useCurrentUser, useSignIn, useSignOut, useSignUp, useSubscribeForAuthenticatedUser, useSubscribeForUser, useUpdateUser };
+export { Authenticate, Firebase, authenticationSlice, createUser, createUsersSlice, isAuthenticationState, isMinimalExpectedReduxState, isUsersState, signIn, signOut, signUp, subscribeForAuthenticatedUser, useAuthenticationState, useCreateUser, useCurrentUser, useSignIn, useSignOut, useSignUp, useSubscribeForAuthenticatedUser, useSubscribeForUser, useUpdateUser };
 //# sourceMappingURL=index.modern.js.map

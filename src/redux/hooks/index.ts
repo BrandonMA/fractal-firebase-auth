@@ -7,3 +7,4 @@ export * from './useSignUp';
 export * from './useSubscribeForAuthenticatedUser';
 export * from './useSubscribeForUser';
 export * from './useUpdateUser';
+export * from './useCreateUser';

@@ -204,6 +204,13 @@ function useUpdateUser(database, data, usersSlice) {
   }, [dispatch, database, data, usersSlice]);
 }
 
+function useCreateUser(database, data, usersSlice) {
+  var dispatch = reactRedux.useDispatch();
+  return react.useCallback(function () {
+    return dispatch(createUser(database, data, usersSlice));
+  }, [dispatch, database, data, usersSlice]);
+}
+
 var initialState = Object.freeze({
   firebaseUser: undefined,
   loading: true
@@ -329,6 +336,7 @@ exports.signOut = signOut;
 exports.signUp = signUp;
 exports.subscribeForAuthenticatedUser = subscribeForAuthenticatedUser;
 exports.useAuthenticationState = useAuthenticationState;
+exports.useCreateUser = useCreateUser;
 exports.useCurrentUser = useCurrentUser;
 exports.useSignIn = useSignIn;
 exports.useSignOut = useSignOut;
