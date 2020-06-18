@@ -197,11 +197,11 @@ function updateUser(database, data, usersSlice) {
   };
 }
 
-function useUpdateUser(database, data, usersSlice) {
+function useUpdateUser(database, usersSlice) {
   var dispatch = useDispatch();
-  return useCallback(function () {
+  return useCallback(function (data) {
     return dispatch(updateUser(database, data, usersSlice));
-  }, [dispatch, database, data, usersSlice]);
+  }, [dispatch, database, usersSlice]);
 }
 
 function useCreateUser(database, data, usersSlice) {

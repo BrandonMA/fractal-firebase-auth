@@ -197,11 +197,11 @@ function updateUser(database, data, usersSlice) {
   };
 }
 
-function useUpdateUser(database, data, usersSlice) {
+function useUpdateUser(database, usersSlice) {
   var dispatch = reactRedux.useDispatch();
-  return react.useCallback(function () {
+  return react.useCallback(function (data) {
     return dispatch(updateUser(database, data, usersSlice));
-  }, [dispatch, database, data, usersSlice]);
+  }, [dispatch, database, usersSlice]);
 }
 
 function useCreateUser(database, data, usersSlice) {

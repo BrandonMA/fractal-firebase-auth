@@ -10,11 +10,13 @@ import { updateUser } from '../thunks/Users/updateUser';
 
 export function useUpdateUser<T extends MinimalUserData, S>(
     database: MinimalExpectedDatabase<T, S>,
-    data: T,
     usersSlice: UsersSlice
-): () => Promise<void> {
+): (data: T) => Promise<void> {
     const dispatch = useDispatch<ThunkDispatch<Promise<void>, MinimalExpectedReduxState, Action>>();
-    return useCallback(() => {
-        return dispatch(updateUser(database, data, usersSlice));
-    }, [dispatch, database, data, usersSlice]);
+    return useCallback(
+        (data: T) => {
+            return dispatch(updateUser(database, data, usersSlice));
+        },
+        [dispatch, database, usersSlice]
+    );
 }
