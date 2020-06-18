@@ -185,6 +185,25 @@ function useSubscribeForUser(database, id, usersSlice, onFetchDone) {
   }, [dispatch, database, id, usersSlice, onFetchDone]);
 }
 
+function updateUser(database, data, usersSlice) {
+  return function (dispatch) {
+    try {
+      return Promise.resolve(database.collections.users.updateDocument(data)).then(function (userDocument) {
+        dispatch(usersSlice.actions.setUser(userDocument));
+      });
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
+}
+
+function useUpdateUser(database, data, usersSlice) {
+  var dispatch = useDispatch();
+  return useCallback(function () {
+    return dispatch(updateUser(database, data, usersSlice));
+  }, [dispatch, database, data, usersSlice]);
+}
+
 var initialState = Object.freeze({
   firebaseUser: undefined,
   loading: true
@@ -297,5 +316,5 @@ function Firebase(props) {
   return firebaseReady ? props.children : props.loadingComponent;
 }
 
-export { Authenticate, Firebase, authenticationSlice, createUser, createUsersSlice, isAuthenticationState, isMinimalExpectedReduxState, isUsersState, signIn, signOut, signUp, subscribeForAuthenticatedUser, useAuthenticationState, useCurrentUser, useSignIn, useSignOut, useSignUp, useSubscribeForAuthenticatedUser, useSubscribeForUser };
+export { Authenticate, Firebase, authenticationSlice, createUser, createUsersSlice, isAuthenticationState, isMinimalExpectedReduxState, isUsersState, signIn, signOut, signUp, subscribeForAuthenticatedUser, useAuthenticationState, useCurrentUser, useSignIn, useSignOut, useSignUp, useSubscribeForAuthenticatedUser, useSubscribeForUser, useUpdateUser };
 //# sourceMappingURL=index.modern.js.map

@@ -185,6 +185,25 @@ function useSubscribeForUser(database, id, usersSlice, onFetchDone) {
   }, [dispatch, database, id, usersSlice, onFetchDone]);
 }
 
+function updateUser(database, data, usersSlice) {
+  return function (dispatch) {
+    try {
+      return Promise.resolve(database.collections.users.updateDocument(data)).then(function (userDocument) {
+        dispatch(usersSlice.actions.setUser(userDocument));
+      });
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
+}
+
+function useUpdateUser(database, data, usersSlice) {
+  var dispatch = reactRedux.useDispatch();
+  return react.useCallback(function () {
+    return dispatch(updateUser(database, data, usersSlice));
+  }, [dispatch, database, data, usersSlice]);
+}
+
 var initialState = Object.freeze({
   firebaseUser: undefined,
   loading: true
@@ -316,4 +335,5 @@ exports.useSignOut = useSignOut;
 exports.useSignUp = useSignUp;
 exports.useSubscribeForAuthenticatedUser = useSubscribeForAuthenticatedUser;
 exports.useSubscribeForUser = useSubscribeForUser;
+exports.useUpdateUser = useUpdateUser;
 //# sourceMappingURL=index.js.map
