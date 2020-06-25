@@ -1,9 +1,3 @@
-import Authenticate from './Authenticate';
-import { enableMapSet } from 'immer';
-
-enableMapSet();
-
+export * from './Authenticate';
 export * from './Firebase';
 export * from './redux';
-
-export { Authenticate };

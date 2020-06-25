@@ -10,5 +10,5 @@ interface Props {
     userNotAvailableComponent: JSX.Element;
     children: JSX.Element;
 }
-export default function Authenticate(props: Props): JSX.Element;
+export declare function Authenticate(props: Props): JSX.Element;
 export {};

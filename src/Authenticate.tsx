@@ -14,7 +14,7 @@ interface Props {
     children: JSX.Element;
 }
 
-export default function Authenticate(props: Props): JSX.Element {
+export function Authenticate(props: Props): JSX.Element {
     const authenticationState = useAuthenticationState();
     const currentUser = useCurrentUser();
     const [listeningForUser, setListeningForUser] = useState(false);
