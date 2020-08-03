@@ -55,14 +55,38 @@ function useCurrentUser() {
   }
 }
 
+// A type of promise-like that resolves synchronously and supports only one observer
+
+const _iteratorSymbol = /*#__PURE__*/ typeof Symbol !== "undefined" ? (Symbol.iterator || (Symbol.iterator = Symbol("Symbol.iterator"))) : "@@iterator";
+
+const _asyncIteratorSymbol = /*#__PURE__*/ typeof Symbol !== "undefined" ? (Symbol.asyncIterator || (Symbol.asyncIterator = Symbol("Symbol.asyncIterator"))) : "@@asyncIterator";
+
+// Asynchronously call a function and send errors to recovery continuation
+function _catch(body, recover) {
+	try {
+		var result = body();
+	} catch(e) {
+		return recover(e);
+	}
+	if (result && result.then) {
+		return result.then(void 0, recover);
+	}
+	return result;
+}
+
 var signIn = createAsyncThunk('authentication/signIn', function (user) {
   try {
-    return Promise.resolve(auth().signInWithEmailAndPassword(user.email, user.password)).then(function (userCredential) {
-      return {
-        firebaseUser: userCredential.user,
-        loading: false
-      };
-    });
+    return Promise.resolve(_catch(function () {
+      return Promise.resolve(auth().signInWithEmailAndPassword(user.email, user.password)).then(function (userCredential) {
+        return {
+          firebaseUser: userCredential.user,
+          loading: false
+        };
+      });
+    }, function (error) {
+      alert(error);
+      throw error;
+    }));
   } catch (e) {
     return Promise.reject(e);
   }
@@ -83,12 +107,17 @@ var signOut = createAsyncThunk('authentication/signOut', function () {
 
 var signUp = createAsyncThunk('authentication/signUp', function (user) {
   try {
-    return Promise.resolve(auth().createUserWithEmailAndPassword(user.email, user.password)).then(function (userCredential) {
-      return {
-        firebaseUser: userCredential.user,
-        loading: false
-      };
-    });
+    return Promise.resolve(_catch(function () {
+      return Promise.resolve(auth().createUserWithEmailAndPassword(user.email, user.password)).then(function (userCredential) {
+        return {
+          firebaseUser: userCredential.user,
+          loading: false
+        };
+      });
+    }, function (error) {
+      alert(error);
+      throw error;
+    }));
   } catch (e) {
     return Promise.reject(e);
   }

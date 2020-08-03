@@ -7,10 +7,15 @@ import { EmailPasswordPair } from '../../types/EmailPasswordPair';
 export const signIn = createAsyncThunk(
     'authentication/signIn',
     async (user: EmailPasswordPair): Promise<AuthenticationState> => {
-        const userCredential = await firebase.auth().signInWithEmailAndPassword(user.email, user.password);
-        return {
-            firebaseUser: userCredential.user,
-            loading: false
-        };
+        try {
+            const userCredential = await firebase.auth().signInWithEmailAndPassword(user.email, user.password);
+            return {
+                firebaseUser: userCredential.user,
+                loading: false
+            };
+        } catch (error) {
+            alert(error);
+            throw error;
+        }
     }
 );
