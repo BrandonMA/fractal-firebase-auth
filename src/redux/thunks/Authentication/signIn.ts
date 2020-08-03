@@ -1,21 +1,18 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { ThunkDispatch, Action } from '@reduxjs/toolkit';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import { AuthenticationState } from '../../types/AuthenticationState';
 import { EmailPasswordPair } from '../../types/EmailPasswordPair';
+import { MinimalExpectedReduxState } from '../../types/MinimalExpectedReduxState';
+import { authenticationSlice } from '../../slices/createAuthenticationSlice';
 
-export const signIn = createAsyncThunk(
-    'authentication/signIn',
-    async (user: EmailPasswordPair): Promise<AuthenticationState> => {
-        try {
-            const userCredential = await firebase.auth().signInWithEmailAndPassword(user.email, user.password);
-            return {
-                firebaseUser: userCredential.user,
-                loading: false
-            };
-        } catch (error) {
-            alert(error);
-            throw error;
-        }
-    }
-);
+export const signIn = (slice: typeof authenticationSlice, user: EmailPasswordPair) => async (
+    dispatch: ThunkDispatch<firebase.Unsubscribe, MinimalExpectedReduxState, Action>
+): Promise<void> => {
+    const userCredential = await firebase.auth().signInWithEmailAndPassword(user.email, user.password);
+    dispatch(
+        slice.actions.setAuthenticationState({
+            firebaseUser: userCredential.user,
+            loading: false
+        })
+    );
+};

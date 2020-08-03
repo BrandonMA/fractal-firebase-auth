@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { auth, initializeApp } from 'firebase/app';
 import 'firebase/auth';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useCallback, useState, useEffect } from 'react';
 
 function isAuthenticationState(value) {
@@ -55,42 +55,20 @@ function useCurrentUser() {
   }
 }
 
-// A type of promise-like that resolves synchronously and supports only one observer
-
-const _iteratorSymbol = /*#__PURE__*/ typeof Symbol !== "undefined" ? (Symbol.iterator || (Symbol.iterator = Symbol("Symbol.iterator"))) : "@@iterator";
-
-const _asyncIteratorSymbol = /*#__PURE__*/ typeof Symbol !== "undefined" ? (Symbol.asyncIterator || (Symbol.asyncIterator = Symbol("Symbol.asyncIterator"))) : "@@asyncIterator";
-
-// Asynchronously call a function and send errors to recovery continuation
-function _catch(body, recover) {
-	try {
-		var result = body();
-	} catch(e) {
-		return recover(e);
-	}
-	if (result && result.then) {
-		return result.then(void 0, recover);
-	}
-	return result;
-}
-
-var signIn = createAsyncThunk('authentication/signIn', function (user) {
-  try {
-    return Promise.resolve(_catch(function () {
+var signIn = function signIn(slice, user) {
+  return function (dispatch) {
+    try {
       return Promise.resolve(auth().signInWithEmailAndPassword(user.email, user.password)).then(function (userCredential) {
-        return {
+        dispatch(slice.actions.setAuthenticationState({
           firebaseUser: userCredential.user,
           loading: false
-        };
+        }));
       });
-    }, function (error) {
-      alert(error);
-      throw error;
-    }));
-  } catch (e) {
-    return Promise.reject(e);
-  }
-});
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
+};
 
 var signOut = createAsyncThunk('authentication/signOut', function () {
   try {
@@ -105,23 +83,20 @@ var signOut = createAsyncThunk('authentication/signOut', function () {
   }
 });
 
-var signUp = createAsyncThunk('authentication/signUp', function (user) {
-  try {
-    return Promise.resolve(_catch(function () {
+var signUp = function signUp(slice, user) {
+  return function (dispatch) {
+    try {
       return Promise.resolve(auth().createUserWithEmailAndPassword(user.email, user.password)).then(function (userCredential) {
-        return {
+        dispatch(slice.actions.setAuthenticationState({
           firebaseUser: userCredential.user,
           loading: false
-        };
+        }));
       });
-    }, function (error) {
-      alert(error);
-      throw error;
-    }));
-  } catch (e) {
-    return Promise.reject(e);
-  }
-});
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
+};
 
 var subscribeForAuthenticatedUser = function subscribeForAuthenticatedUser(slice) {
   return function (dispatch) {
@@ -148,18 +123,18 @@ function createUser(database, data, usersSlice) {
   };
 }
 
-function useSignIn(email, password) {
+function useSignIn(slice, email, password) {
   var dispatch = useDispatch();
   return useCallback(function () {
     try {
-      return Promise.resolve(dispatch(signIn({
+      return Promise.resolve(dispatch(signIn(slice, {
         email: email,
         password: password
       }))).then(function () {});
     } catch (e) {
       return Promise.reject(e);
     }
-  }, [email, password, dispatch]);
+  }, [slice, email, password, dispatch]);
 }
 
 function useSignOut() {
@@ -173,18 +148,18 @@ function useSignOut() {
   }, [dispatch]);
 }
 
-function useSignUp(email, password) {
+function useSignUp(slice, email, password) {
   var dispatch = useDispatch();
   return useCallback(function () {
     try {
-      return Promise.resolve(dispatch(signUp({
+      return Promise.resolve(dispatch(signUp(slice, {
         email: email,
         password: password
       }))).then(function () {});
     } catch (e) {
       return Promise.reject(e);
     }
-  }, [email, password, dispatch]);
+  }, [slice, email, password, dispatch]);
 }
 
 function useSubscribeForAuthenticatedUser(slice) {
@@ -268,9 +243,7 @@ var authenticationSlice = createSlice({
     setAuthenticationState: replaceAuthenticationState
   },
   extraReducers: function extraReducers(builder) {
-    builder.addCase(signIn.fulfilled, replaceAuthenticationState);
     builder.addCase(signOut.fulfilled, replaceAuthenticationState);
-    builder.addCase(signUp.fulfilled, replaceAuthenticationState);
   }
 });
 
