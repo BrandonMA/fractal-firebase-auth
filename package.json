@@ -58,5 +58,8 @@
     },
     "files": [
         "dist"
-    ]
+    ],
+    "dependencies": {
+        "recoil": "^0.0.10"
+    }
 }
