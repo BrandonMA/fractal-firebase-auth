@@ -2,6 +2,8 @@ import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
 import { UsersState } from '../types/UsersState';
 import { MinimalUserData, MinimalUser } from '../types/MinimalUser';
 
+// Crear atom de currentUser
+
 type UsersMinimalState = UsersState<MinimalUserData, unknown>;
 
 const initialState: Readonly<UsersMinimalState> = Object.freeze({

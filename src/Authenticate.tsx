@@ -56,6 +56,6 @@ export function Authenticate(props: Props): JSX.Element {
                 return props.children;
             }
         }
-        return props.loadingComponent;
+        return props.loadingComponent; // Cambiar por error message
     }
 }
