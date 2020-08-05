@@ -10,6 +10,6 @@ export const currentUserSelector = selector({
         if (auth.firebaseUser != null) {
             return users.get(auth.firebaseUser.uid);
         }
-        return null;
+        return undefined;
     }
 });
