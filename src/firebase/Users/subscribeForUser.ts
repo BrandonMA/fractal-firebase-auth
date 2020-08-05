@@ -1,16 +1,17 @@
 import firebase from 'firebase/app';
 import { MinimalExpectedDatabase } from '../types/MinimalExpectedDatabase';
-import { MinimalUserData, isMinimalUserData } from '../types';
+import { MinimalUserData } from '../types';
+import { Document } from 'firebase-db-manager';
 
 export function subscribeForUser<T extends MinimalUserData, S>(
     database: MinimalExpectedDatabase<T, S>,
     id: string,
-    onFetchDone?: (newDocument?: MinimalUserData) => void
+    onFetchDone?: (newDocument?: Document<T, S>) => void
 ): firebase.Unsubscribe {
     return database.collections.users.subscribeToDocument(
         id,
         (newDocument) => {
-            if (onFetchDone && isMinimalUserData(newDocument)) {
+            if (onFetchDone) {
                 onFetchDone(newDocument);
             }
         },

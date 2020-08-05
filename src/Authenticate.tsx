@@ -1,10 +1,9 @@
-import { MinimalUserData } from './redux';
 import { useEffect, useState } from 'react';
-import { MinimalExpectedDatabase } from './redux/types/MinimalExpectedDatabase';
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import { authenticationAtom, currentUserSelector, usersAtom } from './recoil';
 import { subscribeForAuthenticatedUser } from './firebase/Authentication/subscribeForAuthenticatedUser';
 import { subscribeForUser } from './firebase/Users/subscribeForUser';
+import { MinimalExpectedDatabase, MinimalUserData } from './firebase/types';
 
 interface Props {
     database: MinimalExpectedDatabase<MinimalUserData, null>;
@@ -20,23 +19,23 @@ export function Authenticate(props: Props): JSX.Element {
     const setUsers = useSetRecoilState(usersAtom);
     const currentUser = useRecoilValue(currentUserSelector);
     const [listeningForUser, setListeningForUser] = useState(false);
-    const { database } = props;
+    const { database, loadingComponent, authenticationComponent, userNotAvailableComponent, children, errorComponet } = props;
 
     useEffect(() => {
         const unsubscribe = subscribeForAuthenticatedUser((authState) => {
             setAuthenticationState(authState);
         });
         return (): void => {
-            unsubscribe(); // Remove auth listening when the component is unmounted.
+            unsubscribe();
         };
     }, [setAuthenticationState]);
 
     useEffect(() => {
         let unsubscribe: firebase.Unsubscribe | undefined;
         if (authenticationState.firebaseUser != null) {
-            unsubscribe = subscribeForUser(database, authenticationState.firebaseUser?.uid, (document) => {
-                if (document !== undefined) {
-                    setUsers((oldUsers) => oldUsers.set(document?.id, document));
+            unsubscribe = subscribeForUser(database, authenticationState.firebaseUser.uid, (document) => {
+                if (document != null) {
+                    setUsers((oldUsers) => oldUsers.set(document.id(), document));
                 }
                 setListeningForUser(true);
             });
@@ -49,17 +48,17 @@ export function Authenticate(props: Props): JSX.Element {
     }, [authenticationState, database, setUsers]);
 
     if (authenticationState.firebaseUser === undefined && authenticationState.loading) {
-        return props.loadingComponent;
+        return loadingComponent;
     } else if (authenticationState.firebaseUser === null && authenticationState.loading === false) {
-        return props.authenticationComponent;
+        return authenticationComponent;
     } else {
         if (listeningForUser) {
             if (currentUser == null) {
-                return props.userNotAvailableComponent;
+                return userNotAvailableComponent;
             } else {
-                return props.children;
+                return children;
             }
         }
-        return props.errorComponet;
+        return errorComponet;
     }
 }
