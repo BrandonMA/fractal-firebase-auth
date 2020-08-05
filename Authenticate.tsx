@@ -1,9 +1,10 @@
+import { MinimalUserData } from './redux';
 import { useEffect, useState } from 'react';
+import { MinimalExpectedDatabase } from './redux/types/MinimalExpectedDatabase';
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import { authenticationAtom, currentUserSelector, usersAtom } from './recoil';
-import { subscribeForAuthenticatedUser } from './firebase/authentication/subscribeForAuthenticatedUser';
-import { subscribeForUser } from './firebase/users/subscribeForUser';
-import { MinimalExpectedDatabase, MinimalUserData } from './firebase/types';
+import { subscribeForAuthenticatedUser } from './firebase/Authentication/subscribeForAuthenticatedUser';
+import { subscribeForUser } from './firebase/Users/subscribeForUser';
 
 interface Props {
     database: MinimalExpectedDatabase<MinimalUserData, null>;
@@ -11,32 +12,33 @@ interface Props {
     authenticationComponent: JSX.Element;
     userNotAvailableComponent: JSX.Element;
     children: JSX.Element;
+    errorComponet: JSX.Element;
 }
 
 export function Authenticate(props: Props): JSX.Element {
     const [authenticationState, setAuthenticationState] = useRecoilState(authenticationAtom);
     const setUsers = useSetRecoilState(usersAtom);
     const currentUser = useRecoilValue(currentUserSelector);
-    const [loadingUserFromDatabase, setLoadingUserFromDatabase] = useState(true);
-    const { database, loadingComponent, authenticationComponent, userNotAvailableComponent, children } = props;
+    const [listeningForUser, setListeningForUser] = useState(false);
+    const { database } = props;
 
     useEffect(() => {
         const unsubscribe = subscribeForAuthenticatedUser((authState) => {
             setAuthenticationState(authState);
         });
         return (): void => {
-            unsubscribe();
+            unsubscribe(); // Remove auth listening when the component is unmounted.
         };
     }, [setAuthenticationState]);
 
     useEffect(() => {
         let unsubscribe: firebase.Unsubscribe | undefined;
         if (authenticationState.firebaseUser != null) {
-            unsubscribe = subscribeForUser(database, authenticationState.firebaseUser.uid, (document) => {
-                if (document != null) {
-                    setUsers((oldUsers) => oldUsers.set(document.id(), document));
+            unsubscribe = subscribeForUser(database, authenticationState.firebaseUser?.uid, (document) => {
+                if (document !== undefined) {
+                    setUsers((oldUsers) => oldUsers.set(document?.id, document));
                 }
-                setLoadingUserFromDatabase(false);
+                setListeningForUser(true);
             });
         }
         return (): void => {
@@ -47,18 +49,17 @@ export function Authenticate(props: Props): JSX.Element {
     }, [authenticationState, database, setUsers]);
 
     if (authenticationState.firebaseUser === undefined && authenticationState.loading) {
-        return loadingComponent;
+        return props.loadingComponent;
     } else if (authenticationState.firebaseUser === null && authenticationState.loading === false) {
-        return authenticationComponent;
+        return props.authenticationComponent;
     } else {
-        if (loadingUserFromDatabase && currentUser == null) {
-            return loadingComponent;
-        } else {
+        if (listeningForUser) {
             if (currentUser == null) {
-                return userNotAvailableComponent;
+                return props.userNotAvailableComponent;
             } else {
-                return children;
+                return props.children;
             }
         }
+        return props.errorComponet;
     }
 }

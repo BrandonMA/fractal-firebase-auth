@@ -1,296 +1,101 @@
-var reactRedux = require('react-redux');
+var react = require('react');
+var recoil = require('recoil');
 var firebase = require('firebase/app');
 require('firebase/auth');
-var toolkit = require('@reduxjs/toolkit');
-var react = require('react');
 
-function isAuthenticationState(value) {
-  var castedValue = value;
-  return castedValue.loading != null;
-}
-
-function isMinimalExpectedReduxState(value) {
-  var castedValue = value;
-  return castedValue.authentication != null && isAuthenticationState(castedValue.authentication) && castedValue.users != null;
-}
-
-function getState(state) {
-  if (isMinimalExpectedReduxState(state)) {
-    return state.authentication;
-  } else {
-    throw Error('State does not have the expected shape');
+var authenticationAtom = recoil.atom({
+  key: 'authenticationAtom',
+  "default": {
+    firebaseUser: undefined,
+    loading: true
   }
-}
+});
 
-function useAuthenticationState() {
-  return reactRedux.useSelector(getState);
-}
+var usersAtom = recoil.atom({
+  key: 'usersAtom',
+  "default": new Map()
+});
 
-function isUsersState(value) {
-  var casted = value;
-  return casted.values != null;
-}
+var currentUserSelector = recoil.selector({
+  key: 'currentUserSelector',
+  get: function get(_ref) {
+    var _get = _ref.get;
 
-function isMinimalExpectedDatabase(value) {
-  var casted = value;
-  return casted.collections.users != null;
-}
+    var auth = _get(authenticationAtom);
 
-function getUsers(state) {
-  if (isMinimalExpectedReduxState(state) && isUsersState(state.users)) {
-    return state.users;
-  } else {
-    throw Error('State does not have the expected shape');
-  }
-}
+    var users = _get(usersAtom);
 
-function useCurrentUser() {
-  var authState = useAuthenticationState();
-  var users = reactRedux.useSelector(getUsers);
-
-  if (authState.firebaseUser != null) {
-    return users.values.get(authState.firebaseUser.uid);
-  } else {
-    return null;
-  }
-}
-
-var signIn = function signIn(slice, user) {
-  return function (dispatch) {
-    try {
-      return Promise.resolve(firebase.auth().signInWithEmailAndPassword(user.email, user.password)).then(function (userCredential) {
-        dispatch(slice.actions.setAuthenticationState({
-          firebaseUser: userCredential.user,
-          loading: false
-        }));
-      });
-    } catch (e) {
-      return Promise.reject(e);
+    if (auth.firebaseUser != null) {
+      return users.get(auth.firebaseUser.uid);
     }
-  };
-};
 
-var signOut = toolkit.createAsyncThunk('authentication/signOut', function () {
-  try {
-    return Promise.resolve(firebase.auth().signOut()).then(function () {
-      return {
-        firebaseUser: undefined,
-        loading: false
-      };
+    return undefined;
+  }
+});
+
+function subscribeForAuthenticatedUser(onFetch) {
+  return firebase.auth().onAuthStateChanged(function (user) {
+    onFetch({
+      firebaseUser: user,
+      loading: false
     });
-  } catch (e) {
-    return Promise.reject(e);
-  }
-});
+  }, function (error) {
+    alert(error.message);
+  });
+}
 
-var signUp = function signUp(slice, user) {
-  return function (dispatch) {
-    try {
-      return Promise.resolve(firebase.auth().createUserWithEmailAndPassword(user.email, user.password)).then(function (userCredential) {
-        dispatch(slice.actions.setAuthenticationState({
-          firebaseUser: userCredential.user,
-          loading: false
-        }));
-      });
-    } catch (e) {
-      return Promise.reject(e);
+function subscribeForUser(database, id, onFetchDone) {
+  return database.collections.users.subscribeToDocument(id, function (newDocument) {
+    if (onFetchDone) {
+      onFetchDone(newDocument);
     }
-  };
-};
-
-var subscribeForAuthenticatedUser = function subscribeForAuthenticatedUser(slice) {
-  return function (dispatch) {
-    return firebase.auth().onAuthStateChanged(function (user) {
-      dispatch(slice.actions.setAuthenticationState({
-        firebaseUser: user,
-        loading: false
-      }));
-    }, function (error) {
-      alert(error.message);
-    });
-  };
-};
-
-function createUser(database, data, usersSlice) {
-  return function (dispatch) {
-    try {
-      return Promise.resolve(database.collections.users.createDocument(data)).then(function (userDocument) {
-        dispatch(usersSlice.actions.setUser(userDocument));
-      });
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  };
-}
-
-function useSignIn(slice, email, password) {
-  var dispatch = reactRedux.useDispatch();
-  return react.useCallback(function () {
-    try {
-      return Promise.resolve(dispatch(signIn(slice, {
-        email: email,
-        password: password
-      }))).then(function () {});
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  }, [slice, email, password, dispatch]);
-}
-
-function useSignOut() {
-  var dispatch = reactRedux.useDispatch();
-  return react.useCallback(function () {
-    try {
-      return Promise.resolve(dispatch(signOut())).then(function () {});
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  }, [dispatch]);
-}
-
-function useSignUp(slice, email, password) {
-  var dispatch = reactRedux.useDispatch();
-  return react.useCallback(function () {
-    try {
-      return Promise.resolve(dispatch(signUp(slice, {
-        email: email,
-        password: password
-      }))).then(function () {});
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  }, [slice, email, password, dispatch]);
-}
-
-function useSubscribeForAuthenticatedUser(slice) {
-  var dispatch = reactRedux.useDispatch();
-  return react.useCallback(function () {
-    return dispatch(subscribeForAuthenticatedUser(slice));
-  }, [dispatch, slice]);
-}
-
-function subscribeForUser(database, id, usersSlice, onFetchDone) {
-  return function (dispatch) {
-    return database.collections.users.subscribeToDocument(id, function (newDocument) {
-      dispatch(usersSlice.actions.setUser(newDocument));
-
-      if (onFetchDone) {
-        onFetchDone();
-      }
-    }, function (error) {
-      alert(error.message);
-    }, function () {
-      if (onFetchDone) {
-        onFetchDone();
-      }
-    });
-  };
-}
-
-function useSubscribeForUser(database, id, usersSlice, onFetchDone) {
-  var dispatch = reactRedux.useDispatch();
-  return react.useCallback(function () {
-    return dispatch(subscribeForUser(database, id, usersSlice, onFetchDone));
-  }, [dispatch, database, id, usersSlice, onFetchDone]);
-}
-
-function updateUser(database, data, usersSlice) {
-  return function (dispatch) {
-    try {
-      return Promise.resolve(database.collections.users.updateDocument(data)).then(function (userDocument) {
-        dispatch(usersSlice.actions.setUser(userDocument));
-      });
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  };
-}
-
-function useUpdateUser(database, usersSlice) {
-  var dispatch = reactRedux.useDispatch();
-  return react.useCallback(function (data) {
-    return dispatch(updateUser(database, data, usersSlice));
-  }, [dispatch, database, usersSlice]);
-}
-
-function useCreateUser(database, data, usersSlice) {
-  var dispatch = reactRedux.useDispatch();
-  return react.useCallback(function () {
-    return dispatch(createUser(database, data, usersSlice));
-  }, [dispatch, database, data, usersSlice]);
-}
-
-var initialState = Object.freeze({
-  firebaseUser: undefined,
-  loading: true
-});
-
-function replaceAuthenticationState(state, action) {
-  state.loading = action.payload.loading;
-  state.firebaseUser = action.payload.firebaseUser;
-}
-
-var authenticationSlice = toolkit.createSlice({
-  name: 'authentication',
-  initialState: initialState,
-  reducers: {
-    setFirebaseUser: function setFirebaseUser(state, action) {
-      state.firebaseUser = action.payload;
-    },
-    setLoadingFirebaseData: function setLoadingFirebaseData(state, action) {
-      state.loading = action.payload;
-    },
-    setAuthenticationState: replaceAuthenticationState
-  },
-  extraReducers: function extraReducers(builder) {
-    builder.addCase(signOut.fulfilled, replaceAuthenticationState);
-  }
-});
-
-var initialState$1 = Object.freeze({
-  values: new Map()
-});
-function createUsersSlice() {
-  return toolkit.createSlice({
-    name: 'users',
-    initialState: initialState$1,
-    reducers: {
-      setUser: function setUser(state, action) {
-        state.values.set(action.payload.id(), action.payload);
-      }
+  }, function (error) {
+    alert(error.message);
+  }, function () {
+    if (onFetchDone) {
+      onFetchDone();
     }
   });
 }
 
 function Authenticate(props) {
-  var _authenticationState$, _authenticationState$2;
+  var _useRecoilState = recoil.useRecoilState(authenticationAtom),
+      authenticationState = _useRecoilState[0],
+      setAuthenticationState = _useRecoilState[1];
 
-  var authenticationState = useAuthenticationState();
-  var currentUser = useCurrentUser();
+  var setUsers = recoil.useSetRecoilState(usersAtom);
+  var currentUser = recoil.useRecoilValue(currentUserSelector);
 
-  var _useState = react.useState(false),
-      listeningForUser = _useState[0],
-      setListeningForUser = _useState[1];
+  var _useState = react.useState(true),
+      loadingUserFromDatabase = _useState[0],
+      setLoadingUserFromDatabase = _useState[1];
 
   var database = props.database,
-      authenticationSlice = props.authenticationSlice,
-      usersSlice = props.usersSlice;
-  var subscribeForAuthenticatedUser = useSubscribeForAuthenticatedUser(authenticationSlice);
-  var onFetch = react.useCallback(function () {
-    setListeningForUser(true);
-  }, []);
-  var subscribeForUser = useSubscribeForUser(database, (_authenticationState$ = (_authenticationState$2 = authenticationState.firebaseUser) === null || _authenticationState$2 === void 0 ? void 0 : _authenticationState$2.uid) != null ? _authenticationState$ : '', usersSlice, onFetch);
+      loadingComponent = props.loadingComponent,
+      authenticationComponent = props.authenticationComponent,
+      userNotAvailableComponent = props.userNotAvailableComponent,
+      children = props.children;
   react.useEffect(function () {
-    var unsubscribe = subscribeForAuthenticatedUser();
+    var unsubscribe = subscribeForAuthenticatedUser(function (authState) {
+      setAuthenticationState(authState);
+    });
     return function () {
       unsubscribe();
     };
-  }, [subscribeForAuthenticatedUser]);
+  }, [setAuthenticationState]);
   react.useEffect(function () {
     var unsubscribe;
 
     if (authenticationState.firebaseUser != null) {
-      unsubscribe = subscribeForUser();
+      unsubscribe = subscribeForUser(database, authenticationState.firebaseUser.uid, function (document) {
+        if (document != null) {
+          setUsers(function (oldUsers) {
+            return oldUsers.set(document.id(), document);
+          });
+        }
+
+        setLoadingUserFromDatabase(false);
+      });
     }
 
     return function () {
@@ -298,26 +103,26 @@ function Authenticate(props) {
         unsubscribe();
       }
     };
-  }, [subscribeForUser, authenticationState]);
+  }, [authenticationState, database, setUsers]);
 
   if (authenticationState.firebaseUser === undefined && authenticationState.loading) {
-    return props.loadingComponent;
+    return loadingComponent;
   } else if (authenticationState.firebaseUser === null && authenticationState.loading === false) {
-    return props.authenticationComponent;
+    return authenticationComponent;
   } else {
-    if (listeningForUser) {
+    if (loadingUserFromDatabase && currentUser == null) {
+      return loadingComponent;
+    } else {
       if (currentUser == null) {
-        return props.userNotAvailableComponent;
+        return userNotAvailableComponent;
       } else {
-        return props.children;
+        return children;
       }
     }
-
-    return props.loadingComponent;
   }
 }
 
-function Firebase(props) {
+function FirebaseInit(props) {
   var _useState = react.useState(false),
       firebaseReady = _useState[0],
       setFirebaseReady = _useState[1];
@@ -330,26 +135,91 @@ function Firebase(props) {
   return firebaseReady ? props.children : props.loadingComponent;
 }
 
+var signIn = function signIn(email, password) {
+  try {
+    return Promise.resolve(firebase.auth().signInWithEmailAndPassword(email, password)).then(function (userCredential) {
+      return {
+        firebaseUser: userCredential.user,
+        loading: false
+      };
+    });
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+var signOut = function signOut() {
+  try {
+    return Promise.resolve(firebase.auth().signOut()).then(function () {
+      return {
+        firebaseUser: undefined,
+        loading: false
+      };
+    });
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+var signUp = function signUp(user) {
+  try {
+    return Promise.resolve(firebase.auth().createUserWithEmailAndPassword(user.email, user.password)).then(function (userCredential) {
+      return {
+        firebaseUser: userCredential.user,
+        loading: false
+      };
+    });
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+var createUser = function createUser(database, data) {
+  try {
+    return Promise.resolve(database.collections.users.createDocument(data));
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+function isAuthenticationState(value) {
+  var castedValue = value;
+  return castedValue.loading != null;
+}
+
+function isMinimalExpectedReduxState(value) {
+  var castedValue = value;
+  return castedValue.authentication != null && isAuthenticationState(castedValue.authentication) && castedValue.users != null;
+}
+
+function isMinimalUserData(value) {
+  var castedValue = value;
+  return castedValue.email != null;
+}
+
+function isUsersState(value) {
+  var casted = value;
+  return casted.values != null;
+}
+
+function isMinimalExpectedDatabase(value) {
+  var casted = value;
+  return casted.collections.users != null;
+}
+
 exports.Authenticate = Authenticate;
-exports.Firebase = Firebase;
-exports.authenticationSlice = authenticationSlice;
+exports.FirebaseInit = FirebaseInit;
+exports.authenticationAtom = authenticationAtom;
 exports.createUser = createUser;
-exports.createUsersSlice = createUsersSlice;
+exports.currentUserSelector = currentUserSelector;
 exports.isAuthenticationState = isAuthenticationState;
 exports.isMinimalExpectedDatabase = isMinimalExpectedDatabase;
 exports.isMinimalExpectedReduxState = isMinimalExpectedReduxState;
+exports.isMinimalUserData = isMinimalUserData;
 exports.isUsersState = isUsersState;
 exports.signIn = signIn;
 exports.signOut = signOut;
 exports.signUp = signUp;
 exports.subscribeForAuthenticatedUser = subscribeForAuthenticatedUser;
-exports.useAuthenticationState = useAuthenticationState;
-exports.useCreateUser = useCreateUser;
-exports.useCurrentUser = useCurrentUser;
-exports.useSignIn = useSignIn;
-exports.useSignOut = useSignOut;
-exports.useSignUp = useSignUp;
-exports.useSubscribeForAuthenticatedUser = useSubscribeForAuthenticatedUser;
-exports.useSubscribeForUser = useSubscribeForUser;
-exports.useUpdateUser = useUpdateUser;
+exports.usersAtom = usersAtom;
 //# sourceMappingURL=index.js.map
