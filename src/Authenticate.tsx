@@ -11,15 +11,14 @@ interface Props {
     authenticationComponent: JSX.Element;
     userNotAvailableComponent: JSX.Element;
     children: JSX.Element;
-    errorComponet: JSX.Element;
 }
 
 export function Authenticate(props: Props): JSX.Element {
     const [authenticationState, setAuthenticationState] = useRecoilState(authenticationAtom);
     const setUsers = useSetRecoilState(usersAtom);
     const currentUser = useRecoilValue(currentUserSelector);
-    const [listeningForUser, setListeningForUser] = useState(false);
-    const { database, loadingComponent, authenticationComponent, userNotAvailableComponent, children, errorComponet } = props;
+    const [loadingUserFromDatabase, setLoadingUserFromDatabase] = useState(true);
+    const { database, loadingComponent, authenticationComponent, userNotAvailableComponent, children } = props;
 
     useEffect(() => {
         const unsubscribe = subscribeForAuthenticatedUser((authState) => {
@@ -37,7 +36,7 @@ export function Authenticate(props: Props): JSX.Element {
                 if (document != null) {
                     setUsers((oldUsers) => oldUsers.set(document.id(), document));
                 }
-                setListeningForUser(true);
+                setLoadingUserFromDatabase(false);
             });
         }
         return (): void => {
@@ -52,13 +51,14 @@ export function Authenticate(props: Props): JSX.Element {
     } else if (authenticationState.firebaseUser === null && authenticationState.loading === false) {
         return authenticationComponent;
     } else {
-        if (listeningForUser) {
+        if (loadingUserFromDatabase && currentUser == null) {
+            return loadingComponent;
+        } else {
             if (currentUser == null) {
                 return userNotAvailableComponent;
             } else {
                 return children;
             }
         }
-        return errorComponet;
     }
 }

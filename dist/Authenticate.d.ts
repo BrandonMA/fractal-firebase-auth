@@ -6,7 +6,6 @@ interface Props {
     authenticationComponent: JSX.Element;
     userNotAvailableComponent: JSX.Element;
     children: JSX.Element;
-    errorComponet: JSX.Element;
 }
 export declare function Authenticate(props: Props): JSX.Element;
 export {};

@@ -66,16 +66,15 @@ function Authenticate(props) {
   var setUsers = useSetRecoilState(usersAtom);
   var currentUser = useRecoilValue(currentUserSelector);
 
-  var _useState = useState(false),
-      listeningForUser = _useState[0],
-      setListeningForUser = _useState[1];
+  var _useState = useState(true),
+      loadingUserFromDatabase = _useState[0],
+      setLoadingUserFromDatabase = _useState[1];
 
   var database = props.database,
       loadingComponent = props.loadingComponent,
       authenticationComponent = props.authenticationComponent,
       userNotAvailableComponent = props.userNotAvailableComponent,
-      children = props.children,
-      errorComponet = props.errorComponet;
+      children = props.children;
   useEffect(function () {
     var unsubscribe = subscribeForAuthenticatedUser(function (authState) {
       setAuthenticationState(authState);
@@ -95,7 +94,7 @@ function Authenticate(props) {
           });
         }
 
-        setListeningForUser(true);
+        setLoadingUserFromDatabase(false);
       });
     }
 
@@ -111,15 +110,15 @@ function Authenticate(props) {
   } else if (authenticationState.firebaseUser === null && authenticationState.loading === false) {
     return authenticationComponent;
   } else {
-    if (listeningForUser) {
+    if (loadingUserFromDatabase && currentUser == null) {
+      return loadingComponent;
+    } else {
       if (currentUser == null) {
         return userNotAvailableComponent;
       } else {
         return children;
       }
     }
-
-    return errorComponet;
   }
 }
 
