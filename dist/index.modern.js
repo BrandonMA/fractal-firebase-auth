@@ -136,36 +136,6 @@ function FirebaseInit(props) {
   return firebaseReady ? props.children : props.loadingComponent;
 }
 
-var authenticationAtom$1 = atom({
-  key: 'authenticationAtom',
-  "default": {
-    firebaseUser: undefined,
-    loading: true
-  }
-});
-
-var usersAtom$1 = atom({
-  key: 'usersAtom',
-  "default": new Map()
-});
-
-var currentUserSelector$1 = selector({
-  key: 'currentUserSelector',
-  get: function get(_ref) {
-    var _get = _ref.get;
-
-    var auth = _get(authenticationAtom$1);
-
-    var users = _get(usersAtom$1);
-
-    if (auth.firebaseUser != null) {
-      return users.get(auth.firebaseUser.uid);
-    }
-
-    return undefined;
-  }
-});
-
 var signIn = function signIn(email, password) {
   try {
     return Promise.resolve(auth().signInWithEmailAndPassword(email, password)).then(function (userCredential) {
@@ -205,17 +175,6 @@ var signUp = function signUp(user) {
   }
 };
 
-function subscribeForAuthenticatedUser$1(onFetch) {
-  return auth().onAuthStateChanged(function (user) {
-    onFetch({
-      firebaseUser: user,
-      loading: false
-    });
-  }, function (error) {
-    alert(error.message);
-  });
-}
-
 var createUser = function createUser(database, data) {
   try {
     return Promise.resolve(database.collections.users.createDocument(data));
@@ -249,5 +208,5 @@ function isMinimalExpectedDatabase(value) {
   return casted.collections.users != null;
 }
 
-export { Authenticate, FirebaseInit, authenticationAtom$1 as authenticationAtom, createUser, currentUserSelector$1 as currentUserSelector, isAuthenticationState, isMinimalExpectedDatabase, isMinimalExpectedReduxState, isMinimalUserData, isUsersState, signIn, signOut, signUp, subscribeForAuthenticatedUser$1 as subscribeForAuthenticatedUser, usersAtom$1 as usersAtom };
+export { Authenticate, FirebaseInit, authenticationAtom, createUser, currentUserSelector, isAuthenticationState, isMinimalExpectedDatabase, isMinimalExpectedReduxState, isMinimalUserData, isUsersState, signIn, signOut, signUp, subscribeForAuthenticatedUser, usersAtom };
 //# sourceMappingURL=index.modern.js.map

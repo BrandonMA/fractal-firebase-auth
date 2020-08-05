@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import { authenticationAtom, currentUserSelector, usersAtom } from './recoil';
-import { subscribeForAuthenticatedUser } from './firebase/Authentication/subscribeForAuthenticatedUser';
-import { subscribeForUser } from './firebase/Users/subscribeForUser';
+import { subscribeForAuthenticatedUser } from './firebase/authentication/subscribeForAuthenticatedUser';
+import { subscribeForUser } from './firebase/users/subscribeForUser';
 import { MinimalExpectedDatabase, MinimalUserData } from './firebase/types';
 
 interface Props {

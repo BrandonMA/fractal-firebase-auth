@@ -136,36 +136,6 @@ function FirebaseInit(props) {
   return firebaseReady ? props.children : props.loadingComponent;
 }
 
-var authenticationAtom$1 = recoil.atom({
-  key: 'authenticationAtom',
-  "default": {
-    firebaseUser: undefined,
-    loading: true
-  }
-});
-
-var usersAtom$1 = recoil.atom({
-  key: 'usersAtom',
-  "default": new Map()
-});
-
-var currentUserSelector$1 = recoil.selector({
-  key: 'currentUserSelector',
-  get: function get(_ref) {
-    var _get = _ref.get;
-
-    var auth = _get(authenticationAtom$1);
-
-    var users = _get(usersAtom$1);
-
-    if (auth.firebaseUser != null) {
-      return users.get(auth.firebaseUser.uid);
-    }
-
-    return undefined;
-  }
-});
-
 var signIn = function signIn(email, password) {
   try {
     return Promise.resolve(firebase.auth().signInWithEmailAndPassword(email, password)).then(function (userCredential) {
@@ -205,17 +175,6 @@ var signUp = function signUp(user) {
   }
 };
 
-function subscribeForAuthenticatedUser$1(onFetch) {
-  return firebase.auth().onAuthStateChanged(function (user) {
-    onFetch({
-      firebaseUser: user,
-      loading: false
-    });
-  }, function (error) {
-    alert(error.message);
-  });
-}
-
 var createUser = function createUser(database, data) {
   try {
     return Promise.resolve(database.collections.users.createDocument(data));
@@ -251,9 +210,9 @@ function isMinimalExpectedDatabase(value) {
 
 exports.Authenticate = Authenticate;
 exports.FirebaseInit = FirebaseInit;
-exports.authenticationAtom = authenticationAtom$1;
+exports.authenticationAtom = authenticationAtom;
 exports.createUser = createUser;
-exports.currentUserSelector = currentUserSelector$1;
+exports.currentUserSelector = currentUserSelector;
 exports.isAuthenticationState = isAuthenticationState;
 exports.isMinimalExpectedDatabase = isMinimalExpectedDatabase;
 exports.isMinimalExpectedReduxState = isMinimalExpectedReduxState;
@@ -262,6 +221,6 @@ exports.isUsersState = isUsersState;
 exports.signIn = signIn;
 exports.signOut = signOut;
 exports.signUp = signUp;
-exports.subscribeForAuthenticatedUser = subscribeForAuthenticatedUser$1;
-exports.usersAtom = usersAtom$1;
+exports.subscribeForAuthenticatedUser = subscribeForAuthenticatedUser;
+exports.usersAtom = usersAtom;
 //# sourceMappingURL=index.js.map

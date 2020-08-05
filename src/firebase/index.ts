@@ -1,3 +1,3 @@
-export * from './Authentication';
-export * from './Users';
+export * from './authentication';
+export * from './users';
 export * from './types';
