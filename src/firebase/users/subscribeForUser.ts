@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
-import { MinimalExpectedDatabase } from '../types/MinimalExpectedDatabase';
-import { MinimalUserData } from '../types';
-import { Document } from 'firebase-db-manager';
+import { MinimalExpectedDatabase } from '../../types/MinimalExpectedDatabase';
+import { MinimalUserData } from '../../types';
+import { Document } from '@bma98/firebase-db-manager';
 
 export function subscribeForUser<T extends MinimalUserData, S>(
     database: MinimalExpectedDatabase<T, S>,

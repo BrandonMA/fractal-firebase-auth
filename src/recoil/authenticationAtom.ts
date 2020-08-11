@@ -1,10 +1,7 @@
 import { atom } from 'recoil';
-import { AuthenticationState } from '../firebase/types';
+import { AuthenticationState, createAuthenticationState } from '../types';
 
 export const authenticationAtom = atom<AuthenticationState>({
     key: 'authenticationAtom',
-    default: {
-        firebaseUser: undefined,
-        loading: true
-    }
+    default: createAuthenticationState()
 });
