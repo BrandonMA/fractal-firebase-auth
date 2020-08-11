@@ -30,5 +30,8 @@ module.exports = {
         react: {
             version: '16.13.1'
         }
+    },
+    rules: {
+        'no-prototype-builtins': 'off'
     }
 };
