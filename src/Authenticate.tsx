@@ -3,22 +3,22 @@ import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import { authenticationAtom, currentUserSelector, usersAtom } from './recoil';
 import { subscribeForAuthenticatedUser } from './firebase/authentication/subscribeForAuthenticatedUser';
 import { subscribeForUser } from './firebase/users/subscribeForUser';
-import { MinimalExpectedDatabase, MinimalUserData } from './firebase/types';
+import { MinimalExpectedDatabase, MinimalUserData } from './types';
 
-interface Props {
-    database: MinimalExpectedDatabase<MinimalUserData, null>;
+interface Props<UserType extends MinimalUserData, UserSubCollection> {
+    database: MinimalExpectedDatabase<UserType, UserSubCollection>;
     loadingComponent: JSX.Element;
     authenticationComponent: JSX.Element;
     userNotAvailableComponent: JSX.Element;
     children: JSX.Element;
 }
 
-export function Authenticate(props: Props): JSX.Element {
+export function Authenticate<UserType extends MinimalUserData, UserSubCollection>(props: Props<UserType, UserSubCollection>): JSX.Element {
     const [authenticationState, setAuthenticationState] = useRecoilState(authenticationAtom);
     const setUsers = useSetRecoilState(usersAtom);
     const currentUser = useRecoilValue(currentUserSelector);
     const [loadingUserFromDatabase, setLoadingUserFromDatabase] = useState(true);
-    const { database, loadingComponent, authenticationComponent, userNotAvailableComponent, children } = props;
+    const { database } = props;
 
     useEffect(() => {
         const unsubscribe = subscribeForAuthenticatedUser((authState) => {
@@ -47,17 +47,17 @@ export function Authenticate(props: Props): JSX.Element {
     }, [authenticationState, database, setUsers]);
 
     if (authenticationState.firebaseUser === undefined && authenticationState.loading) {
-        return loadingComponent;
+        return props.loadingComponent;
     } else if (authenticationState.firebaseUser === null && authenticationState.loading === false) {
-        return authenticationComponent;
+        return props.authenticationComponent;
     } else {
         if (loadingUserFromDatabase && currentUser == null) {
-            return loadingComponent;
+            return props.loadingComponent;
         } else {
             if (currentUser == null) {
-                return userNotAvailableComponent;
+                return props.userNotAvailableComponent;
             } else {
-                return children;
+                return props.children;
             }
         }
     }

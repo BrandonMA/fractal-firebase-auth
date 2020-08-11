@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { atom } from 'recoil';
-import { MinimalUserData } from '../firebase/types/MinimalUser';
-import { Document } from 'firebase-db-manager';
+import { MinimalUserData } from '../types/MinimalUser';
+import { Document } from '@bma98/firebase-db-manager';
 
 export const usersAtom = atom({
     key: 'usersAtom',

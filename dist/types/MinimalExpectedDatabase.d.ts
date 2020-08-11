@@ -1,4 +1,4 @@
-import { Database, Collection } from 'firebase-db-manager';
+import { Database, Collection } from '@bma98/firebase-db-manager';
 import { MinimalUserData } from './MinimalUser';
 declare type UsersCollection<T extends MinimalUserData, S> = Collection<T, S>;
 export declare type MinimalExpectedDatabase<T extends MinimalUserData, S> = Database<{
