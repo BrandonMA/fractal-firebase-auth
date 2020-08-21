@@ -1,5 +1,5 @@
 import * as firebase from 'firebase/app';
-import { useState, useEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 
 interface Config {
     [key: string]: string;
@@ -15,7 +15,7 @@ export function FirebaseInit(props: Props): JSX.Element {
     const [firebaseReady, setFirebaseReady] = useState(false);
     const { firebaseConfig } = props;
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         firebase.initializeApp(firebaseConfig);
         setFirebaseReady(true);
     }, [firebaseConfig]);
