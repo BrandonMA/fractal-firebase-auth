@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
-import { authenticationAtom, currentUserSelector, usersAtom } from './recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { authenticationAtom, useAuthenticatedUser, usersAtom } from './recoil';
 import { subscribeForAuthenticatedUser } from './firebase/authentication/subscribeForAuthenticatedUser';
 import { subscribeForUser } from './firebase/users/subscribeForUser';
 import { MinimalExpectedDatabase, MinimalUserData } from './types';
@@ -16,7 +16,7 @@ interface Props<UserType extends MinimalUserData, UserSubCollection> {
 export function Authenticate<UserType extends MinimalUserData, UserSubCollection>(props: Props<UserType, UserSubCollection>): JSX.Element {
     const [authenticationState, setAuthenticationState] = useRecoilState(authenticationAtom);
     const setUsers = useSetRecoilState(usersAtom);
-    const currentUser = useRecoilValue(currentUserSelector);
+    const currentUser = useAuthenticatedUser();
     const [loadingUserFromDatabase, setLoadingUserFromDatabase] = useState(true);
     const { database } = props;
 
