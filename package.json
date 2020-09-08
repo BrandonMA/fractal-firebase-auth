@@ -11,8 +11,8 @@
     "unpkg": "dist/index.umd.js",
     "source": "src/index.tsx",
     "scripts": {
-        "build": "microbundle",
-        "format": "prettier --write \"src/**/*.ts\"",
+        "build": "microbundle --jsx React.createElement",
+        "format": "prettier --write \"src/**/*.ts\" && prettier --write \"src/**/*.tsx\"",
         "lint": "eslint src --ext .ts,.tsx"
     },
     "devDependencies": {
