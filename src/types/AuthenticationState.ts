@@ -1,8 +1,8 @@
-import * as firebase from 'firebase/app';
 import produce from 'immer';
+import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
 export interface AuthenticationState {
-    firebaseUser: firebase.User | undefined | null;
+    firebaseUser: FirebaseAuthTypes.User | undefined | null;
     loading: boolean;
 }
 

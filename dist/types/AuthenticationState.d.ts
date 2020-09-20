@@ -1,6 +1,6 @@
-import * as firebase from 'firebase/app';
+import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 export interface AuthenticationState {
-    firebaseUser: firebase.User | undefined | null;
+    firebaseUser: FirebaseAuthTypes.User | undefined | null;
     loading: boolean;
 }
 export declare function createAuthenticationState(values?: Partial<AuthenticationState>): Readonly<AuthenticationState>;

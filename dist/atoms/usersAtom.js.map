@@ -1,0 +1,1 @@
+{"version":3,"file":"usersAtom.js","sourceRoot":"","sources":["../../src/atoms/usersAtom.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,IAAI,EAAE,MAAM,QAAQ,CAAC;AAI9B,MAAM,CAAC,IAAM,SAAS,GAAG,IAAI,CAAC;IAC1B,GAAG,EAAE,WAAW;IAChB,SAAO,EAAE,IAAI,GAAG,EAA8C;CACjE,CAAC,CAAC"}
