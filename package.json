@@ -6,10 +6,6 @@
     "license": "MIT",
     "repository": "BrandonMA/react-firebase-auth",
     "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "module": "dist/index.modern.js",
-    "unpkg": "dist/index.umd.js",
-    "source": "src/index.tsx",
     "scripts": {
         "build": "expo-module build",
         "clean": "expo-module clean",
@@ -55,7 +51,7 @@
         "@react-native-firebase/firestore": "^7.8.2",
         "firebase": "^7.21.0",
         "immer": "^7.0.9",
-        "react": "~16.11.0",
+        "react": "~16.13.1",
         "recoil": "^0.0.13"
     }
 }
