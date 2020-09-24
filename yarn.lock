@@ -1012,11 +1012,15 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@bma98/firebase-db-manager@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@bma98/firebase-db-manager/-/firebase-db-manager-1.2.2.tgz#e5153233d85ae9a07cae639c56d38fdb85091d4d"
-  integrity sha512-gifLA45cfeKBndqxeAdF7y0S4NHP7YGIBp8Mo3n4dS1khiJogpaqK5eW+uZCGtq3pfG4ATZbmclKvdRV2Q7CKw==
+"@bma98/firebase-db-manager@^1.2.3":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@bma98/firebase-db-manager/-/firebase-db-manager-1.2.4.tgz#10109d0e2225940f627b96d14b639b64a9704fd1"
+  integrity sha512-lEZr6AKeOFM3PytZSjVyI4VjaBgm0AbF/JF2h04O0mO7Sgkl5INOz/g3ps7NUcC4H4GAW8UrbLc3ihMuCHkGnw==
   dependencies:
+    "@react-native-firebase/app" "^8.4.3"
+    "@react-native-firebase/firestore" "^7.8.2"
+    firebase "^7.21.0"
+    immer "^7.0.9"
     uuid "^3.4.0"
 
 "@cnakazawa/watch@^1.0.3":
@@ -5537,7 +5541,7 @@ react-test-renderer@~16.9.0:
     react-is "^16.9.0"
     scheduler "^0.15.0"
 
-react@16.13.1:
+react@~16.13.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
   integrity sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w==
