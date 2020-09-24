@@ -7,6 +7,6 @@ export function FirebaseInit(props) {
     useLayoutEffect(function () {
         setApp(firebase.initializeApp(firebaseConfig));
     }, [firebaseConfig]);
-    return <FirebaseContext.Provider value={app}>{app != null ? props.children : props.loadingComponent}</FirebaseContext.Provider>;
+    return React.createElement(FirebaseContext.Provider, { value: app }, app != null ? props.children : props.loadingComponent);
 }
 //# sourceMappingURL=FirebaseInit.js.map
