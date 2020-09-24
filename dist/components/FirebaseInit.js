@@ -9,4 +9,4 @@ export function FirebaseInit(props) {
     }, [firebaseConfig]);
     return <FirebaseContext.Provider value={app}>{app != null ? props.children : props.loadingComponent}</FirebaseContext.Provider>;
 }
-//# sourceMappingURL=FirebaseInit.jsx.map
+//# sourceMappingURL=FirebaseInit.js.map

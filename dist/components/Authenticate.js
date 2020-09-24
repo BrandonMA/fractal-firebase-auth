@@ -24,4 +24,4 @@ export function Authenticate(props) {
         }
     }
 }
-//# sourceMappingURL=Authenticate.jsx.map
+//# sourceMappingURL=Authenticate.js.map

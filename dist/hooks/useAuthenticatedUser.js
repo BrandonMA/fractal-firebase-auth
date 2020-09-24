@@ -9,4 +9,4 @@ export function useAuthenticatedUser() {
     }
     return undefined;
 }
-//# sourceMappingURL=useAuthenticatedUser.jsx.map
+//# sourceMappingURL=useAuthenticatedUser.js.map
