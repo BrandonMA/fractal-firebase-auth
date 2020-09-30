@@ -7,6 +7,7 @@ export async function signIn(email: string, password: string): Promise<Authentic
     const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
     return createAuthenticationState({
         firebaseUser: (userCredential.user as unknown) as FirebaseAuthTypes.User,
-        loading: false
+        loading: false,
+        credential: (userCredential as unknown) as FirebaseAuthTypes.UserCredential
     });
 }
