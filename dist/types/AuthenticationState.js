@@ -2,7 +2,8 @@ import produce from 'immer';
 export function createAuthenticationState(values) {
     var newObject = produce({
         firebaseUser: undefined,
-        loading: true
+        loading: true,
+        credential: undefined
     }, function (draft) {
         Object.assign(draft, values);
     });

@@ -47,7 +47,8 @@ export function signUp(email, password) {
                     userCredential = _a.sent();
                     return [2 /*return*/, createAuthenticationState({
                             firebaseUser: userCredential.user,
-                            loading: false
+                            loading: false,
+                            credential: userCredential
                         })];
             }
         });

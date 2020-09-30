@@ -5,6 +5,7 @@ export async function signUp(email: string, password: string): Promise<Authentic
     const userCredential = await auth().createUserWithEmailAndPassword(email, password);
     return createAuthenticationState({
         firebaseUser: userCredential.user,
-        loading: false
+        loading: false,
+        credential: userCredential
     });
 }
