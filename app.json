@@ -1,0 +1,27 @@
+{
+    "expo": {
+        "entryPoint": "./App.tsx",
+        "name": "React-Firebase-Auth",
+        "slug": "React-Firebase-Auth",
+        "version": "1.0.0",
+        "orientation": "default",
+        "icon": "./assets/icon.png",
+        "splash": {
+            "image": "./assets/splash.png",
+            "resizeMode": "contain"
+        },
+        "updates": {
+            "fallbackToCacheTimeout": 0
+        },
+        "assetBundlePatterns": ["**/*"],
+        "ios": {
+            "supportsTablet": true
+        },
+        "web": {
+            "favicon": "./assets/favicon.png"
+        },
+        "android": {
+            "softwareKeyboardLayoutMode": "pan"
+        }
+    }
+}

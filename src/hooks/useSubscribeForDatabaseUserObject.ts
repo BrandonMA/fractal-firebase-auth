@@ -3,6 +3,7 @@ import { subscribeForUser } from '../firebase/users/subscribeForUser';
 import { AuthenticationState, MinimalUserData, MinimalExpectedDatabase } from '../types';
 import { useSetRecoilState } from 'recoil';
 import { usersAtom } from '../atoms/usersAtom';
+import produce from 'immer';
 
 export function useSubscribeForDatabaseUserObject<T extends MinimalUserData, S>(
     authenticationState: AuthenticationState,
@@ -12,11 +13,15 @@ export function useSubscribeForDatabaseUserObject<T extends MinimalUserData, S>(
     const [loadingUserFromDatabase, setLoadingUserFromDatabase] = useState(true);
 
     useEffect(() => {
-        let unsubscribe: firebase.Unsubscribe | undefined;
+        let unsubscribe: () => void | undefined;
         if (authenticationState.firebaseUser != null) {
             unsubscribe = subscribeForUser(database, authenticationState.firebaseUser.uid, (document) => {
                 if (document != null) {
-                    setUsers((oldUsers) => oldUsers.set(document.id(), document));
+                    setUsers((oldUsers) => {
+                        return produce(oldUsers, (draft) => {
+                            draft.set(document.id(), document);
+                        });
+                    });
                 }
                 setLoadingUserFromDatabase(false);
             });

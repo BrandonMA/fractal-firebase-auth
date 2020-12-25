@@ -6,6 +6,7 @@ import { AuthenticationState } from '../types/AuthenticationState';
 
 export function useSubscribeForAuthenticatedUser(): AuthenticationState {
     const [authenticationState, setAuthenticationState] = useRecoilState(authenticationAtom);
+
     useEffect(() => {
         const unsubscribe = subscribeForAuthenticatedUser((authState) => {
             setAuthenticationState(authState);
@@ -14,5 +15,6 @@ export function useSubscribeForAuthenticatedUser(): AuthenticationState {
             unsubscribe();
         };
     }, [setAuthenticationState]);
+
     return authenticationState;
 }
