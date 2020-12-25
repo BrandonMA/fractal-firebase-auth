@@ -2,7 +2,7 @@ import auth from '@react-native-firebase/auth';
 import { AuthenticationState, createAuthenticationState } from '../../../types/AuthenticationState';
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
-export function subscribeForAuthenticatedUser(onFetch: (state: AuthenticationState) => void): firebase.Unsubscribe {
+export function subscribeForAuthenticatedUser(onFetch: (state: AuthenticationState) => void): () => void {
     return auth().onAuthStateChanged((user) => {
         onFetch(
             createAuthenticationState({

@@ -1,7 +1,5 @@
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import React, { useState, useLayoutEffect } from 'react';
-
-const FirebaseContext = React.createContext<firebase.app.App | undefined>(undefined);
 
 interface Config {
     [key: string]: string;
@@ -21,5 +19,5 @@ export function FirebaseInit(props: Props): JSX.Element {
         setApp(firebase.initializeApp(firebaseConfig));
     }, [firebaseConfig]);
 
-    return <FirebaseContext.Provider value={app}>{app != null ? props.children : props.loadingComponent}</FirebaseContext.Provider>;
+    return <>{app != null ? props.children : props.loadingComponent}</>;
 }
