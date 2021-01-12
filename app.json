@@ -1,8 +1,8 @@
 {
     "expo": {
         "entryPoint": "./App.tsx",
-        "name": "React-Firebase-Auth",
-        "slug": "React-Firebase-Auth",
+        "name": "Fractal-Firebase-Auth",
+        "slug": "Fractal-Firebase-Auth",
         "version": "1.0.0",
         "orientation": "default",
         "icon": "./assets/icon.png",

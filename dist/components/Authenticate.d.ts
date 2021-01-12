@@ -1,11 +1,11 @@
 /// <reference types="react" />
 import { MinimalExpectedDatabase, MinimalUserData } from '../types';
-interface Props<UserType extends MinimalUserData, UserSubCollection> {
+import { ComponentRoutePair } from '../types/ComponentRoutePair';
+export interface AuthenticateProps<UserType extends MinimalUserData, UserSubCollection> {
     database: MinimalExpectedDatabase<UserType, UserSubCollection>;
-    loadingComponent: JSX.Element;
-    authenticationComponent: JSX.Element;
-    userNotAvailableComponent: JSX.Element;
-    children: JSX.Element;
+    loadingPair: ComponentRoutePair;
+    authPair: ComponentRoutePair;
+    createUser: ComponentRoutePair;
+    app: ComponentRoutePair;
 }
-export declare function Authenticate<UserType extends MinimalUserData, UserSubCollection>(props: Props<UserType, UserSubCollection>): JSX.Element;
-export {};
+export declare function Authenticate<UserType extends MinimalUserData, UserSubCollection>({ authPair, loadingPair, app, createUser, database }: AuthenticateProps<UserType, UserSubCollection>): JSX.Element;

@@ -1,27 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { subscribeForUser } from '../firebase/users/subscribeForUser';
-import { AuthenticationState, MinimalUserData, MinimalExpectedDatabase } from '../types';
-import { useSetRecoilState } from 'recoil';
-import { usersAtom } from '../atoms/usersAtom';
-import produce from 'immer';
+import { MinimalUserData, MinimalExpectedDatabase } from '../types';
+import { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import { FirebaseUserContext } from '../context/FirebaseUserProvider';
 
 export function useSubscribeForDatabaseUserObject<T extends MinimalUserData, S>(
-    authenticationState: AuthenticationState,
+    firebaseUser: FirebaseAuthTypes.User | null | undefined,
     database: MinimalExpectedDatabase<T, S>
 ): boolean {
-    const setUsers = useSetRecoilState(usersAtom);
+    const [, setUser] = useContext(FirebaseUserContext);
     const [loadingUserFromDatabase, setLoadingUserFromDatabase] = useState(true);
 
     useEffect(() => {
         let unsubscribe: () => void | undefined;
-        if (authenticationState.firebaseUser != null) {
-            unsubscribe = subscribeForUser(database, authenticationState.firebaseUser.uid, (document) => {
+        if (firebaseUser != null) {
+            unsubscribe = subscribeForUser(database, firebaseUser.uid, (document) => {
                 if (document != null) {
-                    setUsers((oldUsers) => {
-                        return produce(oldUsers, (draft) => {
-                            draft.set(document.id(), document);
-                        });
-                    });
+                    setUser(document);
                 }
                 setLoadingUserFromDatabase(false);
             });
@@ -31,7 +26,7 @@ export function useSubscribeForDatabaseUserObject<T extends MinimalUserData, S>(
                 unsubscribe();
             }
         };
-    }, [authenticationState, database, setUsers]);
+    }, [firebaseUser, database, setUser]);
 
     return loadingUserFromDatabase;
 }

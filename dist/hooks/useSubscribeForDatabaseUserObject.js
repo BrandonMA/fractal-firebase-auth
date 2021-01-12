@@ -1,21 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { subscribeForUser } from '../firebase/users/subscribeForUser';
-import { useSetRecoilState } from 'recoil';
-import { usersAtom } from '../atoms/usersAtom';
-import produce from 'immer';
-export function useSubscribeForDatabaseUserObject(authenticationState, database) {
-    var setUsers = useSetRecoilState(usersAtom);
-    var _a = useState(true), loadingUserFromDatabase = _a[0], setLoadingUserFromDatabase = _a[1];
+import { FirebaseUserContext } from '../context/FirebaseUserProvider';
+export function useSubscribeForDatabaseUserObject(firebaseUser, database) {
+    var _a = useContext(FirebaseUserContext), setUser = _a[1];
+    var _b = useState(true), loadingUserFromDatabase = _b[0], setLoadingUserFromDatabase = _b[1];
     useEffect(function () {
         var unsubscribe;
-        if (authenticationState.firebaseUser != null) {
-            unsubscribe = subscribeForUser(database, authenticationState.firebaseUser.uid, function (document) {
+        if (firebaseUser != null) {
+            unsubscribe = subscribeForUser(database, firebaseUser.uid, function (document) {
                 if (document != null) {
-                    setUsers(function (oldUsers) {
-                        return produce(oldUsers, function (draft) {
-                            draft.set(document.id(), document);
-                        });
-                    });
+                    setUser(document);
                 }
                 setLoadingUserFromDatabase(false);
             });
@@ -25,7 +19,7 @@ export function useSubscribeForDatabaseUserObject(authenticationState, database)
                 unsubscribe();
             }
         };
-    }, [authenticationState, database, setUsers]);
+    }, [firebaseUser, database, setUser]);
     return loadingUserFromDatabase;
 }
 //# sourceMappingURL=useSubscribeForDatabaseUserObject.js.map

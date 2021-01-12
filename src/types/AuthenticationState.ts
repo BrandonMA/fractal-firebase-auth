@@ -8,7 +8,7 @@ export interface AuthenticationState {
 }
 
 export function createAuthenticationState(values?: Partial<AuthenticationState>): Readonly<AuthenticationState> {
-    const newObject: AuthenticationState = produce(
+    return produce(
         {
             firebaseUser: undefined,
             loading: true,
@@ -18,7 +18,6 @@ export function createAuthenticationState(values?: Partial<AuthenticationState>)
             Object.assign(draft, values);
         }
     );
-    return newObject;
 }
 
 export function isAuthenticationState(value: unknown): value is AuthenticationState {

@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useContext, useEffect } from 'react';
 import { subscribeForAuthenticatedUser } from '../firebase/authentication/subscribeForAuthenticatedUser';
-import { authenticationAtom } from '../atoms/authenticationAtom';
+import { createAuthenticationState } from '../types/AuthenticationState';
+import { AuthenticationStateContext } from '../context/AuthenticationStateProvider';
 export function useSubscribeForAuthenticatedUser() {
-    var _a = useRecoilState(authenticationAtom), authenticationState = _a[0], setAuthenticationState = _a[1];
+    var _a = useContext(AuthenticationStateContext), authenticationState = _a[0], setAuthenticationState = _a[1];
     useEffect(function () {
         var unsubscribe = subscribeForAuthenticatedUser(function (authState) {
-            setAuthenticationState(authState);
+            setAuthenticationState(createAuthenticationState(authState));
         });
         return function () {
             unsubscribe();

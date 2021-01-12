@@ -1,7 +1,8 @@
-import { useRecoilValue } from 'recoil';
-import { authenticationAtom } from '../atoms';
 import { AuthenticationState } from '../types';
+import { useContext } from 'react';
+import { AuthenticationStateContext } from '../context';
 
 export function useAuthenticationState(): AuthenticationState {
-    return useRecoilValue(authenticationAtom);
+    const [authenticationState] = useContext(AuthenticationStateContext);
+    return authenticationState;
 }

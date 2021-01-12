@@ -1,6 +1,7 @@
-import { useRecoilValue } from 'recoil';
-import { authenticationAtom } from '../atoms';
+import { useContext } from 'react';
+import { AuthenticationStateContext } from '../context';
 export function useAuthenticationState() {
-    return useRecoilValue(authenticationAtom);
+    var authenticationState = useContext(AuthenticationStateContext)[0];
+    return authenticationState;
 }
 //# sourceMappingURL=useAuthenticationState.js.map
