@@ -1,0 +1,1 @@
+{"version":3,"file":"useFirebaseUser.js","sourceRoot":"","sources":["../../src/hooks/useFirebaseUser.tsx"],"names":[],"mappings":"AAEA,OAAO,EAAE,UAAU,EAAE,MAAM,OAAO,CAAC;AACnC,OAAO,EAAE,mBAAmB,EAAE,MAAM,iCAAiC,CAAC;AAEtE,MAAM,UAAU,eAAe;IACpB,IAAA,IAAI,GAAI,UAAU,CAAC,mBAAmB,CAAC,GAAnC,CAAoC;IAC/C,OAAQ,IAAkC,CAAC;AAC/C,CAAC"}

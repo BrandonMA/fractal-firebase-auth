@@ -36,14 +36,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 export function createUser(database, data) {
     return __awaiter(this, void 0, void 0, function () {
-        var userDocument;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, database.collections.users.createDocument(data)];
-                case 1:
-                    userDocument = _a.sent();
-                    return [2 /*return*/, userDocument];
-            }
+            return [2 /*return*/, database.collections.users.createDocument(data)];
         });
     });
 }

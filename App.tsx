@@ -1,97 +1,103 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { registerRootComponent } from 'expo';
-import { ActivityIndicator, Button, Text, TextInput, View } from 'react-native';
 import { firebaseConfig } from './firebase';
-import { FirebaseInit, Authenticate, signUp, useAuthenticatedUser, createUser } from './src';
-import { IDEnabled, Database, Collection, Document } from '@bma98/firebase-db-manager';
-import { useAuthenticationState } from './src/hooks/useAuthenticationState';
-import { RecoilRoot } from 'recoil';
+import { FirebaseInit, AuthScreen, useFirebaseUser, ComponentRoutePair, FractalFirebaseAuthRoot, CreateUserScreen } from './src';
+import { IDEnabled, Database, Collection } from '@bma98/firebase-db-manager';
+import { FractalNavigationRoot } from '@bma98/fractal-navigation';
+import { PaddedContainer, LoadingBackground, Text, BaseBox } from '@bma98/fractal-ui';
+import { Image } from 'react-native';
+import { BackgroundExample } from './BackgroundExample';
 
-function createDatabase() {
+interface User extends IDEnabled {
+    email: string;
+}
+
+type UserCollection = Collection<User, null>;
+type DatabaseType = Database<{
+    users: UserCollection;
+}>;
+
+function createDatabase(): DatabaseType {
     return new Database({
         users: new Collection<User, null>('Users', null)
     });
 }
 
-interface User extends IDEnabled {
-    name: string;
-    email: string;
-}
-
-function LoadingComponent(): JSX.Element {
-    return <ActivityIndicator size='large' />;
-}
-
-function LogIn(): JSX.Element {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-    const handleLogin = () => {
-        signUp(email, password);
-    };
-
-    return (
-        <View>
-            <TextInput placeholder='Email' onChangeText={setEmail} />
-            <TextInput placeholder='Password' onChangeText={setPassword} />
-            <Button title='Log In' onPress={handleLogin} />
-        </View>
-    );
-}
-
-interface FinishProfileProps {
-    database: ReturnType<typeof createDatabase>;
-}
-
-function FinishProfile(props: FinishProfileProps): JSX.Element {
-    const { database } = props;
-    const authenticationState = useAuthenticationState();
-    const [name, setName] = useState('');
-
-    const handleCreateUser = () => {
-        createUser(database, {
-            name,
-            email: authenticationState.firebaseUser.email,
-            id: authenticationState.firebaseUser.uid
-        });
-    };
-
-    return (
-        <View>
-            <TextInput placeholder='Name' onChangeText={setName} />
-            <Button title='Create user' onPress={handleCreateUser} />
-        </View>
-    );
-}
-
 function Home(): JSX.Element {
-    const currentUser = useAuthenticatedUser() as Document<User, null>;
-    return <Text>Logged In! {currentUser.data.name}</Text>;
+    const currentUser = useFirebaseUser<User, null>();
+    return (
+        <PaddedContainer>
+            <Text>Logged In! {currentUser?.data?.email}</Text>
+        </PaddedContainer>
+    );
 }
+
+const authPair: ComponentRoutePair = {
+    route: '/auth',
+    component: (
+        <AuthScreen
+            resetPasswordText={'Reset Password'}
+            resetPasswordDescriptionText={'Please check your email to finish the process.'}
+            logo={
+                <Image
+                    source={{
+                        uri:
+                            'https://firebasestorage.googleapis.com/v0/b/fir-db-manager-12154.appspot.com/o/Logo.png?alt=media&token=75aca343-619e-4d99-b177-436d4c0ea943'
+                    }}
+                    style={{ height: 200, width: 200, borderRadius: 16, marginTop: 16 }}
+                />
+            }
+            forgotPasswordText={'Forgot your password?'}
+            signInText={'Sign In'}
+            signUpText={'Sign Up'}
+            emailPlaceholder={'Email'}
+            passwordPlaceholder={'Password'}
+            background={
+                <>
+                    <BaseBox flex={1} />
+                    <BackgroundExample width={'100%'} style={{ marginBottom: -50 }} />
+                </>
+            }
+        />
+    )
+};
+
+const loadingPair: ComponentRoutePair = {
+    route: '/loading',
+    component: <LoadingBackground />
+};
+
+const appPair: ComponentRoutePair = {
+    route: '/app',
+    component: <Home />
+};
 
 function FirebaseReady(): JSX.Element {
     const database = createDatabase();
+
+    const createUserPair: ComponentRoutePair = {
+        route: '/create_user',
+        component: <CreateUserScreen database={database} />
+    };
+
     return (
-        <Authenticate
+        <FractalFirebaseAuthRoot
             database={database}
-            authenticationComponent={<LogIn />}
-            loadingComponent={<LoadingComponent />}
-            userNotAvailableComponent={<FinishProfile database={database} />}
-        >
-            <Home />
-        </Authenticate>
+            loadingPair={loadingPair}
+            authPair={authPair}
+            createUser={createUserPair}
+            app={appPair}
+        />
     );
 }
 
 export function App(): JSX.Element {
     return (
-        <RecoilRoot>
-            <View>
-                <FirebaseInit loadingComponent={<LoadingComponent />} firebaseConfig={firebaseConfig}>
-                    <FirebaseReady />
-                </FirebaseInit>
-            </View>
-        </RecoilRoot>
+        <FractalNavigationRoot>
+            <FirebaseInit loadingComponent={<LoadingBackground />} firebaseConfig={firebaseConfig}>
+                <FirebaseReady />
+            </FirebaseInit>
+        </FractalNavigationRoot>
     );
 }
 
