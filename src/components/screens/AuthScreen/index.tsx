@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { Background, BaseBox, Cell, ErrorMessage, PaddedContainer, SocialMediaButtons } from '@bma98/fractal-ui';
-import { LayoutAnimation, ScrollView, StyleSheet, ViewStyle } from 'react-native';
+import { LayoutAnimation, ScrollView, ViewStyle } from 'react-native';
 import { AuthenticationScreenProps } from './types/AuthenticationScreenProps';
 import { handleGooglePress } from './util/handleGooglePress';
 import { handleFacebookPress } from './util/handleFacebookPress';
@@ -28,9 +28,7 @@ export function AuthScreen({ logo, background, removeAppleButton = true, ...othe
 
     return (
         <Background>
-            <BaseBox style={StyleSheet.absoluteFill} overflow={'hidden'}>
-                {background}
-            </BaseBox>
+            {background}
             <ScrollView contentContainerStyle={scrollViewStyle}>
                 <BaseBox flex={1} maxWidth={600} alignItems={'center'} width={'100%'}>
                     {logo}
