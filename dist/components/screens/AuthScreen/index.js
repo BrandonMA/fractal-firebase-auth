@@ -22,7 +22,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import React, { useCallback, useState } from 'react';
 import { Background, BaseBox, Cell, ErrorMessage, PaddedContainer, SocialMediaButtons } from '@bma98/fractal-ui';
-import { LayoutAnimation, ScrollView, StyleSheet } from 'react-native';
+import { LayoutAnimation, ScrollView } from 'react-native';
 import { handleGooglePress } from './util/handleGooglePress';
 import { handleFacebookPress } from './util/handleFacebookPress';
 import { handleApplePress } from './util/handleApplePress';
@@ -42,7 +42,7 @@ export function AuthScreen(_a) {
         setState('passwordReset');
     }, []);
     return (React.createElement(Background, null,
-        React.createElement(BaseBox, { style: StyleSheet.absoluteFill, overflow: 'hidden' }, background),
+        background,
         React.createElement(ScrollView, { contentContainerStyle: scrollViewStyle },
             React.createElement(BaseBox, { flex: 1, maxWidth: 600, alignItems: 'center', width: '100%' },
                 logo,
