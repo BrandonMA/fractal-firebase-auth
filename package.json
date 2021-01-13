@@ -1,6 +1,6 @@
 {
     "name": "@bma98/fractal-firebase-auth",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "React Components to use firebase on react with custom logic to manage shared state",
     "author": "BrandonMA",
     "license": "MIT",
@@ -15,7 +15,7 @@
         "lint": "eslint src/ --fix"
     },
     "devDependencies": {
-        "@bma98/fractal-navigation": "^1.0.7",
+        "@bma98/fractal-navigation": "^1.0.8",
         "@bma98/fractal-ui": "^1.6.7",
         "@invertase/react-native-apple-authentication": "^2.1.0",
         "@react-native-community/google-signin": "^5.0.0",
@@ -72,7 +72,7 @@
         "firebase": "^8.2.1",
         "react": "~16.13.1",
         "react-native": "0.63.4",
-        "@bma98/fractal-navigation": "^1.0.7",
+        "@bma98/fractal-navigation": "^1.0.8",
         "@bma98/fractal-ui": "^1.6.7"
     }
 }
