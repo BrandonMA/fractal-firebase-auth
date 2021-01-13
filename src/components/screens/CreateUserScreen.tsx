@@ -6,19 +6,21 @@ import { useAuthenticationState } from '../../hooks/useAuthenticationState';
 
 export interface CreateUserScreenProps {
     database: MinimalExpectedDatabase<MinimalUserData, unknown>;
+    createUserObject: (basicUser: MinimalUserData) => any;
 }
 
-export function CreateUserScreen({ database }: CreateUserScreenProps): JSX.Element {
+export function CreateUserScreen({ database, createUserObject }: CreateUserScreenProps): JSX.Element {
     const authenticationState = useAuthenticationState();
 
     useEffect(() => {
         if (authenticationState.firebaseUser != null) {
-            createUser(database, {
+            const finalUser = createUserObject({
                 email: authenticationState.firebaseUser.email ?? '',
                 id: authenticationState.firebaseUser.uid
-            }).catch((error) => alert(error.message));
+            });
+            createUser(database, finalUser).catch((error) => alert(error.message));
         }
-    }, [database, authenticationState]);
+    }, [database, authenticationState, createUserObject]);
 
     return <LoadingBackground />;
 }
