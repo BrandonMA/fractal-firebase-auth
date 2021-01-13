@@ -4,9 +4,8 @@ import { firebaseConfig } from './firebase';
 import { FirebaseInit, AuthScreen, useFirebaseUser, ComponentRoutePair, FractalFirebaseAuthRoot, CreateUserScreen } from './src';
 import { IDEnabled, Database, Collection } from '@bma98/firebase-db-manager';
 import { FractalNavigationRoot } from '@bma98/fractal-navigation';
-import { PaddedContainer, LoadingBackground, Text, BaseBox } from '@bma98/fractal-ui';
+import { PaddedContainer, LoadingBackground, Text } from '@bma98/fractal-ui';
 import { Image } from 'react-native';
-import { BackgroundExample } from './BackgroundExample';
 
 interface User extends IDEnabled {
     email: string;
@@ -36,8 +35,14 @@ const authPair: ComponentRoutePair = {
     route: '/auth',
     component: (
         <AuthScreen
+            byAcceptingTerms={'By creating an account you accept our '}
+            termsAndConditions={'Terms and Conditions '}
+            and={'and '}
+            privacyPolicy={'Privacy Policy'}
             resetPasswordText={'Reset Password'}
             resetPasswordDescriptionText={'Please check your email to finish the process.'}
+            onTermsPressed={() => console.log('Show terms and conditions')}
+            onPrivacyPressed={() => console.log('Show privacy policy')}
             logo={
                 <Image
                     source={{
@@ -52,12 +57,6 @@ const authPair: ComponentRoutePair = {
             signUpText={'Sign Up'}
             emailPlaceholder={'Email'}
             passwordPlaceholder={'Password'}
-            background={
-                <>
-                    <BaseBox flex={1} />
-                    <BackgroundExample width={'100%'} style={{ marginBottom: -50 }} />
-                </>
-            }
         />
     )
 };

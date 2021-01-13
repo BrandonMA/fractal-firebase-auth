@@ -36,16 +36,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import React, { useCallback, useState } from 'react';
 import { signUp } from '../../../../firebase';
-import { Button, IconTextField, Separator } from '@bma98/fractal-ui';
+import { BaseBox, Button, IconTextField, Separator } from '@bma98/fractal-ui';
 import { renderEmailIcon } from '../util/renderEmailIcon';
 import { renderPasswordIcon } from '../util/renderPasswordIcon';
+import { Text, TouchableOpacity } from 'react-native';
+import { useTheme } from '@shopify/restyle';
 export function SignUp(_a) {
     var _this = this;
-    var emailPlaceholder = _a.emailPlaceholder, passwordPlaceholder = _a.passwordPlaceholder, signInText = _a.signInText, signUpText = _a.signUpText, onSecondaryButtonPress = _a.onSecondaryButtonPress;
+    var emailPlaceholder = _a.emailPlaceholder, passwordPlaceholder = _a.passwordPlaceholder, signInText = _a.signInText, signUpText = _a.signUpText, onSecondaryButtonPress = _a.onSecondaryButtonPress, byAcceptingTerms = _a.byAcceptingTerms, termsAndConditions = _a.termsAndConditions, and = _a.and, privacyPolicy = _a.privacyPolicy, onTermsPressed = _a.onTermsPressed, onPrivacyPressed = _a.onPrivacyPressed;
     var _b = useState(''), email = _b[0], setEmail = _b[1];
     var _c = useState(''), password = _c[0], setPassword = _c[1];
     var _d = useState(false), loading = _d[0], setLoading = _d[1];
     var toggleLoading = useCallback(function () { return setLoading(function (currentValue) { return !currentValue; }); }, []);
+    var colors = useTheme().colors;
     var handleEmailSignUp = function () { return __awaiter(_this, void 0, void 0, function () {
         var error_1;
         return __generator(this, function (_a) {
@@ -75,6 +78,14 @@ export function SignUp(_a) {
                 secureTextEntry: true
             } }),
         React.createElement(Button, { loading: loading, text: signUpText, variant: 'mainInteractiveColor', marginBottom: 'm', onPress: handleEmailSignUp }),
+        React.createElement(BaseBox, { marginBottom: 'm' },
+            React.createElement(Text, { selectable: false, style: { color: colors.labelColor, textAlign: 'center' } },
+                byAcceptingTerms,
+                React.createElement(TouchableOpacity, { onPress: onTermsPressed },
+                    React.createElement(Text, { style: { color: colors.mainInteractiveColor } }, termsAndConditions)),
+                and,
+                React.createElement(TouchableOpacity, { onPress: onPrivacyPressed },
+                    React.createElement(Text, { style: { color: colors.mainInteractiveColor } }, privacyPolicy)))),
         React.createElement(Separator, { marginBottom: 'm' }),
         React.createElement(Button, { text: signInText, variant: 'alternativeInteractiveColor', onPress: onSecondaryButtonPress })));
 }

@@ -59,8 +59,9 @@
     },
     "dependencies": {
         "@bma98/firebase-db-manager": "^1.3.3",
-        "immer": "^8.0.0",
-        "@expo/vector-icons": "^12.0.0"
+        "@expo/vector-icons": "^12.0.0",
+        "@shopify/restyle": "^1.4.0",
+        "immer": "^8.0.0"
     },
     "peerDependencies": {
         "@react-native-firebase/app": "^10.3.0",
