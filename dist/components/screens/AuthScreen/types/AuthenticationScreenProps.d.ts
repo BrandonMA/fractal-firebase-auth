@@ -7,7 +7,14 @@ export interface AuthenticationScreenProps {
     forgotPasswordText: string;
     resetPasswordText: string;
     resetPasswordDescriptionText: string;
+    byAcceptingTerms: string;
+    and: string;
+    termsAndConditions: string;
+    privacyPolicy: string;
+    onTermsPressed: () => void;
+    onPrivacyPressed: () => void;
     logo?: JSX.Element;
     removeAppleButton?: boolean;
     background?: JSX.Element;
+    footer?: JSX.Element;
 }
