@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9b158f11-260c-43c1-bf45-bfd52bfcfb91" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/firebase/authentication/apple/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/firebase/authentication/apple/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/firebase/authentication/apple/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/firebase/authentication/apple/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/firebase/authentication/apple/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/firebase/authentication/apple/index.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/firebase/authentication/facebook/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/firebase/authentication/facebook/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/firebase/authentication/facebook/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/firebase/authentication/facebook/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/firebase/authentication/facebook/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/firebase/authentication/facebook/index.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/firebase/authentication/google/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/firebase/authentication/google/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/firebase/authentication/google/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/firebase/authentication/google/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/firebase/authentication/google/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/firebase/authentication/google/index.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/apple/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/apple/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/facebook/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/facebook/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/google/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/google/index.ts" afterDir="false" />
-    </list>
+    <list default="true" id="9b158f11-260c-43c1-bf45-bfd52bfcfb91" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,7 +81,7 @@
       <workItem from="1610568312404" duration="2710000" />
       <workItem from="1610584266575" duration="153000" />
       <workItem from="1610606213156" duration="626000" />
-      <workItem from="1610607163960" duration="712000" />
+      <workItem from="1610607163960" duration="851000" />
     </task>
     <servers />
   </component>
