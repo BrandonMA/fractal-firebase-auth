@@ -36,30 +36,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { createAuthenticationState } from '../../../types/AuthenticationState';
 export function apple(locale) {
     if (locale === void 0) { locale = 'en'; }
     return __awaiter(this, void 0, void 0, function () {
-        var provider, userCredential;
+        var provider;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    provider = new firebase.auth.OAuthProvider('apple.com');
-                    provider.addScope('email');
-                    provider.addScope('name');
-                    provider.setCustomParameters({
-                        // Localize the Apple authentication screen in any language you need.
-                        locale: locale
-                    });
-                    return [4 /*yield*/, firebase.auth().signInWithPopup(provider)];
-                case 1:
-                    userCredential = _a.sent();
-                    return [2 /*return*/, createAuthenticationState({
-                            firebaseUser: userCredential.user,
-                            loading: false,
-                            credential: userCredential
-                        })];
-            }
+            provider = new firebase.auth.OAuthProvider('apple.com');
+            provider.addScope('email');
+            provider.addScope('name');
+            provider.setCustomParameters({
+                // Localize the Apple authentication screen in any language you need.
+                locale: locale
+            });
+            return [2 /*return*/, firebase.auth().signInWithRedirect(provider)];
         });
     });
 }
