@@ -1,4 +1,3 @@
-export * from './createUser';
-export * from './subscribeForUser';
-export * from './updateUser';
+export * from './createUserDocument';
+export * from './subscribeForUserDocument';
 //# sourceMappingURL=index.js.map

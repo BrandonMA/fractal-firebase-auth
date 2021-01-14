@@ -1,7 +1,7 @@
 import { LoadingBackground } from '@bma98/fractal-ui';
 import React, { useEffect } from 'react';
 import { MinimalExpectedDatabase, MinimalUserData } from '../../types';
-import { createUser } from '../../firebase/users/createUser';
+import { createUserDocument } from '../../firebase/users/createUserDocument';
 import { useAuthenticationState } from '../../hooks/useAuthenticationState';
 
 export interface CreateUserScreenProps {
@@ -18,7 +18,7 @@ export function CreateUserScreen({ database, createUserObject }: CreateUserScree
                 email: authenticationState.firebaseUser.email ?? '',
                 id: authenticationState.firebaseUser.uid
             });
-            createUser(database, finalUser).catch((error) => alert(error.message));
+            createUserDocument(database, finalUser).catch((error) => alert(error.message));
         }
     }, [database, authenticationState, createUserObject]);
 

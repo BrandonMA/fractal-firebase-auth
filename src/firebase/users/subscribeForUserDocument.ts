@@ -3,7 +3,7 @@ import { MinimalExpectedDatabase } from '../../types/MinimalExpectedDatabase';
 import { MinimalUserData } from '../../types';
 import { Document } from '@bma98/firebase-db-manager';
 
-export function subscribeForUser<T extends MinimalUserData, S>(
+export function subscribeForUserDocument<T extends MinimalUserData, S>(
     database: MinimalExpectedDatabase<T, S>,
     id: string,
     onFetchDone?: (newDocument?: Document<T, S>) => void
