@@ -1,4 +1,4 @@
-export function subscribeForUser(database, id, onFetchDone) {
+export function subscribeForUserDocument(database, id, onFetchDone) {
     return database.collections.users.subscribeToDocument(id, function (newDocument) {
         if (onFetchDone) {
             onFetchDone(newDocument);
@@ -11,4 +11,4 @@ export function subscribeForUser(database, id, onFetchDone) {
         }
     });
 }
-//# sourceMappingURL=subscribeForUser.js.map
+//# sourceMappingURL=subscribeForUserDocument.js.map

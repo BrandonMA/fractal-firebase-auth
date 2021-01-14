@@ -34,17 +34,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-export function updateUser(database, data) {
+export function createUserDocument(database, data) {
     return __awaiter(this, void 0, void 0, function () {
-        var userDocument;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, database.collections.users.updateDocument(data)];
-                case 1:
-                    userDocument = _a.sent();
-                    return [2 /*return*/, userDocument];
-            }
+            return [2 /*return*/, database.collections.users.createDocument(data)];
         });
     });
 }
-//# sourceMappingURL=updateUser.js.map
+//# sourceMappingURL=createUserDocument.js.map

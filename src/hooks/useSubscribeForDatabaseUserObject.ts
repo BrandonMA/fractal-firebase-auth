@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { subscribeForUser } from '../firebase/users/subscribeForUser';
+import { subscribeForUserDocument } from '../firebase/users/subscribeForUserDocument';
 import { MinimalUserData, MinimalExpectedDatabase } from '../types';
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { FirebaseUserContext } from '../context/FirebaseUserProvider';
@@ -14,7 +14,7 @@ export function useSubscribeForDatabaseUserObject<T extends MinimalUserData, S>(
     useEffect(() => {
         let unsubscribe: () => void | undefined;
         if (firebaseUser != null) {
-            unsubscribe = subscribeForUser(database, firebaseUser.uid, (document) => {
+            unsubscribe = subscribeForUserDocument(database, firebaseUser.uid, (document) => {
                 if (document != null) {
                     setUser(document);
                 }
