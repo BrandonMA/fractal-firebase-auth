@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { registerRootComponent } from 'expo';
 import { firebaseConfig } from './firebase';
 import { FirebaseInit, AuthScreen, useFirebaseUser, ComponentRoutePair, FractalFirebaseAuthRoot, CreateUserScreen } from './src';
@@ -73,11 +73,12 @@ const appPair: ComponentRoutePair = {
 
 function FirebaseReady(): JSX.Element {
     const database = useMemo(() => createDatabase(), []);
+    const createUser = useCallback((user) => user, []);
 
     const createUserPair: ComponentRoutePair = useMemo(() => {
         return {
             route: '/create_user',
-            component: <CreateUserScreen database={database} />
+            component: <CreateUserScreen createUserObject={createUser} database={database} />
         };
     }, [database]);
 

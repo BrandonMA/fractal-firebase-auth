@@ -1,6 +1,6 @@
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import { EmailIcon } from '../../../assets/EmailIcon';
 export function renderEmailIcon(color, size) {
-    return React.createElement(Ionicons, { selectable: false, name: 'mail', size: size, color: color });
+    return React.createElement(EmailIcon, { width: size, height: size, fill: color });
 }
 //# sourceMappingURL=renderEmailIcon.js.map

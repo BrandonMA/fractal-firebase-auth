@@ -1,6 +1,6 @@
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import { EmailIcon } from '../../../assets/EmailIcon';
 
 export function renderEmailIcon(color: string, size: number): JSX.Element {
-    return <Ionicons selectable={false} name='mail' size={size} color={color} />;
+    return <EmailIcon width={size} height={size} fill={color} />;
 }
