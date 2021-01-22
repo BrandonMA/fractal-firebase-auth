@@ -1,6 +1,6 @@
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import { LockIcon } from '../../../assets/LockIcon';
 
 export function renderPasswordIcon(color: string, size: number): JSX.Element {
-    return <Ionicons selectable={false} name='lock-closed' size={size} color={color} />;
+    return <LockIcon height={size} width={size} fill={color} />;
 }
