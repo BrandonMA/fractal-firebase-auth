@@ -15,13 +15,15 @@
         },
         "assetBundlePatterns": ["**/*"],
         "ios": {
-            "supportsTablet": true
+            "supportsTablet": true,
+            "bundleIdentifier": "fractal.fractalfirebaseauth"
         },
         "web": {
             "favicon": "./assets/favicon.png"
         },
         "android": {
-            "softwareKeyboardLayoutMode": "pan"
+            "softwareKeyboardLayoutMode": "pan",
+            "package": "fractal.fractalfirebaseauth"
         }
     }
 }

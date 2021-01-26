@@ -8,6 +8,7 @@ import { handleApplePress } from './util/handleApplePress';
 import { SignIn } from './components/SignIn';
 import { SignUp } from './components/SignUp';
 import { PasswordReset } from './components/PasswordReset';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 type AuthenticationScreenState = 'signIn' | 'signUp' | 'passwordReset';
 
@@ -30,6 +31,7 @@ export function AuthScreen({ logo, background, removeAppleButton = true, ...othe
         <Background>
             {background}
             <ScrollView contentContainerStyle={scrollViewStyle}>
+                <SafeAreaView />
                 <BaseBox flex={1} maxWidth={600} alignItems={'center'} width={'100%'}>
                     {logo}
                     <PaddedContainer width={'100%'}>
