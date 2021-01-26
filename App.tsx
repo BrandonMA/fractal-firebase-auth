@@ -5,7 +5,8 @@ import { FirebaseInit, AuthScreen, useFirebaseUser, ComponentRoutePair, FractalF
 import { IDEnabled, Database, Collection } from '@bma98/firebase-db-manager';
 import { FractalNavigationRoot } from '@bma98/fractal-navigation';
 import { PaddedContainer, LoadingBackground, Text } from '@bma98/fractal-ui';
-import { Image } from 'react-native';
+import { Image, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface User extends IDEnabled {
     email: string;
@@ -25,9 +26,12 @@ function createDatabase(): DatabaseType {
 function Home(): JSX.Element {
     const currentUser = useFirebaseUser<User, null>();
     return (
-        <PaddedContainer>
-            <Text>Logged In! {currentUser?.data?.email}</Text>
-        </PaddedContainer>
+        <ScrollView>
+            <SafeAreaView />
+            <PaddedContainer>
+                <Text>Logged In! {currentUser?.data?.email}</Text>
+            </PaddedContainer>
+        </ScrollView>
     );
 }
 
@@ -80,7 +84,7 @@ function FirebaseReady(): JSX.Element {
             route: '/create_user',
             component: <CreateUserScreen createUserObject={createUser} database={database} />
         };
-    }, [database]);
+    }, [database, createUser]);
 
     return (
         <FractalFirebaseAuthRoot
