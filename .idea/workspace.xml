@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b158f11-260c-43c1-bf45-bfd52bfcfb91" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,8 +44,13 @@
     <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
+<<<<<<< HEAD
     <property name="prettierjs.PrettierConfiguration.Package" value="$USER_HOME$/.nvm/versions/node/v12.20.0/lib/node_modules/prettier" />
     <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
+=======
+    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\Brandon\Documents\Git\fractal-firebase-auth\node_modules\prettier" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
+>>>>>>> 86d2a764cf8f5dfb3de6f2bbcdbb485d92443d4d
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
@@ -90,6 +96,10 @@
       <workItem from="1610653310808" duration="108000" />
       <workItem from="1610923757237" duration="24000" />
       <workItem from="1611276150170" duration="1654000" />
+<<<<<<< HEAD
+=======
+      <workItem from="1612031377223" duration="9245000" />
+>>>>>>> 86d2a764cf8f5dfb3de6f2bbcdbb485d92443d4d
     </task>
     <servers />
   </component>

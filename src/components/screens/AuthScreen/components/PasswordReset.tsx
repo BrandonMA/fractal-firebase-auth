@@ -58,7 +58,9 @@ export function PasswordReset({
                 onPress={handlePasswordReset}
             />
             <Separator marginBottom={'m'} />
-            <TextButton onPress={onSecondaryButtonPress} alignSelf={'center'} variant={'mainInteractiveColor'} text={signInText} />
+            <TextButton onPress={onSecondaryButtonPress} alignSelf={'center'} variant={'mainInteractiveColor'}>
+                {signInText}
+            </TextButton>
         </>
     );
 }

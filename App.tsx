@@ -61,6 +61,7 @@ const authPair: ComponentRoutePair = {
             signUpText={'Sign Up'}
             emailPlaceholder={'Email'}
             passwordPlaceholder={'Password'}
+            androidID={'870719140957-hfimiu57e6l1ubtbe82ec6l4er1m8nrb.apps.googleusercontent.com'}
         />
     )
 };

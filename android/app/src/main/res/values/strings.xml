@@ -1,3 +1,4 @@
 <resources>
+    <string name="facebook_app_id">216417893467004</string> <string name="fb_login_protocol_scheme">fb216417893467004</string>
     <string name="app_name">Fractal-Firebase-Auth</string>
 </resources>

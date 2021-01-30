@@ -16,4 +16,5 @@ export interface AuthenticationScreenProps {
     removeAppleButton?: boolean;
     background?: JSX.Element;
     footer?: JSX.Element;
+    androidID?: string;
 }

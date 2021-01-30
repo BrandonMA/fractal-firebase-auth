@@ -51,13 +51,9 @@ export function SignIn({
                 }}
             />
             <Button loading={loading} text={signInText} variant={'mainInteractiveColor'} marginBottom={'m'} onPress={handleEmailSignIn} />
-            <TextButton
-                onPress={onPasswordReset}
-                alignSelf={'center'}
-                variant={'mainInteractiveColor'}
-                text={forgotPasswordText}
-                marginBottom={'m'}
-            />
+            <TextButton onPress={onPasswordReset} alignSelf={'center'} variant={'mainInteractiveColor'} marginBottom={'m'}>
+                {forgotPasswordText}
+            </TextButton>
             <Separator marginBottom={'m'} />
             <Button text={signUpText} variant={'alternativeInteractiveColor'} onPress={onSecondaryButtonPress} />
         </>
