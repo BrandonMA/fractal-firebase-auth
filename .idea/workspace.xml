@@ -6,69 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9b158f11-260c-43c1-bf45-bfd52bfcfb91" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/com/fractalfirebaseauth/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/com/fractalfirebaseauth/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Authenticate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Authenticate.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FirebaseInit/index.native.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FirebaseInit/index.native.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FirebaseInit/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FirebaseInit/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FractalFirebaseAuthRoot.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FractalFirebaseAuthRoot.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/assets/EmailIcon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/assets/EmailIcon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/assets/LockIcon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/assets/LockIcon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/screens/AuthScreen/components/PasswordReset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/screens/AuthScreen/components/PasswordReset.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/screens/AuthScreen/components/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/screens/AuthScreen/components/SignIn.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/screens/AuthScreen/components/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/screens/AuthScreen/components/SignUp.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/screens/AuthScreen/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/screens/AuthScreen/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/screens/AuthScreen/types/AuthenticationScreenProps.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/screens/AuthScreen/types/AuthenticationScreenProps.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/screens/AuthScreen/types/HelperAuthenticationScreenProps.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/screens/AuthScreen/types/HelperAuthenticationScreenProps.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/screens/AuthScreen/util/handleApplePress.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/screens/AuthScreen/util/handleApplePress.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/screens/AuthScreen/util/handleFacebookPress.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/screens/AuthScreen/util/handleFacebookPress.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/screens/AuthScreen/util/handleGooglePress.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/screens/AuthScreen/util/handleGooglePress.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/screens/AuthScreen/util/renderEmailIcon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/screens/AuthScreen/util/renderEmailIcon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/screens/AuthScreen/util/renderPasswordIcon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/screens/AuthScreen/util/renderPasswordIcon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/screens/AuthScreen/util/renderResetIcon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/screens/AuthScreen/util/renderResetIcon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/screens/CreateUserScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/screens/CreateUserScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/screens/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/screens/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/context/AuthenticationStateProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/context/AuthenticationStateProvider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/context/FirebaseUserProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/context/FirebaseUserProvider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/context/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/context/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/apple/index.native.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/apple/index.native.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/apple/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/apple/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/facebook/index.native.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/facebook/index.native.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/facebook/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/facebook/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/google/index.native.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/google/index.native.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/google/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/google/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/resetPassword/index.native.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/resetPassword/index.native.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/resetPassword/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/resetPassword/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/signIn/index.native.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/signIn/index.native.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/signIn/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/signIn/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/signOut/index.native.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/signOut/index.native.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/signOut/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/signOut/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/signUp/index.native.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/signUp/index.native.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/signUp/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/signUp/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/subscribeForAuthenticatedUser/index.native.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/subscribeForAuthenticatedUser/index.native.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/subscribeForAuthenticatedUser/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/subscribeForAuthenticatedUser/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/users/createUserDocument.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/users/createUserDocument.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/users/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/users/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/users/subscribeForUserDocument.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/users/subscribeForUserDocument.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/useAuthenticationState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useAuthenticationState.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/useFirebaseUser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useFirebaseUser.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/useSubscribeForAuthenticatedUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useSubscribeForAuthenticatedUser.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/useSubscribeForDatabaseUserObject.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useSubscribeForDatabaseUserObject.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/AuthenticationState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/AuthenticationState.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/ComponentRoutePair.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/ComponentRoutePair.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/MinimalExpectedDatabase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/MinimalExpectedDatabase.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/MinimalUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/MinimalUser.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +90,7 @@
       <workItem from="1610653310808" duration="108000" />
       <workItem from="1610923757237" duration="24000" />
       <workItem from="1611276150170" duration="1654000" />
-      <workItem from="1612031377223" duration="8384000" />
+      <workItem from="1612031377223" duration="9084000" />
     </task>
     <servers />
   </component>
