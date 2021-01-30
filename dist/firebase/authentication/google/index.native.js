@@ -37,13 +37,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-community/google-signin';
 import { createAuthenticationState } from '../../../types';
-export function google() {
+export function google(androidID) {
     return __awaiter(this, void 0, void 0, function () {
         var idToken, googleCredential, userCredential;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    GoogleSignin.configure();
+                    GoogleSignin.configure({
+                        webClientId: androidID
+                    });
                     return [4 /*yield*/, GoogleSignin.signIn()];
                 case 1:
                     idToken = (_a.sent()).idToken;

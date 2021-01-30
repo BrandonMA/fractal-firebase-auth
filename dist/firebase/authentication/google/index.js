@@ -36,10 +36,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import firebase from 'firebase/app';
 import 'firebase/auth';
-export function google() {
+export function google(androidID) {
     return __awaiter(this, void 0, void 0, function () {
         var provider;
         return __generator(this, function (_a) {
+            console.log(androidID);
             provider = new firebase.auth.GoogleAuthProvider();
             return [2 /*return*/, firebase.auth().signInWithRedirect(provider)];
         });

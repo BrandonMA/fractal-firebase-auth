@@ -1,2 +1,2 @@
 import { AuthenticationState } from '../../../types';
-export declare function google(): Promise<AuthenticationState>;
+export declare function google(androidID: string): Promise<AuthenticationState>;

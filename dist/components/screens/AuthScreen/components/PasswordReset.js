@@ -77,6 +77,6 @@ export function PasswordReset(_a) {
         showMessage && !loading ? (React.createElement(Message, { icon: renderResetIcon, messageType: 'success', title: resetPasswordText, description: resetPasswordDescriptionText, marginBottom: 'm' })) : null,
         React.createElement(Button, { loading: loading, text: resetPasswordText, variant: 'warningInteractiveColor', marginBottom: 'm', onPress: handlePasswordReset }),
         React.createElement(Separator, { marginBottom: 'm' }),
-        React.createElement(TextButton, { onPress: onSecondaryButtonPress, alignSelf: 'center', variant: 'mainInteractiveColor', text: signInText })));
+        React.createElement(TextButton, { onPress: onSecondaryButtonPress, alignSelf: 'center', variant: 'mainInteractiveColor' }, signInText)));
 }
 //# sourceMappingURL=PasswordReset.js.map

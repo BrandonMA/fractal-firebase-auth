@@ -1,14 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import { Background, BaseBox, Cell, ErrorMessage, PaddedContainer, SocialMediaButtons } from '@bma98/fractal-ui';
-import { LayoutAnimation, ScrollView, ViewStyle } from 'react-native';
+import { InteractionManager, LayoutAnimation, ScrollView, ViewStyle } from 'react-native';
 import { AuthenticationScreenProps } from './types/AuthenticationScreenProps';
-import { handleFacebookPress } from './util/handleFacebookPress';
-import { handleApplePress } from './util/handleApplePress';
 import { SignIn } from './components/SignIn';
 import { SignUp } from './components/SignUp';
 import { PasswordReset } from './components/PasswordReset';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { google } from '../../../firebase';
+import { apple, facebook, google } from '../../../firebase';
 
 type AuthenticationScreenState = 'signIn' | 'signUp' | 'passwordReset';
 
@@ -22,6 +20,9 @@ export function AuthScreen({
     ...others
 }: AuthenticationScreenProps): JSX.Element {
     const [state, setState] = useState<AuthenticationScreenState>('signIn');
+    const [googleLoading, setGoogleLoading] = useState(false);
+    const [facebookLoading, setFacebookLoading] = useState(false);
+    const [appleLoading, setAppleLoading] = useState(false);
 
     const toggleState = useCallback(() => {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
@@ -34,8 +35,40 @@ export function AuthScreen({
     }, []);
 
     const handleGooglePress = useCallback(() => {
-        google(androidID).catch((error) => console.log(error.message));
+        InteractionManager.runAfterInteractions(async () => {
+            setGoogleLoading(true);
+            try {
+                await google(androidID);
+            } catch (error) {
+                console.log(error.message);
+                setGoogleLoading(false);
+            }
+        });
     }, [androidID]);
+
+    const handleFacebookPress = useCallback(() => {
+        InteractionManager.runAfterInteractions(async () => {
+            setFacebookLoading(true);
+            try {
+                await facebook();
+            } catch (error) {
+                console.log(error.message);
+                setFacebookLoading(false);
+            }
+        });
+    }, []);
+
+    const handleApplePress = useCallback(() => {
+        InteractionManager.runAfterInteractions(async () => {
+            setAppleLoading(true);
+            try {
+                await apple();
+            } catch (error) {
+                console.log(error.message);
+                setAppleLoading(false);
+            }
+        });
+    }, []);
 
     return (
         <Background>
@@ -62,6 +95,9 @@ export function AuthScreen({
                         onApplePress={handleApplePress}
                         onGooglePress={handleGooglePress}
                         onFacebookPress={handleFacebookPress}
+                        googleLoading={googleLoading}
+                        appleLoading={appleLoading}
+                        facebookLoading={facebookLoading}
                         removeAppleButton={removeAppleButton}
                     />
                 </BaseBox>

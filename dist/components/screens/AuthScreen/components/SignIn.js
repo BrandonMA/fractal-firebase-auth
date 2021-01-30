@@ -75,7 +75,7 @@ export function SignIn(_a) {
                 secureTextEntry: true
             } }),
         React.createElement(Button, { loading: loading, text: signInText, variant: 'mainInteractiveColor', marginBottom: 'm', onPress: handleEmailSignIn }),
-        React.createElement(TextButton, { onPress: onPasswordReset, alignSelf: 'center', variant: 'mainInteractiveColor', text: forgotPasswordText, marginBottom: 'm' }),
+        React.createElement(TextButton, { onPress: onPasswordReset, alignSelf: 'center', variant: 'mainInteractiveColor', marginBottom: 'm' }, forgotPasswordText),
         React.createElement(Separator, { marginBottom: 'm' }),
         React.createElement(Button, { text: signUpText, variant: 'alternativeInteractiveColor', onPress: onSecondaryButtonPress })));
 }

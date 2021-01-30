@@ -227,6 +227,8 @@ PODS:
   - DoubleConversion (1.1.6)
   - EXApplication (2.4.1):
     - UMCore
+  - EXBlur (8.2.2):
+    - UMCore
   - EXConstants (9.3.5):
     - UMConstantsInterface
     - UMCore
@@ -690,6 +692,7 @@ PODS:
 DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - EXApplication (from `../node_modules/expo-application/ios`)
+  - EXBlur (from `../node_modules/expo-blur/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
   - EXDevice (from `../node_modules/expo-device/ios`)
   - EXErrorRecovery (from `../node_modules/expo-error-recovery/ios`)
@@ -788,6 +791,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   EXApplication:
     :path: "../node_modules/expo-application/ios"
+  EXBlur:
+    :path: "../node_modules/expo-blur/ios"
   EXConstants:
     :path: "../node_modules/expo-constants/ios"
   EXDevice:
@@ -924,6 +929,7 @@ SPEC CHECKSUMS:
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   EXApplication: b61d007b4f23ab6aa3d7fe1f517ffd81ed962749
+  EXBlur: 94c9008f323a09eeebb574b4d517d843e9453a30
   EXConstants: 5874c3bf65601ce96049412e6e5f43d198c1cdaf
   EXDevice: 2c97087616e032d943b2dd68372004e7b31ab31b
   EXErrorRecovery: 595048e4ae93a70716b195f2ebc1849d63e0ee3f
