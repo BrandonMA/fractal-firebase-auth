@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "870719140957",
+    "project_id": "fir-db-manager-12154",
+    "storage_bucket": "fir-db-manager-12154.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870719140957:android:0d0f57a4208aa1e4a809b4",
+        "android_client_info": {
+          "package_name": "com.fractalfirebaseauth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870719140957-hfimiu57e6l1ubtbe82ec6l4er1m8nrb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0C9_JK3zQLVe1f4Mt3Y7WTzdEIy8cvWM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870719140957-hfimiu57e6l1ubtbe82ec6l4er1m8nrb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "870719140957-s0198ll082qra277dt2scruafgnv4h4j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "fractal.fractalfirebaseauth"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
