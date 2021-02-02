@@ -1,4 +1,4 @@
-import { AuthenticationStateProvider, FirebaseUserProvider } from '../context';
+import { AuthenticationStateProvider, UserDocumentProvider } from '../context';
 import React from 'react';
 import { Authenticate, AuthenticateProps } from './Authenticate';
 import { MinimalUserData } from '../types';
@@ -8,9 +8,9 @@ export function FractalFirebaseAuthRoot<UserType extends MinimalUserData, UserSu
 ): JSX.Element {
     return (
         <AuthenticationStateProvider>
-            <FirebaseUserProvider>
+            <UserDocumentProvider>
                 <Authenticate {...props} />
-            </FirebaseUserProvider>
+            </UserDocumentProvider>
         </AuthenticationStateProvider>
     );
 }

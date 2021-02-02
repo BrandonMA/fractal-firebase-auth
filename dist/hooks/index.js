@@ -1,5 +1,5 @@
 export * from './useSubscribeForAuthenticatedUser';
-export * from './useSubscribeForDatabaseUserObject';
-export * from './useFirebaseUser';
+export * from './useSubscribeForUserDocument';
+export * from './useUserDocument';
 export * from './useAuthenticationState';
 //# sourceMappingURL=index.js.map

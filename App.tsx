@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { registerRootComponent } from 'expo';
 import { firebaseConfig } from './firebase';
-import { FirebaseInit, AuthScreen, useFirebaseUser, ComponentRoutePair, FractalFirebaseAuthRoot, CreateUserScreen } from './src';
+import { FirebaseInit, AuthScreen, ComponentRoutePair, FractalFirebaseAuthRoot, CreateUserScreen, useUserDocument } from './src';
 import { IDEnabled, Database, Collection } from '@bma98/firebase-db-manager';
 import { FractalNavigationRoot } from '@bma98/fractal-navigation';
 import { PaddedContainer, LoadingBackground, Text } from '@bma98/fractal-ui';
@@ -24,7 +24,7 @@ function createDatabase(): DatabaseType {
 }
 
 function Home(): JSX.Element {
-    const currentUser = useFirebaseUser<User, null>();
+    const currentUser = useUserDocument<User, null>();
     return (
         <ScrollView>
             <SafeAreaView />
@@ -76,16 +76,27 @@ const appPair: ComponentRoutePair = {
     component: <Home />
 };
 
-function FirebaseReady(): JSX.Element {
+function AppContent(): JSX.Element {
     const database = useMemo(() => createDatabase(), []);
-    const createUser = useCallback((user) => user, []);
+
+    const createUser = useCallback(
+        (id: string, email: string) => {
+            const newUser = {
+                id,
+                email
+            };
+
+            database.collections.users.createDocument(newUser);
+        },
+        [database]
+    );
 
     const createUserPair: ComponentRoutePair = useMemo(() => {
         return {
             route: '/create_user',
-            component: <CreateUserScreen createUserObject={createUser} database={database} />
+            component: <CreateUserScreen createUser={createUser} />
         };
-    }, [database, createUser]);
+    }, [createUser]);
 
     return (
         <FractalFirebaseAuthRoot
@@ -102,7 +113,7 @@ export function App(): JSX.Element {
     return (
         <FractalNavigationRoot>
             <FirebaseInit loadingComponent={<LoadingBackground />} firebaseConfig={firebaseConfig}>
-                <FirebaseReady />
+                <AppContent />
             </FirebaseInit>
         </FractalNavigationRoot>
     );

@@ -1,2 +1,2 @@
 export * from './AuthenticationStateProvider';
-export * from './FirebaseUserProvider';
+export * from './UserDocumentProvider';

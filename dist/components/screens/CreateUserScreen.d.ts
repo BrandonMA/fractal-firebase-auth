@@ -1,7 +1,5 @@
 /// <reference types="react" />
-import { MinimalExpectedDatabase, MinimalUserData } from '../../types';
 export interface CreateUserScreenProps {
-    database: MinimalExpectedDatabase<MinimalUserData, unknown>;
-    createUserObject: (basicUser: MinimalUserData) => any;
+    createUser: (id: string, email: string) => void;
 }
-export declare function CreateUserScreen({ database, createUserObject }: CreateUserScreenProps): JSX.Element;
+export declare function CreateUserScreen({ createUser }: CreateUserScreenProps): JSX.Element;

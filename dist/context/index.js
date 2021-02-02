@@ -1,3 +1,3 @@
 export * from './AuthenticationStateProvider';
-export * from './FirebaseUserProvider';
+export * from './UserDocumentProvider';
 //# sourceMappingURL=index.js.map

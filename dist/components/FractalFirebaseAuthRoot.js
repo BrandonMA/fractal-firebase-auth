@@ -9,12 +9,12 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-import { AuthenticationStateProvider, FirebaseUserProvider } from '../context';
+import { AuthenticationStateProvider, UserDocumentProvider } from '../context';
 import React from 'react';
 import { Authenticate } from './Authenticate';
 export function FractalFirebaseAuthRoot(props) {
     return (React.createElement(AuthenticationStateProvider, null,
-        React.createElement(FirebaseUserProvider, null,
+        React.createElement(UserDocumentProvider, null,
             React.createElement(Authenticate, __assign({}, props)))));
 }
 //# sourceMappingURL=FractalFirebaseAuthRoot.js.map

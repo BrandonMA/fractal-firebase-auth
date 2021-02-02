@@ -2,13 +2,13 @@ import { useContext, useEffect, useState } from 'react';
 import { subscribeForUserDocument } from '../firebase/users/subscribeForUserDocument';
 import { MinimalUserData, MinimalExpectedDatabase } from '../types';
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';
-import { FirebaseUserContext } from '../context/FirebaseUserProvider';
+import { UserDocumentContext } from '../context/UserDocumentProvider';
 
-export function useSubscribeForDatabaseUserObject<T extends MinimalUserData, S>(
+export function useSubscribeForUserDocument<T extends MinimalUserData, S>(
     firebaseUser: FirebaseAuthTypes.User | null | undefined,
     database: MinimalExpectedDatabase<T, S>
 ): boolean {
-    const [, setUser] = useContext(FirebaseUserContext);
+    const [, setUser] = useContext(UserDocumentContext);
     const [loadingUserFromDatabase, setLoadingUserFromDatabase] = useState(true);
 
     useEffect(() => {
