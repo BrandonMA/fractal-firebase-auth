@@ -1,4 +1,3 @@
-/// <reference types="react" />
 interface Config {
     [key: string]: string;
 }

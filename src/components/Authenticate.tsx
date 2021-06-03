@@ -1,24 +1,19 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { MinimalExpectedDatabase, MinimalUserData } from '../types';
-import { useSubscribeForAuthenticatedUser, useSubscribeForUserDocument, useUserDocument } from '../hooks';
-import { ComponentRoutePair } from '../types/ComponentRoutePair';
+import { useAuthenticateChildren, useSubscribeForAuthenticatedUser, useSubscribeForUserDocument, useUserDocument } from '../hooks';
 import { FadeRoute, Redirect, useLocation } from '@bma98/fractal-navigation';
+import { ComponentRouteProps } from '../types/ComponentRouteProps';
 
 export interface AuthenticateProps<UserType extends MinimalUserData, UserSubCollection> {
     database: MinimalExpectedDatabase<UserType, UserSubCollection>;
-    loadingPair: ComponentRoutePair;
-    authPair: ComponentRoutePair;
-    createUser: ComponentRoutePair;
-    app: ComponentRoutePair;
+    children: Array<ReactElement<ComponentRouteProps>>;
 }
 
 export function Authenticate<UserType extends MinimalUserData, UserSubCollection>({
-    authPair,
-    loadingPair,
-    app,
-    createUser,
-    database
+    database,
+    children
 }: AuthenticateProps<UserType, UserSubCollection>): JSX.Element {
+    const [app, loadingPair, authPair, createUser] = useAuthenticateChildren(children);
     const { firebaseUser, loading } = useSubscribeForAuthenticatedUser();
     const isLoadingUserDocument = useSubscribeForUserDocument(firebaseUser, database);
     const userDocument = useUserDocument();
@@ -48,8 +43,12 @@ export function Authenticate<UserType extends MinimalUserData, UserSubCollection
         <>
             <FadeRoute path={loadingPair.route}>{loadingPair.component}</FadeRoute>
             {isFirebaseUserMissing ? <FadeRoute path={authPair.route}>{authPair.component}</FadeRoute> : null}
-            {!isLoadingUserDocument && !isUserDocumentMissing ? <FadeRoute path={app.route}>{app.component}</FadeRoute> : null}
-            {!isLoadingUserDocument && isUserDocumentMissing ? <FadeRoute path={createUser.route}>{createUser.component}</FadeRoute> : null}
+            {!isLoadingUserDocument && !isUserDocumentMissing && !isFirebaseUserMissing ? (
+                <FadeRoute path={app.route}>{app.component}</FadeRoute>
+            ) : null}
+            {!isLoadingUserDocument && isUserDocumentMissing && !isFirebaseUserMissing ? (
+                <FadeRoute path={createUser.route}>{createUser.component}</FadeRoute>
+            ) : null}
             {getRedirect()}
         </>
     );

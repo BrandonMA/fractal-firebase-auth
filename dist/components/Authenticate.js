@@ -1,9 +1,10 @@
 import React from 'react';
-import { useSubscribeForAuthenticatedUser, useSubscribeForUserDocument, useUserDocument } from '../hooks';
+import { useAuthenticateChildren, useSubscribeForAuthenticatedUser, useSubscribeForUserDocument, useUserDocument } from '../hooks';
 import { FadeRoute, Redirect, useLocation } from '@bma98/fractal-navigation';
 export function Authenticate(_a) {
-    var authPair = _a.authPair, loadingPair = _a.loadingPair, app = _a.app, createUser = _a.createUser, database = _a.database;
-    var _b = useSubscribeForAuthenticatedUser(), firebaseUser = _b.firebaseUser, loading = _b.loading;
+    var database = _a.database, children = _a.children;
+    var _b = useAuthenticateChildren(children), app = _b[0], loadingPair = _b[1], authPair = _b[2], createUser = _b[3];
+    var _c = useSubscribeForAuthenticatedUser(), firebaseUser = _c.firebaseUser, loading = _c.loading;
     var isLoadingUserDocument = useSubscribeForUserDocument(firebaseUser, database);
     var userDocument = useUserDocument();
     var pathname = useLocation().pathname;
@@ -33,8 +34,8 @@ export function Authenticate(_a) {
     return (React.createElement(React.Fragment, null,
         React.createElement(FadeRoute, { path: loadingPair.route }, loadingPair.component),
         isFirebaseUserMissing ? React.createElement(FadeRoute, { path: authPair.route }, authPair.component) : null,
-        !isLoadingUserDocument && !isUserDocumentMissing ? React.createElement(FadeRoute, { path: app.route }, app.component) : null,
-        !isLoadingUserDocument && isUserDocumentMissing ? React.createElement(FadeRoute, { path: createUser.route }, createUser.component) : null,
+        !isLoadingUserDocument && !isUserDocumentMissing && !isFirebaseUserMissing ? (React.createElement(FadeRoute, { path: app.route }, app.component)) : null,
+        !isLoadingUserDocument && isUserDocumentMissing && !isFirebaseUserMissing ? (React.createElement(FadeRoute, { path: createUser.route }, createUser.component)) : null,
         getRedirect()));
 }
 //# sourceMappingURL=Authenticate.js.map

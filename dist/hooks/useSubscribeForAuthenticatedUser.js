@@ -10,6 +10,8 @@ export function useSubscribeForAuthenticatedUser() {
         });
         return function () {
             unsubscribe();
+            // Reset to the original state
+            setAuthenticationState(createAuthenticationState());
         };
     }, [setAuthenticationState]);
     return authenticationState;

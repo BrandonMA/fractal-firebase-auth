@@ -11,12 +11,18 @@ export function useSubscribeForUserDocument(firebaseUser, database) {
                 if (document != null) {
                     setUser(document);
                 }
+                else {
+                    setUser(undefined);
+                }
                 setLoadingUserFromDatabase(false);
             });
         }
         return function () {
             if (unsubscribe) {
                 unsubscribe();
+                // Reset to the original state
+                setUser(undefined);
+                setLoadingUserFromDatabase(true);
             }
         };
     }, [firebaseUser, database, setUser]);

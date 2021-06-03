@@ -17,13 +17,20 @@ export function useSubscribeForUserDocument<T extends MinimalUserData, S>(
             unsubscribe = subscribeForUserDocument(database, firebaseUser.uid, (document) => {
                 if (document != null) {
                     setUser(document);
+                } else {
+                    setUser(undefined);
                 }
+
                 setLoadingUserFromDatabase(false);
             });
         }
         return (): void => {
             if (unsubscribe) {
                 unsubscribe();
+
+                // Reset to the original state
+                setUser(undefined);
+                setLoadingUserFromDatabase(true);
             }
         };
     }, [firebaseUser, database, setUser]);

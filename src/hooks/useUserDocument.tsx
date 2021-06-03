@@ -5,5 +5,5 @@ import { UserDocumentContext } from '../context/UserDocumentProvider';
 
 export function useUserDocument<T extends MinimalUserData, S>(): Document<T, S> | undefined {
     const [user] = useContext(UserDocumentContext);
-    return (user as unknown) as Document<T, S>;
+    return user as unknown as Document<T, S>;
 }

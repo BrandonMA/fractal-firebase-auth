@@ -12,9 +12,9 @@ var __assign = (this && this.__assign) || function () {
 import { AuthenticationStateProvider, UserDocumentProvider } from '../context';
 import React from 'react';
 import { Authenticate } from './Authenticate';
-export function FractalFirebaseAuthRoot(props) {
+export function FirebaseAuthRoot(props) {
     return (React.createElement(AuthenticationStateProvider, null,
         React.createElement(UserDocumentProvider, null,
             React.createElement(Authenticate, __assign({}, props)))));
 }
-//# sourceMappingURL=FractalFirebaseAuthRoot.js.map
+//# sourceMappingURL=FirebaseAuthRoot.js.map

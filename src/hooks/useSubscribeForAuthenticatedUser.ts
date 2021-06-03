@@ -12,6 +12,9 @@ export function useSubscribeForAuthenticatedUser(): AuthenticationState {
         });
         return (): void => {
             unsubscribe();
+
+            // Reset to the original state
+            setAuthenticationState(createAuthenticationState());
         };
     }, [setAuthenticationState]);
 

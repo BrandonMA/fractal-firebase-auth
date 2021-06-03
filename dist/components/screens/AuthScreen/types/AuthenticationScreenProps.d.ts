@@ -1,4 +1,3 @@
-/// <reference types="react" />
 export interface AuthenticationScreenProps {
     emailPlaceholder: string;
     passwordPlaceholder: string;

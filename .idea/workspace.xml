@@ -5,11 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b158f11-260c-43c1-bf45-bfd52bfcfb91" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/AuthenticateSection.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hooks/useAuthenticateChildren.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/AuthenticateChildrenKey.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/ComponentRouteProps.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/screens/AuthScreen/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/screens/AuthScreen/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Authenticate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Authenticate.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FractalFirebaseAuthRoot.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FirebaseAuthRoot.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/firebase/authentication/signUp/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/authentication/signUp/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/useSubscribeForAuthenticatedUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useSubscribeForAuthenticatedUser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/useSubscribeForUserDocument.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useSubscribeForUserDocument.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/useUserDocument.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useUserDocument.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +60,7 @@
     <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\Brandon\Documents\Git\fractal-firebase-auth\node_modules\prettier" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
     <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
@@ -56,11 +69,11 @@
       <recent name="$PROJECT_DIR$/src/components/screens/AuthenticationScreen" />
     </key>
     <key name="es6.move.members.recent.items">
+      <recent name="$PROJECT_DIR$/src/hooks/useAuthenticateChildren.ts" />
       <recent name="$PROJECT_DIR$/src/components/screens/AuthenticationScreen/components/SignUp.tsx" />
       <recent name="$PROJECT_DIR$/src/components/screens/AuthenticationScreen/components/SignIn.tsx" />
       <recent name="$PROJECT_DIR$/src/components/screens/AuthenticationScreen/util/handleApplePress.ts" />
       <recent name="$PROJECT_DIR$/src/components/screens/AuthenticationScreen/util/handleFacebookPress.ts" />
-      <recent name="$PROJECT_DIR$/src/components/screens/AuthenticationScreen/util/handleGooglePress.ts" />
     </key>
   </component>
   <component name="RunManager">
@@ -95,6 +108,8 @@
       <workItem from="1610923757237" duration="24000" />
       <workItem from="1611276150170" duration="1654000" />
       <workItem from="1612031377223" duration="9245000" />
+      <workItem from="1622708225872" duration="55000" />
+      <workItem from="1622708307354" duration="2721000" />
     </task>
     <servers />
   </component>
