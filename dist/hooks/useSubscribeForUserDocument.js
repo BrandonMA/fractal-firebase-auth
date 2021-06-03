@@ -17,6 +17,9 @@ export function useSubscribeForUserDocument(firebaseUser, database) {
                 setLoadingUserFromDatabase(false);
             });
         }
+        else {
+            setUser(undefined);
+        }
         return function () {
             if (unsubscribe) {
                 unsubscribe();

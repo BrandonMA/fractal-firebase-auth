@@ -23,7 +23,10 @@ export function useSubscribeForUserDocument<T extends MinimalUserData, S>(
 
                 setLoadingUserFromDatabase(false);
             });
+        } else {
+            setUser(undefined);
         }
+
         return (): void => {
             if (unsubscribe) {
                 unsubscribe();
