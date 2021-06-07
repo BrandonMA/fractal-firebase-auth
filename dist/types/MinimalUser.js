@@ -1,5 +1,5 @@
 export function isMinimalUserData(value) {
-    var castedValue = value;
+    const castedValue = value;
     return castedValue.email != null;
 }
 //# sourceMappingURL=MinimalUser.js.map

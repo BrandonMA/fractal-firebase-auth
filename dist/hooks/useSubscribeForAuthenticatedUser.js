@@ -3,12 +3,12 @@ import { subscribeForAuthenticatedUser } from '../firebase/authentication/subscr
 import { createAuthenticationState } from '../types/AuthenticationState';
 import { AuthenticationStateContext } from '../context/AuthenticationStateProvider';
 export function useSubscribeForAuthenticatedUser() {
-    var _a = useContext(AuthenticationStateContext), authenticationState = _a[0], setAuthenticationState = _a[1];
-    useEffect(function () {
-        var unsubscribe = subscribeForAuthenticatedUser(function (authState) {
+    const [authenticationState, setAuthenticationState] = useContext(AuthenticationStateContext);
+    useEffect(() => {
+        const unsubscribe = subscribeForAuthenticatedUser((authState) => {
             setAuthenticationState(createAuthenticationState(authState));
         });
-        return function () {
+        return () => {
             unsubscribe();
             // Reset to the original state
             setAuthenticationState(createAuthenticationState());

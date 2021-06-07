@@ -1,25 +1,25 @@
 import { AuthenticateChildrenKey } from '../types';
 import React, { Fragment, useMemo } from 'react';
 export function useAuthenticateChildren(children) {
-    return useMemo(function () {
-        var AppComponent = {
+    return useMemo(() => {
+        let AppComponent = {
             component: React.createElement(Fragment, null),
             route: 'app'
         };
-        var LoadingComponent = {
+        let LoadingComponent = {
             component: React.createElement(Fragment, null),
             route: 'loading'
         };
-        var AuthenticationComponent = {
+        let AuthenticationComponent = {
             component: React.createElement(Fragment, null),
             route: 'authenticate'
         };
-        var CreateUserComponent = {
+        let CreateUserComponent = {
             component: React.createElement(Fragment, null),
             route: 'create_user'
         };
-        React.Children.forEach(children, function (child) {
-            var props = child.props;
+        React.Children.forEach(children, (child) => {
+            const props = child.props;
             switch (child.key) {
                 case AuthenticateChildrenKey.AppContent:
                     AppComponent = {

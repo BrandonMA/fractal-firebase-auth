@@ -17,8 +17,6 @@ export function useSubscribeForUserDocument<T extends MinimalUserData, S>(
             unsubscribe = subscribeForUserDocument(database, firebaseUser.uid, (document) => {
                 if (document != null) {
                     setUser(document);
-                } else {
-                    setUser(undefined);
                 }
 
                 setLoadingUserFromDatabase(false);

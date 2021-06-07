@@ -1,11 +1,11 @@
 export function subscribeForUserDocument(database, id, onFetchDone) {
-    return database.collections.users.subscribeToDocument(id, function (newDocument) {
+    return database.collections.users.subscribeToDocument(id, (newDocument) => {
         if (onFetchDone) {
             onFetchDone(newDocument);
         }
-    }, function (error) {
+    }, (error) => {
         alert(error.message);
-    }, function () {
+    }, () => {
         if (onFetchDone) {
             onFetchDone();
         }

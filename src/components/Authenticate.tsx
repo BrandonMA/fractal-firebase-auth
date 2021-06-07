@@ -43,12 +43,8 @@ export function Authenticate<UserType extends MinimalUserData, UserSubCollection
         <>
             <FadeRoute path={loadingPair.route}>{loadingPair.component}</FadeRoute>
             {isFirebaseUserMissing ? <FadeRoute path={authPair.route}>{authPair.component}</FadeRoute> : null}
-            {!isLoadingUserDocument && !isUserDocumentMissing && !isFirebaseUserMissing ? (
-                <FadeRoute path={app.route}>{app.component}</FadeRoute>
-            ) : null}
-            {!isLoadingUserDocument && isUserDocumentMissing && !isFirebaseUserMissing ? (
-                <FadeRoute path={createUser.route}>{createUser.component}</FadeRoute>
-            ) : null}
+            {!isLoadingUserDocument && !isUserDocumentMissing ? <FadeRoute path={app.route}>{app.component}</FadeRoute> : null}
+            {!isLoadingUserDocument && isUserDocumentMissing ? <FadeRoute path={createUser.route}>{createUser.component}</FadeRoute> : null}
             {getRedirect()}
         </>
     );

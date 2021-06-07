@@ -4,12 +4,12 @@ export function createAuthenticationState(values) {
         firebaseUser: undefined,
         loading: true,
         credential: undefined
-    }, function (draft) {
+    }, (draft) => {
         Object.assign(draft, values);
     });
 }
 export function isAuthenticationState(value) {
-    var castedValue = value;
+    const castedValue = value;
     return castedValue.loading != null;
 }
 //# sourceMappingURL=AuthenticationState.js.map

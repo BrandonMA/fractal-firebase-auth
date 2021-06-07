@@ -1,5 +1,5 @@
 export function isMinimalExpectedDatabase(value) {
-    var casted = value;
+    const casted = value;
     return casted.collections.users != null;
 }
 //# sourceMappingURL=MinimalExpectedDatabase.js.map

@@ -6,9 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="9b158f11-260c-43c1-bf45-bfd52bfcfb91" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/hooks/useSubscribeForUserDocument.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/hooks/useSubscribeForUserDocument.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/hooks/useSubscribeForUserDocument.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/hooks/useSubscribeForUserDocument.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Authenticate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Authenticate.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/screens/CreateUserScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/screens/CreateUserScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/context/UserDocumentProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/context/UserDocumentProvider.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hooks/useSubscribeForUserDocument.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useSubscribeForUserDocument.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,6 +101,7 @@
       <workItem from="1622708307354" duration="3328000" />
       <workItem from="1622711941761" duration="2552000" />
       <workItem from="1622716158636" duration="12000" />
+      <workItem from="1623054670101" duration="1249000" />
     </task>
     <servers />
   </component>

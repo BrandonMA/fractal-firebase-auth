@@ -2,12 +2,12 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import { createAuthenticationState } from '../../../types/AuthenticationState';
 export function subscribeForAuthenticatedUser(onFetch) {
-    return firebase.auth().onAuthStateChanged(function (user) {
+    return firebase.auth().onAuthStateChanged((user) => {
         onFetch(createAuthenticationState({
             firebaseUser: user,
             loading: false
         }));
-    }, function (error) {
+    }, (error) => {
         alert(error.message);
     });
 }

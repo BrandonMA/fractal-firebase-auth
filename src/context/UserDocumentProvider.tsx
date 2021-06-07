@@ -14,6 +14,6 @@ interface UserDocumentProviderProps {
 }
 
 export function UserDocumentProvider({ children }: UserDocumentProviderProps): JSX.Element {
-    const handleState = useState<unknown | undefined>(undefined);
+    const handleState = useState<unknown | undefined | null>(undefined);
     return <UserDocumentContext.Provider value={handleState}>{children}</UserDocumentContext.Provider>;
 }

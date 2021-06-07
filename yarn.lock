@@ -1188,7 +1188,7 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bma98/firebase-db-manager@^1.3.3":
+"@bma98/firebase-db-manager@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@bma98/firebase-db-manager/-/firebase-db-manager-1.4.0.tgz#91d96249e5648314530ca1d1e8b38588458a8905"
   integrity sha512-yZRzwuWDdfjQGTRidXL1H3FZP2Np6wyZrWn1pWi0rwwMh3oOFdDNOdpm1bPuNyvoVQ31wKbQ2ZRMtwXEEf2HqQ==
@@ -1196,18 +1196,18 @@
     immer "^8.0.0"
     uuid "^3.4.0"
 
-"@bma98/fractal-navigation@^1.1.1":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@bma98/fractal-navigation/-/fractal-navigation-1.2.0.tgz#ad4fdce0185f0ed2ff3c0596912bf5cde56b890a"
-  integrity sha512-AuhDBCVpyoC+C57wKy+ARIZ2gcEkDL8s+FSKHinSfihox5p1f3Pw/GrOKfF0sBwf8AjHGrkTm+QZwZUr2MqY1w==
+"@bma98/fractal-navigation@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@bma98/fractal-navigation/-/fractal-navigation-1.2.2.tgz#2afd4653155d7205673d35be4a4178c5fa7c73d9"
+  integrity sha512-Esw3deokBIzgqYSV1mZ6B+fBH1YKYdt6Y5iSCy8UVHg4SkfB9+dPC0HC3QIO7Dq747CN50zWyPvEXMi2oiNnNg==
   dependencies:
-    "@bma98/size-class" "^2.0.4"
+    "@bma98/size-class" "^2.2.0"
     "@shopify/restyle" "^1.4.0"
     react-native-keyboard-aware-scroll-view "^0.9.3"
     react-router-dom "^5.2.0"
     react-router-native "^5.2.0"
 
-"@bma98/fractal-ui@^1.7.16":
+"@bma98/fractal-ui@^1.8.0":
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/@bma98/fractal-ui/-/fractal-ui-1.8.0.tgz#1c1db33be83fcdefcfeb1f898ac5c7b03210caef"
   integrity sha512-R07sHcjU3zVNV2OHaoGHdmMZvyS1CLk6u869gxIutzRWMs6HfeGCDmw2zco775JbVrrS9TuNdHiWGA5DqQgQWw==
@@ -1219,7 +1219,7 @@
     expo-blur "~8.2.2"
     react-native-svg "12.1.0"
 
-"@bma98/size-class@^2.0.4":
+"@bma98/size-class@^2.0.4", "@bma98/size-class@^2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@bma98/size-class/-/size-class-2.2.0.tgz#747f27786e4831943bc629ed602829a08e3f7fd7"
   integrity sha512-ZHM6aLx05001cehQ1WJ+tiGY7dMD6dTgTf+JjzVAR3wvu/Ja6miobbM4U/PlIYqti6CsoLkM8us3H6+W+mYalQ==
