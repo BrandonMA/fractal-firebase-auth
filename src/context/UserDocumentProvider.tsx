@@ -1,6 +1,6 @@
 import React, { createContext, Dispatch, ReactNode, SetStateAction, useState } from 'react';
 
-export type UserDocumentContextType = [unknown, Dispatch<SetStateAction<unknown>>];
+export type UserDocumentContextType = [unknown | undefined | null, Dispatch<SetStateAction<unknown>>];
 
 export const UserDocumentContext = createContext<UserDocumentContextType>([
     undefined,

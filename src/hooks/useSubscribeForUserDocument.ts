@@ -15,7 +15,9 @@ export function useSubscribeForUserDocument<T extends MinimalUserData, S>(
         let unsubscribe: () => void | undefined;
         if (firebaseUser != null) {
             unsubscribe = subscribeForUserDocument(database, firebaseUser.uid, (document) => {
-                if (document != null) {
+                if (document !== undefined) {
+                    // If it's null it means the user does not exist on the database
+                    // and we can catch that on create user.
                     setUser(document);
                 }
 

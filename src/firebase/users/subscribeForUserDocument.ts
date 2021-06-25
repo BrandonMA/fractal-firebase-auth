@@ -6,7 +6,7 @@ import { Document } from '@bma98/firebase-db-manager';
 export function subscribeForUserDocument<T extends MinimalUserData, S>(
     database: MinimalExpectedDatabase<T, S>,
     id: string,
-    onFetchDone?: (newDocument?: Document<T, S>) => void
+    onFetchDone?: (newDocument?: Document<T, S> | null) => void
 ): firebase.Unsubscribe {
     return database.collections.users.subscribeToDocument(
         id,
@@ -20,7 +20,7 @@ export function subscribeForUserDocument<T extends MinimalUserData, S>(
         },
         () => {
             if (onFetchDone) {
-                onFetchDone();
+                onFetchDone(null);
             }
         }
     );
