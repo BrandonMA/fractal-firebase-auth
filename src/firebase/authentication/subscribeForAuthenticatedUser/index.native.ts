@@ -6,7 +6,7 @@ export function subscribeForAuthenticatedUser(onFetch: (state: AuthenticationSta
     return auth().onAuthStateChanged((user) => {
         onFetch(
             createAuthenticationState({
-                firebaseUser: (user as unknown) as FirebaseAuthTypes.User,
+                firebaseUser: user as unknown as FirebaseAuthTypes.User,
                 loading: false
             })
         );

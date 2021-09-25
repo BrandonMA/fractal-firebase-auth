@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { MinimalExpectedDatabase, MinimalUserData } from '../types';
 import { useAuthenticateChildren, useSubscribeForAuthenticatedUser, useSubscribeForUserDocument, useUserDocument } from '../hooks';
-import { FadeRoute, Redirect, useLocation } from '@bma98/fractal-navigation';
+import { Redirect, useLocation, Route } from '@bma98/fractal-navigation-router';
 import { ComponentRouteProps } from '../types/ComponentRouteProps';
 
 export interface AuthenticateProps<UserType extends MinimalUserData, UserSubCollection> {
@@ -41,10 +41,10 @@ export function Authenticate<UserType extends MinimalUserData, UserSubCollection
 
     return (
         <>
-            <FadeRoute path={loadingPair.route}>{loadingPair.component}</FadeRoute>
-            {isFirebaseUserMissing ? <FadeRoute path={authPair.route}>{authPair.component}</FadeRoute> : null}
-            {!isLoadingUserDocument && !isUserDocumentMissing ? <FadeRoute path={app.route}>{app.component}</FadeRoute> : null}
-            {!isLoadingUserDocument && isUserDocumentMissing ? <FadeRoute path={createUser.route}>{createUser.component}</FadeRoute> : null}
+            <Route path={loadingPair.route}>{loadingPair.component}</Route>
+            {isFirebaseUserMissing ? <Route path={authPair.route}>{authPair.component}</Route> : null}
+            {!isLoadingUserDocument && !isUserDocumentMissing ? <Route path={app.route}>{app.component}</Route> : null}
+            {!isLoadingUserDocument && isUserDocumentMissing ? <Route path={createUser.route}>{createUser.component}</Route> : null}
             {getRedirect()}
         </>
     );

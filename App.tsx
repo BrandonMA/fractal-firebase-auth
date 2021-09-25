@@ -1,12 +1,23 @@
 import React, { useCallback, useMemo } from 'react';
 import { registerRootComponent } from 'expo';
 import { firebaseConfig } from './firebase';
-import { AuthScreen, CreateUserScreen, FirebaseInit, FirebaseAuthRoot, signOut, useAuthenticationState, useUserDocument } from './src';
+import { AuthenticationScreen } from '@bma98/fractal-auth-screen';
+import {
+    CreateUserScreen,
+    FirebaseInit,
+    FirebaseAuthRoot,
+    signOut,
+    useAuthenticationState,
+    useUserDocument,
+    signIn,
+    signUp,
+    resetPassword
+} from './src';
 import { Collection, Database, IDEnabled } from '@bma98/firebase-db-manager';
-import { FractalNavigationRoot } from '@bma98/fractal-navigation';
-import { Button, LoadingBackground, PaddedContainer, Text } from '@bma98/fractal-ui';
+import { NavigationRouter } from '@bma98/fractal-navigation-router';
+import { Button, LoadingBackground, PaddingLayer, Text } from '@bma98/fractal-ui';
 import { Image, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { AuthenticateChildrenKey } from './src/types/AuthenticateChildrenKey';
 import { AuthenticateSection } from './src/components/AuthenticateSection';
 
@@ -30,14 +41,16 @@ function Home(): JSX.Element {
     const currentUser = useUserDocument<User, null>();
 
     return (
-        <ScrollView>
-            <SafeAreaView />
-            <PaddedContainer>
-                <Text marginBottom='m'>Logged In! {currentUser?.data?.email}</Text>
-                <Button marginBottom='m' text='Sign Out' onPress={signOut} />
-                {!loading && firebaseUser != null ? <Text>{firebaseUser.uid}</Text> : <Text>Still getting the user</Text>}
-            </PaddedContainer>
-        </ScrollView>
+        <SafeAreaProvider>
+            <ScrollView>
+                <SafeAreaView />
+                <PaddingLayer>
+                    <Text marginBottom={12}>{`Logged In! ${currentUser?.data?.email}`}</Text>
+                    <Button marginBottom={12} text='Sign Out' onPress={signOut} />
+                    {!loading && firebaseUser != null ? <Text>{firebaseUser.uid}</Text> : <Text>Still getting the user</Text>}
+                </PaddingLayer>
+            </ScrollView>
+        </SafeAreaProvider>
     );
 }
 
@@ -68,15 +81,15 @@ function AppContent(): JSX.Element {
                 <LoadingBackground />
             </AuthenticateSection>
             <AuthenticateSection route={'/auth'} key={AuthenticateChildrenKey.Authentication}>
-                <AuthScreen
+                <AuthenticationScreen
                     byAcceptingTerms={'By creating an account you accept our '}
                     termsAndConditions={'Terms and Conditions '}
                     and={'and '}
                     privacyPolicy={'Privacy Policy'}
                     resetPasswordText={'Reset Password'}
                     resetPasswordDescriptionText={'Please check your email to finish the process.'}
-                    onTermsPressed={() => console.log('Show terms and conditions')}
-                    onPrivacyPressed={() => console.log('Show privacy policy')}
+                    onTermsButtonPressed={() => console.log('Show terms and conditions')}
+                    onPrivacyButtonPressed={() => console.log('Show privacy policy')}
                     logo={
                         <Image
                             source={{
@@ -90,7 +103,9 @@ function AppContent(): JSX.Element {
                     signUpText={'Sign Up'}
                     emailPlaceholder={'Email'}
                     passwordPlaceholder={'Password'}
-                    androidID={'870719140957-hfimiu57e6l1ubtbe82ec6l4er1m8nrb.apps.googleusercontent.com'}
+                    signIn={signIn}
+                    signUp={signUp}
+                    resetPassword={resetPassword}
                 />
             </AuthenticateSection>
         </FirebaseAuthRoot>
@@ -99,11 +114,11 @@ function AppContent(): JSX.Element {
 
 export function App(): JSX.Element {
     return (
-        <FractalNavigationRoot>
+        <NavigationRouter>
             <FirebaseInit loadingComponent={<LoadingBackground />} firebaseConfig={firebaseConfig}>
                 <AppContent />
             </FirebaseInit>
-        </FractalNavigationRoot>
+        </NavigationRouter>
     );
 }
 
