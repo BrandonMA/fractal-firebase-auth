@@ -16,8 +16,8 @@ export async function google(androidID: string): Promise<AuthenticationState> {
     // Sign-in the user with the credential
     const userCredential = await auth().signInWithCredential(googleCredential);
     return createAuthenticationState({
-        firebaseUser: (userCredential.user as unknown) as FirebaseAuthTypes.User,
+        firebaseUser: userCredential.user as unknown as FirebaseAuthTypes.User,
         loading: false,
-        credential: (userCredential as unknown) as FirebaseAuthTypes.UserCredential
+        credential: userCredential as unknown as FirebaseAuthTypes.UserCredential
     });
 }

@@ -1306,12 +1306,12 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bma98/firebase-db-manager@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@bma98/firebase-db-manager/-/firebase-db-manager-1.4.0.tgz#91d96249e5648314530ca1d1e8b38588458a8905"
-  integrity sha512-yZRzwuWDdfjQGTRidXL1H3FZP2Np6wyZrWn1pWi0rwwMh3oOFdDNOdpm1bPuNyvoVQ31wKbQ2ZRMtwXEEf2HqQ==
+"@bma98/firebase-db-manager@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@bma98/firebase-db-manager/-/firebase-db-manager-1.4.2.tgz#1efe3c36c8bc9ff59b2b5e744aa4db56f453a148"
+  integrity sha512-l5MkEiP1VAk+e4uYIFBXjsj9lCU3PakknW9riOV9Akv3UM0oE8xTrWk2iIf1D/9fXSsvZkgkgTpyI76fjVGRzg==
   dependencies:
-    immer "^8.0.0"
+    immer "^9.0.6"
     uuid "^3.4.0"
 
 "@bma98/fractal-auth-screen@^2.0.2":
@@ -2838,11 +2838,6 @@
   version "1.16.8"
   resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.16.8.tgz#2126ca54d4a5a3e9ea5e3f39ad1e6643f8e4b3d4"
   integrity sha512-pacdQDX6V6EmjF+HoiIh6u++qx4mTK0WnhgUHRc01B+Qt5eoeUwseBqmqfTSXTx/aHDEd6PiIw7UGvKgFoqgFQ==
-
-"@shopify/restyle@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@shopify/restyle/-/restyle-1.4.0.tgz#81d1fbfd16bf1688e7638aa53e6a524c623f936c"
-  integrity sha512-wzckvAzDE8Xi39EFAoO0cWpkvWY0sDI5CrxBn7Ae1Xzc9J17/IQKvTU8uxMN32jjE2VPwQ8i0BVuS8lJfIxUcQ==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
@@ -6596,11 +6591,6 @@ image-size@^0.6.0:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.6.3.tgz#e7e5c65bb534bd7cdcedd6cb5166272a85f75fb2"
   integrity sha512-47xSUiQioGaB96nqtp5/q55m0aBQSQdyIloMOc/x+QVTDZLNmXE892IIDrJ0hM1A5vcNUDD5tDffkSP5lCaIIA==
-
-immer@^8.0.0:
-  version "8.0.4"
-  resolved "https://registry.yarnpkg.com/immer/-/immer-8.0.4.tgz#3a21605a4e2dded852fb2afd208ad50969737b7a"
-  integrity sha512-jMfL18P+/6P6epANRvRk6q8t+3gGhqsJ9EuJ25AXE+9bNTYtssvzeYbEd0mXRYWCmmXSIbnlpz6vd6iJlmGGGQ==
 
 immer@^9.0.6:
   version "9.0.6"

@@ -81,7 +81,6 @@
   "dependencies": {
     "@bma98/firebase-db-manager": "^1.4.2",
     "@bma98/fractal-auth-screen": "^2.0.2",
-    "@shopify/restyle": "^1.4.0",
     "immer": "^9.0.6",
     "react-native-svg": "12.1.0"
   },
@@ -97,7 +96,8 @@
     "firebase": "^8.6.5",
     "react": "~16.13.1",
     "react-native": "0.63.4",
-    "react-native-fbsdk": "^3.0.0"
+    "react-native-fbsdk": "^3.0.0",
+    "@react-native-community/google-signin": "^5.0.0"
   },
   "sideEffects": false
 }
