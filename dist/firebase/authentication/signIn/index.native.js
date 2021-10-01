@@ -7,16 +7,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { createAuthenticationState } from '../../../types/AuthenticationState';
 import auth from '@react-native-firebase/auth';
 export function signIn(email, password) {
     return __awaiter(this, void 0, void 0, function* () {
-        const userCredential = yield auth().signInWithEmailAndPassword(email, password);
-        return createAuthenticationState({
-            firebaseUser: userCredential.user,
-            loading: false,
-            credential: userCredential
-        });
+        yield auth().signInWithEmailAndPassword(email, password);
     });
 }
 //# sourceMappingURL=index.native.js.map

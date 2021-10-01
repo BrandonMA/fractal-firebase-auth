@@ -8,7 +8,6 @@ export function CreateUserScreen({ createUser, children }) {
     const userDocument = useUserDocument();
     useEffect(() => {
         var _a;
-        console.log('Executed', firebaseUser === null || firebaseUser === void 0 ? void 0 : firebaseUser.uid);
         if (firebaseUser != null && userDocument === undefined) {
             createUser(firebaseUser.uid, (_a = firebaseUser.email) !== null && _a !== void 0 ? _a : '');
         }

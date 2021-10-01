@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuthenticateChildren, useSubscribeForAuthenticatedUser, useSubscribeForUserDocument, useUserDocument } from '../hooks';
-import { FadeRoute, Redirect, useLocation } from '@bma98/fractal-navigation';
+import { Redirect, useLocation, Route } from '@bma98/fractal-navigation-router';
 export function Authenticate({ database, children }) {
     const [app, loadingPair, authPair, createUser] = useAuthenticateChildren(children);
     const { firebaseUser, loading } = useSubscribeForAuthenticatedUser();
@@ -31,10 +31,10 @@ export function Authenticate({ database, children }) {
         }
     }
     return (React.createElement(React.Fragment, null,
-        React.createElement(FadeRoute, { path: loadingPair.route }, loadingPair.component),
-        isFirebaseUserMissing ? React.createElement(FadeRoute, { path: authPair.route }, authPair.component) : null,
-        !isLoadingUserDocument && !isUserDocumentMissing ? React.createElement(FadeRoute, { path: app.route }, app.component) : null,
-        !isLoadingUserDocument && isUserDocumentMissing ? React.createElement(FadeRoute, { path: createUser.route }, createUser.component) : null,
+        React.createElement(Route, { path: loadingPair.route }, loadingPair.component),
+        isFirebaseUserMissing ? React.createElement(Route, { path: authPair.route }, authPair.component) : null,
+        !isLoadingUserDocument && !isUserDocumentMissing ? React.createElement(Route, { path: app.route }, app.component) : null,
+        !isLoadingUserDocument && isUserDocumentMissing ? React.createElement(Route, { path: createUser.route }, createUser.component) : null,
         getRedirect()));
 }
 //# sourceMappingURL=Authenticate.js.map
