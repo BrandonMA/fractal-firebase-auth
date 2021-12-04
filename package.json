@@ -23,7 +23,7 @@
     "@bma98/fractal-ui": "^2.0.0",
     "@invertase/react-native-apple-authentication": "^2.1.0",
     "@react-native-community/datetimepicker": "^3.5.2",
-    "@react-native-community/google-signin": "^5.0.0",
+    "@react-native-google-signin/google-signin": "^7.0.1",
     "@react-native-community/slider": "^3.0.3",
     "@react-native-firebase/app": "^12.0.0",
     "@react-native-firebase/auth": "^12.0.0",
@@ -97,7 +97,7 @@
     "react": "~16.13.1",
     "react-native": "0.63.4",
     "react-native-fbsdk": "^3.0.0",
-    "@react-native-community/google-signin": "^5.0.0"
+    "@react-native-google-signin/google-signin": "^7.0.1"
   },
   "sideEffects": false
 }

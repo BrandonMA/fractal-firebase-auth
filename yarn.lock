@@ -2801,11 +2801,6 @@
   dependencies:
     invariant "^2.2.4"
 
-"@react-native-community/google-signin@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@react-native-community/google-signin/-/google-signin-5.0.0.tgz#d1d89c697cc214c10017fa283817e84bd03b2d76"
-  integrity sha512-MvFHImmtlmE1kJZgZ9XaULm/OBuQ/AQWOCPr3NzYTUv2cCqyGwfFrealo5PS/fuL/InCGcfqK1k/1dZ+67Hjmg==
-
 "@react-native-community/slider@^3.0.3":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@react-native-community/slider/-/slider-3.0.3.tgz#830167fd757ba70ac638747ba3169b2dbae60330"
@@ -2833,6 +2828,11 @@
   version "12.0.0"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/storage/-/storage-12.0.0.tgz#7ab75b86e46e19e265cac0e4cf7c19d6b6a94db2"
   integrity sha512-4tg/yQHVISyPkhYeNo7UlkFUPgN8+a2sl6niAf3LEM6+ZFvD1mHUV3tbrmJArOFSMSpMZFbpEaUyM/1dHHePhw==
+
+"@react-native-google-signin/google-signin@^7.0.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@react-native-google-signin/google-signin/-/google-signin-7.0.1.tgz#a03f1a3e43ddb1bb092679bfdd6e38ff6ed819a1"
+  integrity sha512-iG1OkFx1ohSupofWnlbV+Re74L2HF823SOL1KNl1gGDiVxzNKJTZm/wuaPuujzci4kr8GuwR9PRgxLShiAZwlg==
 
 "@react-native-picker/picker@^1.16.3":
   version "1.16.8"

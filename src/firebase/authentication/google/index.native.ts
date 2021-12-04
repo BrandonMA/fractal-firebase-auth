@@ -1,5 +1,5 @@
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-community/google-signin';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { AuthenticationState, createAuthenticationState } from '../../../types';
 
 export async function google(androidID: string): Promise<AuthenticationState> {
