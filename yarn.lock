@@ -1314,10 +1314,10 @@
     immer "^9.0.6"
     uuid "^3.4.0"
 
-"@bma98/fractal-auth-screen@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@bma98/fractal-auth-screen/-/fractal-auth-screen-2.0.2.tgz#28b1b4cc1e8d8066b9cc2d51b4fec4ea9a84b0fd"
-  integrity sha512-rE+5l5w9Ss/CeXRAk1a2uvINU9rLvVxGIl5GjFSyktyolklPRzEgQF/EK2Fy317LctJJweHk7pmjMb0C05xm8Q==
+"@bma98/fractal-auth-screen@^2.0.8":
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/@bma98/fractal-auth-screen/-/fractal-auth-screen-2.0.8.tgz#15f151fc26eec2d30e561b40ec50a9f763029249"
+  integrity sha512-oaQ0ckMwvyd75kon/652h3zIzd0I8rBSrel3CgPL2ba7/NPBSpltlezUXAniBroxaMaEXpB2E0emz7MQmiVwLw==
 
 "@bma98/fractal-navigation-router@^2.0.0":
   version "2.0.0"

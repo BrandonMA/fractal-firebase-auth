@@ -1,18 +1,22 @@
 import React, { ReactElement } from 'react';
 import { MinimalExpectedDatabase, MinimalUserData } from '../types';
 import { useAuthenticateChildren, useSubscribeForAuthenticatedUser, useSubscribeForUserDocument, useUserDocument } from '../hooks';
-import { Redirect, useLocation, Route } from '@bma98/fractal-navigation-router';
+import { Redirect, useLocation } from '@bma98/fractal-navigation-router';
 import { ComponentRouteProps } from '../types/ComponentRouteProps';
+import { AuthenticationCheck } from '@bma98/fractal-auth-screen';
+import { Switch, Route } from '@bma98/fractal-navigation-router';
 
 export interface AuthenticateProps<UserType extends MinimalUserData, UserSubCollection> {
     database: MinimalExpectedDatabase<UserType, UserSubCollection>;
     children: Array<ReactElement<ComponentRouteProps>>;
 }
 
+type FirebaseAuthenticationState = 'loading' | 'accessIsAllowed' | 'firebaseUserIsMissing' | 'firestoreUserDocumentIsMissing';
+
 export function Authenticate<UserType extends MinimalUserData, UserSubCollection>({
     database,
     children
-}: AuthenticateProps<UserType, UserSubCollection>): JSX.Element {
+}: AuthenticateProps<UserType, UserSubCollection>): ReactElement {
     const [app, loadingPair, authPair, createUser] = useAuthenticateChildren(children);
     const { firebaseUser, loading } = useSubscribeForAuthenticatedUser();
     const isLoadingUserDocument = useSubscribeForUserDocument(firebaseUser, database);
@@ -23,29 +27,51 @@ export function Authenticate<UserType extends MinimalUserData, UserSubCollection
     const isFirebaseUserMissing = firebaseUser === null && !loading;
     const isUserDocumentMissing = userDocument == null;
 
-    function getRedirect(): JSX.Element | null {
-        if (isLoadingFirebaseUser) {
-            return <Redirect from={pathname} to={loadingPair.route} />;
+    const firebaseAuthenticationState: FirebaseAuthenticationState = (() => {
+        if (isLoadingFirebaseUser || (isLoadingUserDocument && isUserDocumentMissing)) {
+            return 'loading';
         } else if (isFirebaseUserMissing) {
-            return <Redirect from={pathname} to={authPair.route} />;
-        } else if (isLoadingUserDocument && isUserDocumentMissing) {
-            return <Redirect from={pathname} to={loadingPair.route} />;
+            return 'firebaseUserIsMissing';
         } else if (!isLoadingUserDocument && isUserDocumentMissing) {
-            return <Redirect from={pathname} to={createUser.route} />;
+            return 'firestoreUserDocumentIsMissing';
         } else if (!isLoadingUserDocument && !isUserDocumentMissing) {
-            return <Redirect from={pathname} to={app.route} />;
+            return 'accessIsAllowed';
         } else {
-            return null;
+            return 'loading';
         }
-    }
+    })();
+
+    const authenticationState = (() => {
+        if (firebaseAuthenticationState === 'loading') {
+            return 'loading';
+        } else if (firebaseAuthenticationState === 'firebaseUserIsMissing') {
+            return 'accessIsNotAllowed';
+        } else if (firebaseAuthenticationState === 'firestoreUserDocumentIsMissing') {
+            return 'accessIsNotAllowed';
+        } else {
+            return 'accessIsAllowed';
+        }
+    })();
+
+    const RedirectComponent = (() => {
+        if (firebaseAuthenticationState === 'firebaseUserIsMissing') {
+            return <Redirect from={pathname} to={authPair.route} />;
+        } else {
+            return <Redirect from={pathname} to={createUser.route} />;
+        }
+    })();
 
     return (
-        <>
-            <Route path={loadingPair.route}>{loadingPair.component}</Route>
-            {isFirebaseUserMissing ? <Route path={authPair.route}>{authPair.component}</Route> : null}
-            {!isLoadingUserDocument && !isUserDocumentMissing ? <Route path={app.route}>{app.component}</Route> : null}
-            {!isLoadingUserDocument && isUserDocumentMissing ? <Route path={createUser.route}>{createUser.component}</Route> : null}
-            {getRedirect()}
-        </>
+        <Switch>
+            <Route path={authPair.route}>{authPair.component}</Route>
+            <AuthenticationCheck
+                key='Authenticate'
+                state={authenticationState}
+                loadingComponent={loadingPair.component}
+                redirectComponent={RedirectComponent}
+            >
+                <Route path={app.route}>{app.component}</Route>
+            </AuthenticationCheck>
+        </Switch>
     );
 }

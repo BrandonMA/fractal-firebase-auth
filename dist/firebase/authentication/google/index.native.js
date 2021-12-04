@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import auth from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-community/google-signin';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { createAuthenticationState } from '../../../types';
 export function google(androidID) {
     return __awaiter(this, void 0, void 0, function* () {

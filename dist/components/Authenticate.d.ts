@@ -5,4 +5,4 @@ export interface AuthenticateProps<UserType extends MinimalUserData, UserSubColl
     database: MinimalExpectedDatabase<UserType, UserSubCollection>;
     children: Array<ReactElement<ComponentRouteProps>>;
 }
-export declare function Authenticate<UserType extends MinimalUserData, UserSubCollection>({ database, children }: AuthenticateProps<UserType, UserSubCollection>): JSX.Element;
+export declare function Authenticate<UserType extends MinimalUserData, UserSubCollection>({ database, children }: AuthenticateProps<UserType, UserSubCollection>): ReactElement;
