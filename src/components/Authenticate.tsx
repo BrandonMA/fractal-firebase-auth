@@ -28,10 +28,12 @@ export function Authenticate<UserType extends MinimalUserData, UserSubCollection
     const isUserDocumentMissing = userDocument == null;
 
     const firebaseAuthenticationState: FirebaseAuthenticationState = (() => {
-        if (isLoadingFirebaseUser || (isLoadingUserDocument && isUserDocumentMissing)) {
+        if (isLoadingFirebaseUser) {
             return 'loading';
         } else if (isFirebaseUserMissing) {
             return 'firebaseUserIsMissing';
+        } else if (isLoadingUserDocument && isUserDocumentMissing) {
+            return 'loading';
         } else if (!isLoadingUserDocument && isUserDocumentMissing) {
             return 'firestoreUserDocumentIsMissing';
         } else if (!isLoadingUserDocument && !isUserDocumentMissing) {
@@ -56,21 +58,24 @@ export function Authenticate<UserType extends MinimalUserData, UserSubCollection
     const RedirectComponent = (() => {
         if (firebaseAuthenticationState === 'firebaseUserIsMissing') {
             return <Redirect from={pathname} to={authPair.route} />;
-        } else {
+        } else if (firebaseAuthenticationState === 'firestoreUserDocumentIsMissing') {
             return <Redirect from={pathname} to={createUser.route} />;
+        } else {
+            return <Redirect from={pathname} to={app.route} />;
         }
     })();
 
     return (
         <Switch>
-            <Route path={authPair.route}>{authPair.component}</Route>
+            <Route path={authPair.route}>{authenticationState === 'accessIsAllowed' ? RedirectComponent : authPair.component}</Route>
+            <Route path={createUser.route}>{authenticationState === 'accessIsAllowed' ? RedirectComponent : createUser.component}</Route>
             <AuthenticationCheck
                 key='Authenticate'
                 state={authenticationState}
                 loadingComponent={loadingPair.component}
                 redirectComponent={RedirectComponent}
             >
-                <Route path={app.route}>{app.component}</Route>
+                {app.component}
             </AuthenticationCheck>
         </Switch>
     );

@@ -13,11 +13,14 @@ export function Authenticate({ database, children }) {
     const isFirebaseUserMissing = firebaseUser === null && !loading;
     const isUserDocumentMissing = userDocument == null;
     const firebaseAuthenticationState = (() => {
-        if (isLoadingFirebaseUser || (isLoadingUserDocument && isUserDocumentMissing)) {
+        if (isLoadingFirebaseUser) {
             return 'loading';
         }
         else if (isFirebaseUserMissing) {
             return 'firebaseUserIsMissing';
+        }
+        else if (isLoadingUserDocument && isUserDocumentMissing) {
+            return 'loading';
         }
         else if (!isLoadingUserDocument && isUserDocumentMissing) {
             return 'firestoreUserDocumentIsMissing';
@@ -47,13 +50,16 @@ export function Authenticate({ database, children }) {
         if (firebaseAuthenticationState === 'firebaseUserIsMissing') {
             return React.createElement(Redirect, { from: pathname, to: authPair.route });
         }
-        else {
+        else if (firebaseAuthenticationState === 'firestoreUserDocumentIsMissing') {
             return React.createElement(Redirect, { from: pathname, to: createUser.route });
+        }
+        else {
+            return React.createElement(Redirect, { from: pathname, to: app.route });
         }
     })();
     return (React.createElement(Switch, null,
-        React.createElement(Route, { path: authPair.route }, authPair.component),
-        React.createElement(AuthenticationCheck, { key: 'Authenticate', state: authenticationState, loadingComponent: loadingPair.component, redirectComponent: RedirectComponent },
-            React.createElement(Route, { path: app.route }, app.component))));
+        React.createElement(Route, { path: authPair.route }, authenticationState === 'accessIsAllowed' ? RedirectComponent : authPair.component),
+        React.createElement(Route, { path: createUser.route }, authenticationState === 'accessIsAllowed' ? RedirectComponent : createUser.component),
+        React.createElement(AuthenticationCheck, { key: 'Authenticate', state: authenticationState, loadingComponent: loadingPair.component, redirectComponent: RedirectComponent }, app.component)));
 }
 //# sourceMappingURL=Authenticate.js.map
