@@ -67,8 +67,10 @@ export function Authenticate<UserType extends MinimalUserData, UserSubCollection
 
     return (
         <Switch>
-            <Route path={authPair.route}>{authenticationState === 'accessIsAllowed' ? RedirectComponent : authPair.component}</Route>
-            <Route path={createUser.route}>{authenticationState === 'accessIsAllowed' ? RedirectComponent : createUser.component}</Route>
+            {firebaseAuthenticationState === 'firebaseUserIsMissing' && <Route path={authPair.route}>{authPair.component}</Route>}
+            {firebaseAuthenticationState === 'firestoreUserDocumentIsMissing' && (
+                <Route path={createUser.route}>{createUser.component}</Route>
+            )}
             <AuthenticationCheck
                 key='Authenticate'
                 state={authenticationState}

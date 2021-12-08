@@ -58,8 +58,8 @@ export function Authenticate({ database, children }) {
         }
     })();
     return (React.createElement(Switch, null,
-        React.createElement(Route, { path: authPair.route }, authenticationState === 'accessIsAllowed' ? RedirectComponent : authPair.component),
-        React.createElement(Route, { path: createUser.route }, authenticationState === 'accessIsAllowed' ? RedirectComponent : createUser.component),
+        firebaseAuthenticationState === 'firebaseUserIsMissing' && React.createElement(Route, { path: authPair.route }, authPair.component),
+        firebaseAuthenticationState === 'firestoreUserDocumentIsMissing' && (React.createElement(Route, { path: createUser.route }, createUser.component)),
         React.createElement(AuthenticationCheck, { key: 'Authenticate', state: authenticationState, loadingComponent: loadingPair.component, redirectComponent: RedirectComponent }, app.component)));
 }
 //# sourceMappingURL=Authenticate.js.map
