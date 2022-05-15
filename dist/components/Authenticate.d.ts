@@ -1,8 +1,9 @@
-import { ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { MinimalExpectedDatabase, MinimalUserData } from '../types';
 import { ComponentRouteProps } from '../types/ComponentRouteProps';
-export interface AuthenticateProps<UserType extends MinimalUserData, UserSubCollection> {
-    database: MinimalExpectedDatabase<UserType, UserSubCollection>;
+export interface AuthenticateProps<UserType extends MinimalUserData> {
+    database: MinimalExpectedDatabase<UserType, unknown>;
     children: Array<ReactElement<ComponentRouteProps>>;
+    WrapperComponent: React.FC;
 }
-export declare function Authenticate<UserType extends MinimalUserData, UserSubCollection>({ database, children }: AuthenticateProps<UserType, UserSubCollection>): ReactElement;
+export declare function Authenticate<UserType extends MinimalUserData>({ database, children, WrapperComponent }: AuthenticateProps<UserType>): ReactElement;
