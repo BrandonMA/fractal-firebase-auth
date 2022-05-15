@@ -3,9 +3,7 @@ import React from 'react';
 import { Authenticate, AuthenticateProps } from './Authenticate';
 import { MinimalUserData } from '../types';
 
-export function FirebaseAuthRoot<UserType extends MinimalUserData, UserSubCollection>(
-    props: AuthenticateProps<UserType, UserSubCollection>
-): JSX.Element {
+export function FirebaseAuthRoot<UserType extends MinimalUserData>(props: AuthenticateProps<UserType>): JSX.Element {
     return (
         <AuthenticationStateProvider>
             <UserDocumentProvider>

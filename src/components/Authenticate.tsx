@@ -6,22 +6,25 @@ import { ComponentRouteProps } from '../types/ComponentRouteProps';
 import { AuthenticationCheck } from '@bma98/fractal-auth-screen';
 import { Switch, Route } from '@bma98/fractal-navigation-router';
 
-export interface AuthenticateProps<UserType extends MinimalUserData, UserSubCollection> {
-    database: MinimalExpectedDatabase<UserType, UserSubCollection>;
+export interface AuthenticateProps<UserType extends MinimalUserData> {
+    database: MinimalExpectedDatabase<UserType, unknown>;
     children: Array<ReactElement<ComponentRouteProps>>;
+    WrapperComponent: React.FC;
 }
 
 type FirebaseAuthenticationState = 'loading' | 'accessIsAllowed' | 'firebaseUserIsMissing' | 'firestoreUserDocumentIsMissing';
 
-export function Authenticate<UserType extends MinimalUserData, UserSubCollection>({
+export function Authenticate<UserType extends MinimalUserData>({
     database,
-    children
-}: AuthenticateProps<UserType, UserSubCollection>): ReactElement {
+    children,
+    WrapperComponent
+}: AuthenticateProps<UserType>): ReactElement {
     const [app, loadingPair, authPair, createUser] = useAuthenticateChildren(children);
     const { firebaseUser, loading } = useSubscribeForAuthenticatedUser();
     const isLoadingUserDocument = useSubscribeForUserDocument(firebaseUser, database);
     const userDocument = useUserDocument();
     const { pathname } = useLocation();
+    const Wrapper = WrapperComponent ?? React.Fragment;
 
     const isLoadingFirebaseUser = firebaseUser === undefined && loading;
     const isFirebaseUserMissing = firebaseUser === null && !loading;
@@ -67,9 +70,15 @@ export function Authenticate<UserType extends MinimalUserData, UserSubCollection
 
     return (
         <Switch>
-            {firebaseAuthenticationState === 'firebaseUserIsMissing' && <Route path={authPair.route}>{authPair.component}</Route>}
+            {firebaseAuthenticationState === 'firebaseUserIsMissing' && (
+                <Route path={authPair.route}>
+                    <Wrapper>{authPair.component}</Wrapper>
+                </Route>
+            )}
             {firebaseAuthenticationState === 'firestoreUserDocumentIsMissing' && (
-                <Route path={createUser.route}>{createUser.component}</Route>
+                <Route path={createUser.route}>
+                    <Wrapper>{createUser.component}</Wrapper>
+                </Route>
             )}
             <AuthenticationCheck
                 key='Authenticate'
@@ -77,7 +86,7 @@ export function Authenticate<UserType extends MinimalUserData, UserSubCollection
                 loadingComponent={loadingPair.component}
                 redirectComponent={RedirectComponent}
             >
-                {app.component}
+                <Wrapper>{app.component}</Wrapper>
             </AuthenticationCheck>
         </Switch>
     );
