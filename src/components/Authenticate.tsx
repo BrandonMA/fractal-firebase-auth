@@ -9,7 +9,7 @@ import { Switch, Route } from '@bma98/fractal-navigation-router';
 export interface AuthenticateProps<UserType extends MinimalUserData> {
     database: MinimalExpectedDatabase<UserType, unknown>;
     children: Array<ReactElement<ComponentRouteProps>>;
-    WrapperComponent: React.FC;
+    WrapperComponent?: React.FC;
 }
 
 type FirebaseAuthenticationState = 'loading' | 'accessIsAllowed' | 'firebaseUserIsMissing' | 'firestoreUserDocumentIsMissing';
