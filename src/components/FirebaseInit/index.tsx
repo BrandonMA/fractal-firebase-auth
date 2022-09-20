@@ -16,7 +16,9 @@ export function FirebaseInit(props: Props): JSX.Element {
     const { firebaseConfig } = props;
 
     useLayoutEffect(() => {
-        setApp(firebase.initializeApp(firebaseConfig));
+        if (!firebase.apps.length) {
+            setApp(firebase.initializeApp(firebaseConfig));
+        }
     }, [firebaseConfig]);
 
     return <>{app != null ? props.children : props.loadingComponent}</>;
