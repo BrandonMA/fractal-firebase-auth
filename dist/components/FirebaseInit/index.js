@@ -4,7 +4,9 @@ export function FirebaseInit(props) {
     const [app, setApp] = useState(undefined);
     const { firebaseConfig } = props;
     useLayoutEffect(() => {
-        setApp(firebase.initializeApp(firebaseConfig));
+        if (!firebase.apps.length) {
+            setApp(firebase.initializeApp(firebaseConfig));
+        }
     }, [firebaseConfig]);
     return React.createElement(React.Fragment, null, app != null ? props.children : props.loadingComponent);
 }
