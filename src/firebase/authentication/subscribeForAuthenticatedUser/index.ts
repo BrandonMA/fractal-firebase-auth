@@ -1,5 +1,5 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 import { AuthenticationState, createAuthenticationState } from '../../../types/AuthenticationState';
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
