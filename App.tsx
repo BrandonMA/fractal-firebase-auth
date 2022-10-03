@@ -93,7 +93,7 @@ function AppContent(): JSX.Element {
                     logo={
                         <Image
                             source={{
-                                uri: 'https://firebasestorage.googleapis.com/v0/b/fir-db-manager-12154.appspot.com/o/Logo.png?alt=media&token=75aca343-619e-4d99-b177-436d4c0ea943'
+                                uri: 'https://picsum.photos/id/1039/200'
                             }}
                             style={{ height: 200, width: 200, borderRadius: 16, marginTop: 16 }}
                         />

@@ -3,3 +3,7 @@ dist/
 node_modules/
 .snapshots/
 *.min.js
+
+webpack.config.js
+tsconfig.json
+.eslintrc.js
