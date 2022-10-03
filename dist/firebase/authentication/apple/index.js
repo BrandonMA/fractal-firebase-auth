@@ -7,8 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 export function apple(locale = 'en') {
     return __awaiter(this, void 0, void 0, function* () {
         const provider = new firebase.auth.OAuthProvider('apple.com');
