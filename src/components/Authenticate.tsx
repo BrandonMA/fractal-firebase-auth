@@ -84,12 +84,14 @@ export function Authenticate<UserType extends MinimalUserData>({
     }, [authenticationState, firebaseAuthenticationState]);
 
     return (
-        <Routes>
-            <Route index element={loadingPair.component} />
-            <Route path={loadingPair.route} index element={loadingPair.component} />
-            <Route path={app.route} element={<Wrapper>{app.component}</Wrapper>} />
-            <Route path={authPair.route} element={<Wrapper>{authPair.component}</Wrapper>} />
-            <Route path={createUser.route} element={<Wrapper>{createUser.component}</Wrapper>} />
-        </Routes>
+        <>
+            <Routes>
+                <Route index element={loadingPair.component} />
+                <Route path={loadingPair.route} index element={loadingPair.component} />
+                <Route path={authPair.route} element={<Wrapper>{authPair.component}</Wrapper>} />
+                <Route path={createUser.route} element={<Wrapper>{createUser.component}</Wrapper>} />
+            </Routes>
+            {app.component}
+        </>
     );
 }
