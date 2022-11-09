@@ -63,11 +63,12 @@ export function Authenticate({ database, children, WrapperComponent }) {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [authenticationState, firebaseAuthenticationState]);
-    return (React.createElement(Routes, null,
-        React.createElement(Route, { index: true, element: loadingPair.component }),
-        React.createElement(Route, { path: loadingPair.route, index: true, element: loadingPair.component }),
-        React.createElement(Route, { path: app.route, element: React.createElement(Wrapper, null, app.component) }),
-        React.createElement(Route, { path: authPair.route, element: React.createElement(Wrapper, null, authPair.component) }),
-        React.createElement(Route, { path: createUser.route, element: React.createElement(Wrapper, null, createUser.component) })));
+    return (React.createElement(React.Fragment, null,
+        React.createElement(Routes, null,
+            React.createElement(Route, { index: true, element: loadingPair.component }),
+            React.createElement(Route, { path: loadingPair.route, index: true, element: loadingPair.component }),
+            React.createElement(Route, { path: authPair.route, element: React.createElement(Wrapper, null, authPair.component) }),
+            React.createElement(Route, { path: createUser.route, element: React.createElement(Wrapper, null, createUser.component) })),
+        app.component));
 }
 //# sourceMappingURL=Authenticate.js.map
