@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { registerRootComponent } from 'expo';
 import { firebaseConfig } from './firebase';
 import { AuthenticationScreen } from '@bma98/fractal-auth-screen';
@@ -11,7 +11,10 @@ import {
     useUserDocument,
     signIn,
     signUp,
-    resetPassword
+    resetPassword,
+    facebookSignInWithRedirect,
+    googleSignInWithRedirect,
+    getRedirectResult
 } from './src';
 import { Collection, Database, IDEnabled } from '@bma98/firebase-db-manager';
 import { NavigationRouter } from '@bma98/fractal-navigation-router';
@@ -20,6 +23,7 @@ import { Image, ScrollView } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { AuthenticateChildrenKey } from './src/types/AuthenticateChildrenKey';
 import { AuthenticateSection } from './src/components/AuthenticateSection';
+import firebase from 'firebase/compat/app';
 
 interface User extends IDEnabled {
     email: string;
@@ -56,6 +60,17 @@ function Home(): JSX.Element {
 
 function AppContent(): JSX.Element {
     const database = useMemo(() => createDatabase(), []);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                await getRedirectResult();
+            } catch (error) {
+                const errorMessage = error.message;
+                alert(errorMessage);
+            }
+        })();
+    }, []);
 
     const createUser = useCallback(
         async (id: string, email: string) => {
@@ -106,6 +121,8 @@ function AppContent(): JSX.Element {
                     signIn={signIn}
                     signUp={signUp}
                     resetPassword={resetPassword}
+                    handleGoogleSignIn={async () => await googleSignInWithRedirect('')}
+                    handleFacebookSignIn={facebookSignInWithRedirect}
                 />
             </AuthenticateSection>
         </FirebaseAuthRoot>
