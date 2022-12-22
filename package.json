@@ -1,6 +1,6 @@
 {
     "name": "@bma98/fractal-firebase-auth",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "description": "React Components to use firebase on react with custom logic to manage shared state",
     "author": "BrandonMA",
     "license": "MIT",
