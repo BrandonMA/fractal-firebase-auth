@@ -12,6 +12,7 @@ import 'firebase/compat/auth';
 export function facebookSignInWithPopup() {
     return __awaiter(this, void 0, void 0, function* () {
         const provider = new firebase.auth.FacebookAuthProvider();
+        provider.addScope('email');
         return firebase.auth().signInWithPopup(provider);
     });
 }
