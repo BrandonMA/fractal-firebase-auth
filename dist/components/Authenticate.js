@@ -1,14 +1,13 @@
 import React from 'react';
-import { useAuthenticateChildren, useSubscribeForAuthenticatedUser, useSubscribeForUserDocument, useUserDocument } from '../hooks';
-import { Redirect, useLocation } from '@bma98/fractal-navigation-router';
+import { Redirect, useLocation, Switch, Route } from '@bma98/fractal-navigation-router';
 import { AuthenticationCheck } from '@bma98/fractal-auth-screen';
-import { Switch, Route } from '@bma98/fractal-navigation-router';
+import { useAuthenticateChildren, useSubscribeForAuthenticatedUser, useSubscribeForUserDocument, useUserDocument } from '../hooks';
 export function Authenticate({ database, children, WrapperComponent }) {
     const [app, loadingPair, authPair, createUser] = useAuthenticateChildren(children);
     const { firebaseUser, loading } = useSubscribeForAuthenticatedUser();
     const isLoadingUserDocument = useSubscribeForUserDocument(firebaseUser, database);
     const userDocument = useUserDocument();
-    const { pathname } = useLocation();
+    const { pathname, search } = useLocation();
     const Wrapper = WrapperComponent !== null && WrapperComponent !== void 0 ? WrapperComponent : React.Fragment;
     const isLoadingFirebaseUser = firebaseUser === undefined && loading;
     const isFirebaseUserMissing = firebaseUser === null && !loading;
@@ -17,46 +16,40 @@ export function Authenticate({ database, children, WrapperComponent }) {
         if (isLoadingFirebaseUser) {
             return 'loading';
         }
-        else if (isFirebaseUserMissing) {
+        if (isFirebaseUserMissing) {
             return 'firebaseUserIsMissing';
         }
-        else if (isLoadingUserDocument && isUserDocumentMissing) {
+        if (isLoadingUserDocument && isUserDocumentMissing) {
             return 'loading';
         }
-        else if (!isLoadingUserDocument && isUserDocumentMissing) {
+        if (!isLoadingUserDocument && isUserDocumentMissing) {
             return 'firestoreUserDocumentIsMissing';
         }
-        else if (!isLoadingUserDocument && !isUserDocumentMissing) {
+        if (!isLoadingUserDocument && !isUserDocumentMissing) {
             return 'accessIsAllowed';
         }
-        else {
-            return 'loading';
-        }
+        return 'loading';
     })();
     const authenticationState = (() => {
         if (firebaseAuthenticationState === 'loading') {
             return 'loading';
         }
-        else if (firebaseAuthenticationState === 'firebaseUserIsMissing') {
+        if (firebaseAuthenticationState === 'firebaseUserIsMissing') {
             return 'accessIsNotAllowed';
         }
-        else if (firebaseAuthenticationState === 'firestoreUserDocumentIsMissing') {
+        if (firebaseAuthenticationState === 'firestoreUserDocumentIsMissing') {
             return 'accessIsNotAllowed';
         }
-        else {
-            return 'accessIsAllowed';
-        }
+        return 'accessIsAllowed';
     })();
     const RedirectComponent = (() => {
         if (firebaseAuthenticationState === 'firebaseUserIsMissing') {
-            return React.createElement(Redirect, { from: pathname, to: authPair.route });
+            return React.createElement(Redirect, { from: pathname, to: { pathname: authPair.route, search } });
         }
-        else if (firebaseAuthenticationState === 'firestoreUserDocumentIsMissing') {
-            return React.createElement(Redirect, { from: pathname, to: createUser.route });
+        if (firebaseAuthenticationState === 'firestoreUserDocumentIsMissing') {
+            return React.createElement(Redirect, { from: pathname, to: { pathname: createUser.route, search } });
         }
-        else {
-            return React.createElement(Redirect, { from: pathname, to: app.route });
-        }
+        return React.createElement(Redirect, { from: pathname, to: { pathname: app.route, search } });
     })();
     return (React.createElement(Switch, null,
         firebaseAuthenticationState === 'firebaseUserIsMissing' && (React.createElement(Route, { path: authPair.route },

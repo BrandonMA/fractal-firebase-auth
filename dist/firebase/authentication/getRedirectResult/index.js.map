@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../src/firebase/authentication/getRedirectResult/index.ts"],"names":[],"mappings":";;;;;;;;;AAAA,OAAO,QAAQ,MAAM,qBAAqB,CAAC;AAC3C,OAAO,sBAAsB,CAAC;AAE9B,MAAM,UAAgB,iBAAiB;;QACnC,OAAO,QAAQ,CAAC,IAAI,EAAE,CAAC,iBAAiB,EAAE,CAAC;IAC/C,CAAC;CAAA"}
