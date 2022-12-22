@@ -8,19 +8,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import auth from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { createAuthenticationState } from '../../../types';
-export function google(androidID) {
+import { createAuthenticationState } from '../../../../types/AuthenticationState';
+import { LoginManager, AccessToken } from 'react-native-fbsdk';
+export function facebookSignInWithRedirect() {
     return __awaiter(this, void 0, void 0, function* () {
-        GoogleSignin.configure({
-            webClientId: androidID
-        });
-        // Get the users ID token
-        const { idToken } = yield GoogleSignin.signIn();
-        // Create a Google credential with the token
-        const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+        // Attempt login with permissions
+        const result = yield LoginManager.logInWithPermissions(['public_profile', 'email']);
+        if (result.isCancelled) {
+            throw 'User cancelled the login process';
+        }
+        // Once signed in, get the users AccessToken
+        const data = yield AccessToken.getCurrentAccessToken();
+        if (!data) {
+            throw Error('Something went wrong obtaining access token');
+        }
+        // Create a Firebase credential with the AccessToken
+        const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken);
         // Sign-in the user with the credential
-        const userCredential = yield auth().signInWithCredential(googleCredential);
+        const userCredential = yield auth().signInWithCredential(facebookCredential);
         return createAuthenticationState({
             firebaseUser: userCredential.user,
             loading: false,
